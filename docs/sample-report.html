@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nature Intelligence Report: Western Ghats test block</title>
+<style>
+  :root {
+    --ink: #12211a;
+    --muted: #5a6b62;
+    --line: #d8e0da;
+    --paper: #ffffff;
+    --wash: #f4f7f4;
+    --observed: #1b6b3a;
+    --model: #7a5320;
+    --interpretation: #2f4f7a;
+    --metadata: #55605a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2.5rem 1.5rem;
+    font: 15px/1.65 "Segoe UI", -apple-system, system-ui, sans-serif;
+    color: var(--ink); background: var(--wash);
+  }
+  .sheet { max-width: 60rem; margin: 0 auto; background: var(--paper);
+           border: 1px solid var(--line); border-radius: 6px; padding: 2.5rem; }
+  header { border-bottom: 3px solid var(--observed); padding-bottom: 1.25rem; margin-bottom: 1.75rem; }
+  h1 { font-size: 1.6rem; margin: 0 0 .4rem; letter-spacing: -.01em; }
+  h2 { font-size: 1.1rem; margin: 0; display: flex; align-items: baseline;
+       gap: .6rem; flex-wrap: wrap; }
+  .meta { color: var(--muted); font-size: .85rem; }
+  section { border-top: 1px solid var(--line); padding: 1.4rem 0; }
+  section:first-of-type { border-top: none; }
+  .tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em;
+         padding: .16rem .5rem; border-radius: 3px; border: 1px solid currentColor;
+         font-weight: 600; white-space: nowrap; }
+  .tag.observed { color: var(--observed); }
+  .tag.model_prediction { color: var(--model); }
+  .tag.interpretation { color: var(--interpretation); }
+  .tag.metadata { color: var(--metadata); }
+  ul { margin: .8rem 0; padding-left: 1.15rem; }
+  li { margin: .3rem 0; }
+  p { margin: .8rem 0; }
+  .table-wrap { overflow-x: auto; margin: .9rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; min-width: 30rem; }
+  th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--line); }
+  th { background: var(--wash); font-weight: 600; white-space: nowrap; }
+  .notes { margin-top: .9rem; padding: .75rem .9rem; background: var(--wash);
+           border-left: 3px solid var(--line); font-size: .84rem; color: var(--muted); }
+  .notes p { margin: .3rem 0; }
+  .legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: .8rem; font-size: .8rem; }
+  footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .8rem; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { border: none; padding: 0; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <h1>Nature Intelligence Report: Western Ghats test block</h1>
+    <p class="meta">
+      Nature Intelligence Report &middot; Analysis 94056654-ef5a-49f9-a603-81503d49af52 &middot;
+      Generated 2026-08-16T15:41:20.911438+00:00
+    </p>
+    <div class="legend">
+        <span><span class="tag observed">Observed data</span></span>
+        <span><span class="tag model_prediction">Model prediction</span></span>
+        <span><span class="tag interpretation">Generated interpretation</span></span>
+        <span><span class="tag metadata">Technical metadata</span></span>
+    </div>
+  </header>
+
+  <section>
+    <h2>
+      1. Executive Summary
+      <span class="tag observed">
+        Observed data
+      </span>
+    </h2>
+
+<p>Across Western Ghats test block, mean NDVI on 2021-02-07 was 0.703 over 574,571 valid pixels (174.159 km²). Between the two acquisitions, mean NDVI increased from 0.703 to 0.722 (+0.019). 7.909% of the comparable area changed by at least the moderate threshold. The land-cover model predicts forest as the largest class at 88.1% of classified pixels.</p>
+
+
+    <div class="notes">
+<p>This summary restates measured values only. Interpretation of what they may indicate appears in a separate section.</p>    </div>
+  </section>
+  <section>
+    <h2>
+      2. Region
+      <span class="tag metadata">
+        Technical metadata
+      </span>
+    </h2>
+
+
+    <ul>
+<li>Name: Western Ghats test block</li><li>Bounding box (EPSG:4326): 76.60000, 10.10000, 76.72000, 10.22000</li><li>Area: 174.544 km²</li><li>Coordinate reference system: EPSG:4326</li>    </ul>
+
+
+  </section>
+  <section>
+    <h2>
+      3. Observation Period
+      <span class="tag metadata">
+        Technical metadata
+      </span>
+    </h2>
+
+
+    <ul>
+<li>Period A: 2021-01-01 to 2021-02-28</li><li>Period B: 2024-01-01 to 2024-02-29</li><li>Period A acquisition: 2021-02-07</li><li>Period B acquisition: 2024-01-23</li><li>Separation between acquisitions: 1080 days</li>    </ul>
+
+
+  </section>
+  <section>
+    <h2>
+      4. Data Sources
+      <span class="tag metadata">
+        Technical metadata
+      </span>
+    </h2>
+
+
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Period</th><th>Provider</th><th>Dataset</th><th>Scene</th><th>Acquired</th><th>Processing level</th><th>Scene cloud cover</th><th>Licence</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>A</td><td>Element84 Earth Search (AWS Open Data)</td><td>sentinel-2-l2a</td><td>S2B_43PFM_20210207_3_L2A</td><td>2021-02-07</td><td>S2MSI2A</td><td>0%</td><td>CC-BY-4.0 (Copernicus)</td></tr>
+          <tr><td>B</td><td>Element84 Earth Search (AWS Open Data)</td><td>sentinel-2-l2a</td><td>S2B_43PFM_20240123_0_L2A</td><td>2024-01-23</td><td>S2MSI2A</td><td>0.165%</td><td>CC-BY-4.0 (Copernicus)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes">
+<p>Reference labels for the land-cover model: ESA WorldCover v200 (2021)</p>    </div>
+  </section>
+  <section>
+    <h2>
+      5. Methodology
+      <span class="tag metadata">
+        Technical metadata
+      </span>
+    </h2>
+
+
+    <ul>
+<li>Vegetation index: NDVI = (NIR - Red) / (NIR + Red)</li><li>Bands: red = Sentinel-2 B04 (664.6 nm), near infrared = Sentinel-2 B08 (832.8 nm)</li><li>Quality masking: Sentinel-2 Level-2A scene classification: no-data, saturated, cloud shadow, medium- and high-probability cloud, thin cirrus and snow/ice pixels are excluded.</li><li>Analysis grid: 761x768 pixels at 17.4 m in EPSG:32643</li><li>Radiometric calibration: reflectance offset 0.0 (physical_override)</li><li>Change detection: per-pixel difference: NDVI(period B) - NDVI(period A)</li><li>Co-registration: Period B was reprojected onto the period A pixel grid (bilinear) prior to differencing.</li><li>Comparable pixels: Only pixels valid in both periods after cloud, shadow, cirrus and snow masking contribute to any statistic.</li><li>Land-cover model: naturevision-landcover v1.0.0 (random_forest)</li><li>Model evaluation protocol: Spatially disjoint hold-out: the model is fitted only on the training regions and scored on evaluation regions that share no pixels, scenes or landscapes with them. No pixel-level random split is used, because spatial autocorrelation between adjacent 10 m pixels would inflate the reported accuracy.</li>    </ul>
+
+
+  </section>
+  <section>
+    <h2>
+      6. NDVI Statistics
+      <span class="tag observed">
+        Observed data
+      </span>
+    </h2>
+
+
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Period</th><th>Acquired</th><th>Mean</th><th>Median</th><th>Min</th><th>Max</th><th>Std dev</th><th>Valid pixels</th><th>Valid area</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Period A</td><td>2021-02-07</td><td>0.703</td><td>0.74</td><td>-0.255</td><td>0.915</td><td>0.14</td><td>574,571</td><td>174.159 km²</td></tr>
+          <tr><td>Period B</td><td>2024-01-23</td><td>0.722</td><td>0.76</td><td>-0.203</td><td>0.906</td><td>0.13</td><td>574,490</td><td>174.134 km²</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes">
+<p>Statistics are computed over pixels that survived cloud, shadow, cirrus and snow masking within the selected geometry.</p>    </div>
+  </section>
+  <section>
+    <h2>
+      7. Vegetation Change
+      <span class="tag observed">
+        Observed data
+      </span>
+    </h2>
+
+
+    <ul>
+<li>Mean NDVI, period A: 0.703</li><li>Mean NDVI, period B: 0.722</li><li>Absolute change: +0.019</li><li>Relative change: +2.75%</li><li>Area with change beyond the moderate threshold: 7.909% (13.759 km²)</li><li>Area decreasing: 3.611%</li><li>Area increasing: 4.298%</li>    </ul>
+
+
+    <div class="notes">
+<p>Mean values are recomputed over pixels valid in both periods, so the reported change equals the difference of those means on identical pixels.</p><p>A change in a vegetation index is an observation about reflectance. It does not by itself identify land-cover conversion or any cause.</p>    </div>
+  </section>
+  <section>
+    <h2>
+      8. Land-Cover Results
+      <span class="tag model_prediction">
+        Model prediction
+      </span>
+    </h2>
+
+
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Class</th><th>Share of classified area</th><th>Area</th><th>Mean confidence</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Forest</td><td>88.101%</td><td>153.414 km²</td><td>0.916</td></tr>
+          <tr><td>Agriculture</td><td>7.502%</td><td>13.063 km²</td><td>0.712</td></tr>
+          <tr><td>Water</td><td>2.78%</td><td>4.84 km²</td><td>0.742</td></tr>
+          <tr><td>Urban / built-up</td><td>1.605%</td><td>2.794 km²</td><td>0.641</td></tr>
+          <tr><td>Bare land</td><td>0.013%</td><td>0.022 km²</td><td>0.44</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes">
+<p>These are per-pixel predictions from a statistical model, not measurements.</p><p>Shrubland and grassland are merged into Agriculture, so that class denotes managed or herbaceous cover rather than cropland specifically.</p><p>Mangroves are reported as Forest.</p><p>Snow, ice, moss and lichen are reported as Bare land.</p><p>Herbaceous wetland is reported as Water.</p>    </div>
+  </section>
+  <section>
+    <h2>
+      9. Spatial Change
+      <span class="tag observed">
+        Observed data
+      </span>
+    </h2>
+
+
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Change class</th><th>Share of comparable area</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Significant decrease</td><td>0.916%</td></tr>
+          <tr><td>Moderate decrease</td><td>2.695%</td></tr>
+          <tr><td>Stable</td><td>92.091%</td></tr>
+          <tr><td>Moderate increase</td><td>3.307%</td></tr>
+          <tr><td>Significant increase</td><td>0.991%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes">
+<p>Thresholds applied (absolute NDVI units): moderate 0.1, significant 0.2.</p><p>Comparable pixels: 573922.</p>    </div>
+  </section>
+  <section>
+    <h2>
+      10. Interpretation
+      <span class="tag interpretation">
+        Generated interpretation
+      </span>
+    </h2>
+
+<p>No language provider is configured, so the automated interpretation section was not generated. All measured results are unaffected.</p>
+
+
+    <div class="notes">
+<p>All measured results elsewhere in this report are unaffected.</p>    </div>
+  </section>
+  <section>
+    <h2>
+      11. Confidence
+      <span class="tag metadata">
+        Technical metadata
+      </span>
+    </h2>
+
+
+    <ul>
+<li>Land-cover model held-out overall accuracy: 0.592</li><li>Land-cover model held-out macro F1: 0.527</li><li>Mean per-pixel confidence: 0.892</li><li>Pixels below 0.50 confidence: 0.024</li><li>Period A pixels removed by quality masking: 0.23%</li><li>Period B pixels removed by quality masking: 0.24%</li>    </ul>
+
+
+  </section>
+  <section>
+    <h2>
+      12. Limitations
+      <span class="tag metadata">
+        Technical metadata
+      </span>
+    </h2>
+
+
+    <ul>
+<li>Analysis is based on optical satellite imagery, which cannot see through cloud; masked pixels are excluded rather than estimated.</li><li>A vegetation index measures reflectance-derived greenness, not biomass, carbon stock, habitat quality or biodiversity.</li><li>Comparing two acquisition dates cannot separate land-cover change from seasonal phenology, crop cycles, drought response or differences in illumination and view geometry.</li><li>No causal attribution is made. The analysis identifies where and how much the index changed, not why.</li><li>Land-cover classes are per-pixel predictions from a statistical model and carry classification error, particularly on mixed pixels and class boundaries.</li><li>The mean index change is smaller than the moderate-change threshold, so the regional average is not distinguishable from measurement and processing noise.</li>    </ul>
+
+
+  </section>
+  <section>
+    <h2>
+      13. Technical Metadata
+      <span class="tag metadata">
+        Technical metadata
+      </span>
+    </h2>
+
+
+    <ul>
+<li>Analysis identifier: 94056654-ef5a-49f9-a603-81503d49af52</li><li>Application: NatureVision</li><li>Analysis grid CRS: EPSG:32643</li><li>Analysis grid transform: [17.41130091984231, 0.0, 675240.0, 0.0, -17.408854166666668, 1130250.0]</li><li>Pixel ground area: 303.111 m²</li><li>Model: naturevision-landcover v1.0.0</li><li>Model backend: random_forest</li><li>Period a masked fraction: 0.0023</li><li>Period b masked fraction: 0.0024</li><li>Days between observations: 1080</li><li>Comparable pixel fraction: 0.982</li>    </ul>
+
+
+  </section>
+
+  <footer>
+    <p>
+      Measured values in this report are produced by deterministic geospatial
+      processing of Sentinel-2 Level-2A surface reflectance. Sections tagged
+      "Model prediction" are outputs of a statistical classifier and carry
+      classification error. Sections tagged "Generated interpretation" are
+      written by a language model from the measured evidence and contain no
+      independent measurement.
+    </p>
+  </footer>
+</div>
+</body>
+</html>
