@@ -95,7 +95,6 @@ export function WorkspacePage({ health }: { health: HealthResponse | null }) {
       <Section id="workspace" tone="canopy" className="workspace">
         <Container wide>
           <SectionHead
-            eyebrow="Analysis workspace"
             tone="dark"
             title="Define a region and an observation window"
             lede="The pipeline runs on live Sentinel-2 data. Nothing here is precomputed."
@@ -206,7 +205,6 @@ export function WorkspacePage({ health }: { health: HealthResponse | null }) {
           <Section id={resultsRef.id} tone="cream">
             <Container wide>
               <SectionHead
-                eyebrow="Key findings"
                 title={detail.region.name ?? 'Analysis results'}
                 lede={`${detail.period_a}${detail.period_b ? ` compared with ${detail.period_b}` : ''} · ${detail.region.area_km2.toFixed(1)} km²`}
               />
@@ -252,7 +250,6 @@ export function WorkspacePage({ health }: { health: HealthResponse | null }) {
           <Section id="interpretation" tone="charcoal">
             <Container wide>
               <SectionHead
-                eyebrow="Nature intelligence"
                 tone="dark"
                 title="Interpretation of the measured evidence"
                 lede="Generated from the values above and validated against them before display."
@@ -269,7 +266,6 @@ export function WorkspacePage({ health }: { health: HealthResponse | null }) {
           <Section id="report" tone="cream">
             <Container wide>
               <SectionHead
-                eyebrow="Report"
                 title="Nature Intelligence Report"
                 lede="Thirteen sections, each tagged with where its content came from."
               />
@@ -314,7 +310,6 @@ export function WorkspacePage({ health }: { health: HealthResponse | null }) {
       <Section id="history" tone="canopy">
         <Container wide>
           <SectionHead
-            eyebrow="History"
             tone="dark"
             title="Previous analyses"
             lede="Stored server-side with their metrics and observations. Reopen any run to inspect it."

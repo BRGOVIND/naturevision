@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react'
 
 import { Footer } from './app/Footer'
 import { Nav } from './app/Nav'
+import { Opening } from './app/Opening'
 import { useRouter } from './app/router'
 import { AboutPage } from './pages/AboutPage'
+import { ExplorePage } from './pages/ExplorePage'
 import { LandingPage } from './pages/LandingPage'
 import { MethodologyPage } from './pages/MethodologyPage'
 import { ReportsPage } from './pages/ReportsPage'
@@ -37,6 +39,7 @@ export default function App() {
   useEffect(() => {
     const titles: Record<string, string> = {
       '/': 'NatureVision — Environmental Intelligence',
+      '/explore': 'Explore — NatureVision',
       '/analysis': 'Analysis workspace — NatureVision',
       '/methodology': 'Methodology — NatureVision',
       '/reports': 'Reports — NatureVision',
@@ -47,6 +50,8 @@ export default function App() {
 
   return (
     <>
+      <Opening />
+
       <a className="skip-link" href="#main">
         Skip to content
       </a>
@@ -62,6 +67,7 @@ export default function App() {
 
       <main id="main">
         {route === '/' && <LandingPage navigate={navigate} health={health} />}
+        {route === '/explore' && <ExplorePage navigate={navigate} />}
         {route === '/analysis' && <WorkspacePage health={health} />}
         {route === '/methodology' && <MethodologyPage />}
         {route === '/reports' && <ReportsPage navigate={navigate} />}

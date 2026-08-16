@@ -18,7 +18,6 @@ export function AboutPage({ navigate }: { navigate: Navigate }) {
       <Section tone="canopy" className="page-head">
         <Container>
           <SectionHead
-            eyebrow="About"
             tone="dark"
             title="Why NatureVision exists"
             lede="Satellite data is abundant and public. Turning it into something a non-specialist can act on, without overstating what it shows, is the hard part."
@@ -49,7 +48,7 @@ export function AboutPage({ navigate }: { navigate: Navigate }) {
 
       <Section tone="charcoal">
         <Container>
-          <SectionHead eyebrow="Built with" tone="dark" title="Technology" />
+          <SectionHead tone="dark" title="Technology" />
           <ul className="stack-list">
             {STACK.map((group) => (
               <li key={group.group}>
@@ -64,7 +63,7 @@ export function AboutPage({ navigate }: { navigate: Navigate }) {
       {RECOGNITION.length > 0 && (
         <Section tone="cream">
           <Container>
-            <SectionHead eyebrow="Recognition" title="Awards" />
+            <SectionHead title="Awards" />
             <ul className="limit-list">
               {RECOGNITION.map((item) => (
                 <li key={item.project}>
@@ -78,7 +77,7 @@ export function AboutPage({ navigate }: { navigate: Navigate }) {
 
       <Section tone="canopy">
         <Container>
-          <SectionHead eyebrow="Contact" tone="dark" title="Get in touch" />
+          <SectionHead tone="dark" title="Get in touch" />
           <div className="contact">
             <a className="contact__link" href={`mailto:${SITE.author.email}`}>
               {SITE.author.email}

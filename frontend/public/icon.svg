@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="NatureVision">
+  <rect width="64" height="64" rx="14" fill="#10241a"/>
+  <g fill="none" stroke="#7fa650" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M32 12c-11.2 8.3-17.6 17.6-17.6 27.2A17.6 17.6 0 0 0 32 52a17.6 17.6 0 0 0 17.6-23.5C49.6 21.4 43.2 12.1 32 12Z"/>
+    <path d="M32 52V27.7M32 38.9l8.3-8.3M32 47.4l-7.2-7.2"/>
+  </g>
+</svg>

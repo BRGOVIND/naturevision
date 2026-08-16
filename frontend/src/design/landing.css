@@ -1,0 +1,671 @@
+/* ======================================================================== */
+/* Cinematic opening                                                         */
+/* ======================================================================== */
+.opening {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background: var(--canopy);
+  overflow: hidden;
+  animation: opening-in 600ms var(--ease) both;
+}
+.opening--leaving {
+  animation: opening-out 700ms var(--ease) forwards;
+  pointer-events: none;
+}
+@keyframes opening-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes opening-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+.opening__media {
+  position: absolute;
+  inset: 0;
+}
+.opening__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: opening-drift 3200ms var(--ease) both;
+}
+@keyframes opening-drift {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+.opening__veil {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 90% at 50% 50%,
+    rgb(9 22 15 / 0.3) 0%,
+    rgb(9 22 15 / 0.86) 100%
+  );
+}
+.opening__mark {
+  position: relative;
+  text-align: center;
+  color: #fff;
+  padding-inline: var(--s-5);
+  animation: opening-mark 900ms var(--ease) 180ms both;
+}
+@keyframes opening-mark {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.opening__glyph {
+  display: block;
+  color: var(--lichen);
+  margin: 0 auto var(--s-4);
+  width: 40px;
+}
+.opening__wordmark {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 1.4rem + 5.6vw, 6rem);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+.opening__tagline {
+  margin-top: var(--s-4);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  color: rgb(255 255 255 / 0.62);
+}
+
+/* ======================================================================== */
+/* Scroll reveal                                                             */
+/* ======================================================================== */
+/* Visible by default. Only the explicit pending state hides it, and that is
+   applied by script after confirming it can be undone. */
+.reveal {
+  transition:
+    opacity 700ms var(--ease),
+    transform 700ms var(--ease);
+}
+.reveal--pending {
+  opacity: 0;
+  transform: translateY(14px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal--pending {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ======================================================================== */
+/* Hero                                                                      */
+/* ======================================================================== */
+.hero {
+  position: relative;
+  min-height: min(96vh, 54rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: var(--s-9) var(--s-7);
+  background: var(--canopy);
+  isolation: isolate;
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 34%;
+}
+/* Layered veil: dense behind the type, open on the right so canopy detail
+   survives, and resolving to the page colour at the base so the section has
+   no hard bottom edge. */
+.hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      103deg,
+      rgb(9 22 15 / 0.94) 0%,
+      rgb(9 22 15 / 0.74) 44%,
+      rgb(9 22 15 / 0.2) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgb(9 22 15 / 0.72) 0%,
+      transparent 26%,
+      rgb(9 22 15 / 0.55) 74%,
+      var(--canopy) 100%
+    );
+}
+.hero__content {
+  position: relative;
+}
+.hero__title {
+  font-size: var(--step-6);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.025em;
+  color: #fff;
+  text-wrap: initial;
+}
+.hero__title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--lichen-soft);
+}
+.hero__lede {
+  margin-top: var(--s-6);
+  max-width: 40ch;
+  font-size: var(--step-1);
+  color: rgb(255 255 255 / 0.8);
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-6);
+}
+.hero__foot {
+  position: relative;
+  margin-top: var(--s-8);
+}
+.hero__scale-caption {
+  margin-top: var(--s-2);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  color: rgb(255 255 255 / 0.46);
+}
+
+/* ======================================================================== */
+/* Landing: statement                                                        */
+/* ======================================================================== */
+/* Each landing section carries the fade into the next, so the page reads as
+   one environment rather than a stack of panels. */
+.statement,
+.evidence,
+.integrity,
+.invitation,
+.capabilities,
+.bands {
+  position: relative;
+}
+.statement::before,
+.integrity::before,
+.invitation::before,
+.capabilities::before,
+.bands::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: var(--fade-height);
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.statement {
+  background: var(--cream);
+  padding-block: var(--s-9);
+}
+.statement::before {
+  background: linear-gradient(180deg, transparent 0%, var(--cream) 100%);
+}
+/* Both paragraphs share one measure and one left edge; sizing alone carries
+   the hierarchy. Centring them independently misaligned their left margins. */
+.statement .container {
+  max-width: 54rem;
+}
+.statement__body {
+  font-size: clamp(1.2rem, 0.95rem + 1.1vw, 1.75rem);
+  line-height: 1.45;
+  max-width: 30ch;
+  color: var(--ink);
+}
+.statement__body--quiet {
+  margin-top: var(--s-6);
+  font-size: var(--step-1);
+  line-height: 1.65;
+  max-width: 46ch;
+  color: var(--ink-muted);
+}
+
+/* ======================================================================== */
+/* Landing: evidence                                                         */
+/* ======================================================================== */
+.evidence {
+  background: var(--cream);
+  padding-block: var(--s-8) var(--s-9);
+}
+.evidence__title {
+  font-size: var(--step-4);
+  font-weight: 400;
+  margin-bottom: var(--s-8);
+}
+.evidence__title em,
+.integrity__title em,
+.invitation__title em,
+.page-hero__title em,
+.bands__title em {
+  font-style: italic;
+}
+.evidence__title em,
+.bands__title em {
+  color: var(--moss);
+}
+.evidence__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--s-7) var(--s-6);
+}
+.evidence__item {
+  border-top: 1px solid var(--line-light);
+  padding-top: var(--s-4);
+}
+.evidence__value {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 1.6rem + 3vw, 4rem);
+  font-weight: 400;
+  line-height: 1;
+  color: var(--moss);
+}
+.evidence__label {
+  margin-top: var(--s-3);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink-faint);
+}
+.evidence__note {
+  margin-top: var(--s-2);
+  font-size: var(--step--1);
+  color: var(--ink-muted);
+  max-width: 30ch;
+}
+
+/* ======================================================================== */
+/* Landing: integrity                                                        */
+/* ======================================================================== */
+.integrity {
+  background: var(--charcoal);
+  color: var(--ink-on-dark);
+  padding-block: var(--s-9);
+}
+.integrity::before {
+  background: linear-gradient(180deg, transparent 0%, var(--charcoal) 100%);
+}
+.integrity__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8);
+  align-items: start;
+}
+.integrity__layout > * {
+  min-width: 0;
+}
+.integrity__title {
+  font-size: var(--step-4);
+  font-weight: 400;
+}
+.integrity__title em {
+  color: var(--lichen);
+}
+.integrity__body p {
+  color: var(--ink-on-dark-muted);
+  font-size: var(--step-1);
+  margin-bottom: var(--s-4);
+  max-width: 46ch;
+}
+.integrity__link button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--lichen);
+  font-size: var(--step-0);
+  cursor: pointer;
+  border-bottom: 1px solid rgb(127 166 80 / 0.4);
+  transition: border-color var(--t-fast) var(--ease);
+}
+.integrity__link button:hover {
+  border-bottom-color: var(--lichen);
+}
+
+/* ======================================================================== */
+/* Landing and Explore: invitation                                           */
+/* ======================================================================== */
+.invitation {
+  background: var(--canopy);
+  color: var(--ink-on-dark);
+  padding-block: var(--s-9);
+  text-align: center;
+}
+.invitation::before {
+  background: linear-gradient(180deg, transparent 0%, var(--canopy) 100%);
+}
+.invitation__title {
+  font-size: var(--step-5);
+  font-weight: 400;
+  line-height: 1;
+}
+.invitation__title em {
+  color: var(--lichen);
+}
+.invitation__body {
+  margin: var(--s-5) auto 0;
+  max-width: 44ch;
+  color: var(--ink-on-dark-muted);
+  font-size: var(--step-1);
+}
+.invitation__actions {
+  display: flex;
+  gap: var(--s-3);
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: var(--s-6);
+}
+.invitation__status {
+  display: flex;
+  justify-content: center;
+  gap: var(--s-7);
+  flex-wrap: wrap;
+  margin-top: var(--s-8);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line-dark);
+}
+.invitation__status dt {
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--ink-on-dark-faint);
+}
+.invitation__status dd {
+  margin-top: 0.2rem;
+  color: var(--lichen);
+  font-size: var(--step--1);
+}
+
+/* Dark landing panels get the same control treatment as .section--canopy;
+   without it a secondary button renders dark-on-dark. */
+.invitation .btn--secondary,
+.integrity .btn--secondary,
+.page-hero .btn--secondary {
+  border-color: var(--lichen);
+  color: var(--lichen);
+}
+.invitation .btn--secondary:hover,
+.integrity .btn--secondary:hover,
+.page-hero .btn--secondary:hover {
+  background: var(--lichen);
+  color: var(--canopy);
+}
+
+/* ======================================================================== */
+/* Interior page hero                                                        */
+/* ======================================================================== */
+.page-hero {
+  background: var(--canopy);
+  color: var(--ink-on-dark);
+  padding-block: var(--s-9) var(--s-7);
+}
+.page-hero__title {
+  font-size: var(--step-5);
+  font-weight: 400;
+  line-height: 1;
+  color: #fff;
+}
+.page-hero__title em {
+  color: var(--lichen);
+}
+.page-hero__lede {
+  margin-top: var(--s-5);
+  max-width: 48ch;
+  font-size: var(--step-1);
+  color: var(--ink-on-dark-muted);
+}
+.page-hero .calibration {
+  margin-top: var(--s-7);
+}
+
+/* ======================================================================== */
+/* Explore: capabilities                                                     */
+/* ======================================================================== */
+.capabilities {
+  background: var(--cream);
+  padding-block: var(--s-9);
+}
+.capabilities::before {
+  background: linear-gradient(180deg, transparent 0%, var(--cream) 100%);
+}
+.capability-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--s-7) var(--s-6);
+}
+/* No boxes: a single accent rule carries each capability's identity. */
+.capability {
+  position: relative;
+  padding-top: var(--s-5);
+  border-top: 2px solid var(--card-accent, var(--lichen));
+}
+.capability__index {
+  position: absolute;
+  top: var(--s-5);
+  right: 0;
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+}
+.capability h2 {
+  font-family: var(--font-body);
+  letter-spacing: 0;
+  font-size: var(--step-1);
+  font-weight: 600;
+  margin-bottom: var(--s-3);
+  color: var(--ink);
+}
+.capability p {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+}
+.capability__detail {
+  margin-top: var(--s-4);
+  color: var(--ink-faint);
+  font-size: var(--step--2);
+}
+
+/* ======================================================================== */
+/* Explore: bands                                                            */
+/* ======================================================================== */
+.bands {
+  background: var(--cream-2);
+  padding-block: var(--s-9);
+}
+.bands::before {
+  background: linear-gradient(180deg, transparent 0%, var(--cream-2) 100%);
+}
+.bands__layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-8);
+  align-items: center;
+}
+.bands__layout > * {
+  min-width: 0;
+}
+.bands__title {
+  font-size: var(--step-4);
+  font-weight: 400;
+  margin-bottom: var(--s-4);
+}
+.bands__lead p {
+  color: var(--ink-muted);
+  max-width: 42ch;
+}
+.band-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+}
+.band-list li {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto auto;
+  gap: var(--s-3);
+  align-items: baseline;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--line-light);
+  font-size: var(--step--1);
+}
+.band-list li:first-child {
+  border-top: 1px solid var(--line-light);
+}
+.band-list__id {
+  color: var(--moss);
+  font-weight: 600;
+}
+.band-list__nm,
+.band-list__res {
+  color: var(--ink-faint);
+  font-size: var(--step--2);
+}
+.bands__note {
+  margin-top: var(--s-4);
+  font-size: var(--step--2);
+  color: var(--ink-faint);
+}
+
+/* ======================================================================== */
+/* Methodology: pipeline and trust                                           */
+/* ======================================================================== */
+.pipeline {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.pipeline__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: var(--s-4);
+  padding: var(--s-4) 0;
+  border-top: 1px solid var(--line-light);
+}
+.pipeline__step:last-child {
+  border-bottom: 1px solid var(--line-light);
+}
+.pipeline__rule {
+  position: absolute;
+  left: 1.55rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-light);
+}
+.pipeline__num {
+  position: relative;
+  z-index: 1;
+  align-self: center;
+  justify-self: start;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 1px solid var(--moss);
+  color: var(--moss);
+  font-size: var(--step--2);
+}
+.pipeline__step h3 {
+  font-size: var(--step-1);
+  font-weight: 600;
+}
+.pipeline__step p {
+  color: var(--ink-muted);
+  font-size: var(--step--1);
+  margin-top: 0.15rem;
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: var(--s-6);
+}
+.trust-card {
+  background: transparent;
+  border: none;
+  border-top: 2px solid var(--lichen);
+  border-radius: 0;
+  padding: var(--s-4) 0 0;
+}
+.trust-card h3 {
+  font-size: var(--step-1);
+  color: var(--ink-on-dark);
+  margin-bottom: var(--s-3);
+  font-weight: 600;
+}
+.trust-card p {
+  color: var(--ink-on-dark-muted);
+  font-size: var(--step--1);
+}
+
+/* ======================================================================== */
+/* Landing responsive                                                        */
+/* ======================================================================== */
+@media (max-width: 900px) {
+  .integrity__layout,
+  .bands__layout {
+    grid-template-columns: 1fr;
+    gap: var(--s-6);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: auto;
+    padding-block: var(--s-8) var(--s-6);
+  }
+  .hero__actions .btn {
+    width: 100%;
+  }
+  .invitation__status {
+    gap: var(--s-5);
+  }
+  /* The band table's four columns stop fitting; let them wrap rather than
+     crowd the edge. */
+  .band-list li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem var(--s-3);
+  }
+  .band-list__name {
+    flex: 1 0 auto;
+  }
+}

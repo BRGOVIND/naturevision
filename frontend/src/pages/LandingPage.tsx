@@ -1,103 +1,100 @@
-/** Public landing experience. */
+/**
+ * Landing experience.
+ *
+ * An invitation, not a specification. It establishes identity, says what the
+ * system does and what its evidence looks like, and hands the visitor to the
+ * workspace. The full capability and methodology material lives on /explore
+ * and /methodology, reachable from the navigation.
+ */
 
 import { useEffect, useRef, useState } from 'react'
 
-import {
-  Button,
-  CalibrationStrip,
-  Card,
-  Container,
-  Eyebrow,
-  Section,
-  SectionHead,
-} from '../design/primitives'
+import { Button, CalibrationStrip, Container } from '../design/primitives'
 import type { Navigate } from '../app/router'
 import type { HealthResponse } from '../types/api'
 
-/** Real Sentinel-2 band definitions, mirroring the backend's band registry. */
-const BANDS = [
-  { id: 'B02', name: 'Blue', nm: 492.4, res: 10 },
-  { id: 'B03', name: 'Green', nm: 559.8, res: 10 },
-  { id: 'B04', name: 'Red', nm: 664.6, res: 10 },
-  { id: 'B08', name: 'NIR', nm: 832.8, res: 10 },
-  { id: 'B11', name: 'SWIR-1', nm: 1613.7, res: 20 },
-  { id: 'B12', name: 'SWIR-2', nm: 2202.4, res: 20 },
-]
+/**
+ * Reveals children as they scroll into view.
+ *
+ * Content is visible by default and only opts into the hidden start state
+ * after mount, once we know an observer is available and the element is
+ * genuinely below the fold. A safety timer releases it regardless. An
+ * animation must never be able to leave content permanently invisible.
+ */
+function Reveal({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: React.ReactNode
+  className?: string
+  delay?: number
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [state, setState] = useState<'visible' | 'pending'>('visible')
 
-const CAPABILITIES = [
-  {
-    key: 'remote-sensing',
-    title: 'Remote sensing',
-    body: 'Windowed reads over Sentinel-2 Level-2A cloud-optimised imagery, with scene-classification masking for cloud, shadow, cirrus and snow.',
-    detail: '6 spectral bands · 10 m',
-    accent: 'var(--lichen)',
-  },
-  {
-    key: 'vegetation',
-    title: 'Vegetation intelligence',
-    body: 'NDVI computed per pixel with explicit handling of nodata and near-zero denominators, then summarised into density classes.',
-    detail: '(NIR − Red) / (NIR + Red)',
-    accent: 'var(--moss-bright)',
-    mono: true,
-  },
-  {
-    key: 'land-cover',
-    title: 'Land-cover intelligence',
-    body: 'A trained classifier assigns forest, agriculture, water, built-up and bare land, with per-pixel confidence and published hold-out accuracy.',
-    detail: '5 classes · 11 features',
-    accent: 'var(--model)',
-  },
-  {
-    key: 'temporal',
-    title: 'Temporal change',
-    body: 'Two acquisitions co-registered onto one pixel grid, differenced only where both dates are cloud-free, and classified against documented thresholds.',
-    detail: 'Δ 0.10 / 0.20 thresholds',
-    accent: 'var(--clay)',
-  },
-  {
-    key: 'interpretation',
-    title: 'Nature intelligence',
-    body: 'Measured evidence is turned into structured interpretation, then checked back against the evidence. A figure that was never measured is rejected.',
-    detail: 'Grounding-validated',
-    accent: 'var(--interpreted)',
-  },
-  {
-    key: 'reporting',
-    title: 'Reporting',
-    body: 'Thirteen sections covering region, sources, methodology, statistics, results and limitations — each tagged with where its content came from.',
-    detail: 'HTML export',
-    accent: 'var(--sandstone)',
-  },
-]
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+    if (
+      typeof IntersectionObserver === 'undefined' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return
+    }
+    // Already on screen at mount: leave it alone rather than hiding then fading.
+    if (node.getBoundingClientRect().top < window.innerHeight * 0.9) return
 
-const PIPELINE = [
-  { stage: 'Satellite observations', note: 'Catalogue search, ranked by coverage then cloud' },
-  { stage: 'Geospatial preprocessing', note: 'Windowed reads, calibration, co-registration, masking' },
-  { stage: 'Spectral analysis', note: 'Band arithmetic on a single pixel lattice' },
-  { stage: 'Vegetation index', note: 'NDVI with nodata and zero-denominator guards' },
-  { stage: 'Temporal comparison', note: 'Difference over pixels valid in both periods' },
-  { stage: 'Land-cover model', note: 'Per-pixel classification with confidence' },
-  { stage: 'Environmental evidence', note: 'Deterministic values, provenance-tagged' },
-  { stage: 'Interpretation', note: 'Generated from evidence, validated against it' },
-  { stage: 'Report', note: 'Structured, exportable, limitations included' },
-]
+    setState('pending')
+    const reveal = () => setState('visible')
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          reveal()
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '0px 0px -10% 0px' },
+    )
+    observer.observe(node)
 
-const TRUST = [
+    // Backstop: if the observer never fires, the content still appears.
+    const safety = window.setTimeout(reveal, 2500)
+    return () => {
+      observer.disconnect()
+      window.clearTimeout(safety)
+    }
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={[state === 'pending' ? 'reveal reveal--pending' : 'reveal', className ?? '']
+        .filter(Boolean)
+        .join(' ')}
+      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
+    >
+      {children}
+    </div>
+  )
+}
+
+/** What the system actually produces, stated as evidence rather than features. */
+const EVIDENCE = [
   {
-    title: 'NDVI is an indicator, not a census',
-    body: 'It responds to chlorophyll and canopy density. It does not measure biomass, carbon stock, habitat quality or biodiversity, and the product never says it does.',
+    value: '10 m',
+    label: 'Ground sample',
+    note: 'Every measurement resolves to a hundred square metres of surface.',
   },
   {
-    title: 'Land cover is predicted, not observed',
-    body: 'Class shares come from a statistical model with real error. Its hold-out accuracy and per-class F1 are published, including where they are weak.',
+    value: '~5 days',
+    label: 'Revisit',
+    note: 'Sentinel-2 returns to the same ground twice a week.',
   },
   {
-    title: 'Interpretation is grounded and checked',
-    body: 'The language layer sees only measured evidence. Every number it writes is matched back against that evidence, and unsupported causal claims are flagged.',
-  },
-  {
-    title: 'Change is change, not cause',
-    body: 'A two-date optical comparison cannot separate land-cover conversion from phenology, harvest, drought or illumination. Results say where and how much, never why.',
+    value: '13',
+    label: 'Report sections',
+    note: 'Region, sources, methodology, results and limitations.',
   },
 ]
 
@@ -108,257 +105,191 @@ export function LandingPage({
   navigate: Navigate
   health: HealthResponse | null
 }) {
-  const [heroReady, setHeroReady] = useState(false)
-  const heroImage = useRef<HTMLImageElement>(null)
-
-  // The reveal animation is additive: the image is visible by default, and
-  // this flag only adds the fade. A missed load event can slow the animation
-  // down but can never leave the hero blank.
-  useEffect(() => {
-    if (heroImage.current?.complete) setHeroReady(true)
-  }, [])
-
   return (
     <>
       {/* ---------------------------------------------------------------- */}
       {/* Hero                                                              */}
       {/* ---------------------------------------------------------------- */}
-      <section className={heroReady ? 'hero hero--ready' : 'hero'}>
+      <section className="hero">
         <picture className="hero__media">
-          <source
-            media="(max-width: 640px)"
-            srcSet="/hero/forest-portrait.webp"
-            type="image/webp"
-          />
+          <source media="(max-width: 640px)" srcSet="/hero/forest-portrait.webp" type="image/webp" />
           <source media="(max-width: 640px)" srcSet="/hero/forest-portrait.jpg" />
           <source media="(max-width: 1200px)" srcSet="/hero/forest-mid.webp" type="image/webp" />
-          <source media="(max-width: 1200px)" srcSet="/hero/forest-mid.jpg" />
           <source srcSet="/hero/forest-wide.webp" type="image/webp" />
-          <img
-            ref={heroImage}
-            src="/hero/forest-wide.jpg"
-            alt=""
-            fetchPriority="high"
-            decoding="async"
-            onLoad={() => setHeroReady(true)}
-          />
+          {/* Visible by default; nothing gates it on a preload. */}
+          <img src="/hero/forest-wide.jpg" alt="" fetchPriority="high" decoding="async" />
         </picture>
         <div className="hero__veil" aria-hidden="true" />
 
         <Container wide className="hero__content">
-          <Eyebrow tone="dark">Geospatial environmental intelligence</Eyebrow>
           <h1 className="hero__title">
-            Environmental intelligence from Earth’s changing surface
+            Environmental
+            <br />
+            intelligence
+            <br />
+            <em>from Earth’s</em>
+            <br />
+            changing surface
           </h1>
+
           <p className="hero__lede">
-            NatureVision analyses Sentinel-2 satellite observations to measure vegetation
-            condition, detect change between dates, and classify land cover — then turns
-            those measurements into an interpretable environmental report.
+            Satellite observations, geospatial analysis and machine learning, for
+            understanding observable environmental change.
           </p>
+
           <div className="hero__actions">
             <Button variant="primary" size="lg" onClick={() => navigate('/analysis', 'workspace')}>
+              Launch analysis
+            </Button>
+            <Button variant="ghost" size="lg" onClick={() => navigate('/explore')}>
               Explore NatureVision
             </Button>
-            <Button variant="ghost" size="lg" onClick={() => navigate('/methodology')}>
-              View methodology
-            </Button>
           </div>
-
-          <dl className="hero__stats">
-            <div>
-              <dt>Imagery</dt>
-              <dd>Sentinel-2 L2A</dd>
-            </div>
-            <div>
-              <dt>Ground sample</dt>
-              <dd>10 m</dd>
-            </div>
-            <div>
-              <dt>Revisit</dt>
-              <dd>~5 days</dd>
-            </div>
-            <div>
-              <dt>Land-cover classes</dt>
-              <dd>5</dd>
-            </div>
-          </dl>
         </Container>
 
-        <div className="hero__scale">
-          <CalibrationStrip labelled ariaHidden={false} />
-          <p className="hero__scale-caption">
-            Vegetation index scale — the same ramp used by every map layer in the product
-          </p>
+        <div className="hero__foot">
+          <Container wide>
+            <CalibrationStrip labelled ariaHidden={false} />
+            <p className="hero__scale-caption">
+              Vegetation index scale — the ramp every map layer in the product uses
+            </p>
+          </Container>
         </div>
       </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Intro                                                             */}
+      {/* Statement                                                         */}
       {/* ---------------------------------------------------------------- */}
-      <Section id="intro" tone="cream">
+      <section className="statement">
         <Container>
-          <div className="intro">
-            <div className="intro__lede">
-              <SectionHead
-                eyebrow="What it does"
-                title="Satellite observations, turned into environmental evidence"
-              />
-              <p>
-                Pick a region and a time period. NatureVision finds usable Sentinel-2
-                observations, removes cloud and shadow, computes vegetation indices on a
-                consistent pixel grid, compares dates, and classifies land cover.
-              </p>
-              <p>
-                What comes back is not a score or a verdict. It is a set of measurements
-                with their provenance attached — which scene, acquired when, at what cloud
-                cover, over how many valid pixels — alongside model predictions that are
-                labelled as predictions.
-              </p>
-            </div>
-
-            <aside className="intro__spectrum" aria-labelledby="bands-heading">
-              <h3 id="bands-heading" className="intro__spectrum-title">
-                Bands read per analysis
-              </h3>
-              <ul className="band-list">
-                {BANDS.map((band) => (
-                  <li key={band.id}>
-                    <span className="band-list__id mono">{band.id}</span>
-                    <span className="band-list__name">{band.name}</span>
-                    <span className="band-list__nm mono">{band.nm} nm</span>
-                    <span className="band-list__res mono">{band.res} m</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="intro__spectrum-note">
-                Plus the Level-2A scene classification layer, used to mask cloud, shadow,
-                cirrus and snow before any statistic is computed.
-              </p>
-            </aside>
-          </div>
+          <Reveal>
+            <p className="statement__body">
+              NatureVision turns satellite observations into environmental evidence.
+              Pick a region and a period, and it finds usable imagery, removes cloud
+              and shadow, measures vegetation, compares dates and classifies land
+              cover.
+            </p>
+          </Reveal>
+          <Reveal delay={90}>
+            <p className="statement__body statement__body--quiet">
+              What comes back is not a score. It is a set of measurements with their
+              provenance attached — which scene, acquired when, at what cloud cover,
+              over how many valid pixels — alongside model predictions that are
+              labelled as predictions, and never confused with them.
+            </p>
+          </Reveal>
         </Container>
-      </Section>
+      </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Capabilities                                                      */}
+      {/* Evidence                                                          */}
       {/* ---------------------------------------------------------------- */}
-      <Section id="capabilities" tone="canopy">
-        <Container wide>
-          <SectionHead
-            eyebrow="Capabilities"
-            tone="dark"
-            title="A measurement pipeline, end to end"
-            lede="Each stage is deterministic where it can be, and explicit about its uncertainty where it cannot."
-          />
-          <ul className="capability-grid">
-            {CAPABILITIES.map((c, index) => (
-              <Card as="li" key={c.key} accent={c.accent} className="capability">
-                <span className="capability__index mono" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
-                <p className={c.mono ? 'capability__detail mono' : 'capability__detail'}>
-                  {c.detail}
-                </p>
-              </Card>
-            ))}
-          </ul>
-        </Container>
-      </Section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Methodology                                                       */}
-      {/* ---------------------------------------------------------------- */}
-      <Section id="pipeline" tone="cream">
+      <section className="evidence">
         <Container>
-          <SectionHead
-            eyebrow="How it works"
-            title="From orbit to report"
-            lede="Nine stages. The order matters, because each one constrains what the next is allowed to claim."
-          />
-          <ol className="pipeline">
-            {PIPELINE.map((step, index) => (
-              <li key={step.stage} className="pipeline__step">
-                <span className="pipeline__rule" aria-hidden="true" />
-                <span className="pipeline__num mono">{String(index + 1).padStart(2, '0')}</span>
-                <div>
-                  <h3>{step.stage}</h3>
-                  <p>{step.note}</p>
+          <Reveal>
+            <h2 className="evidence__title">
+              Measured, <em>not estimated</em>
+            </h2>
+          </Reveal>
+          <div className="evidence__grid">
+            {EVIDENCE.map((item, index) => (
+              <Reveal key={item.label} delay={index * 90}>
+                <div className="evidence__item">
+                  <p className="evidence__value">{item.value}</p>
+                  <p className="evidence__label">{item.label}</p>
+                  <p className="evidence__note">{item.note}</p>
                 </div>
-              </li>
-            ))}
-          </ol>
-          <div className="pipeline__cta">
-            <Button variant="secondary" onClick={() => navigate('/methodology')}>
-              Read the full methodology
-            </Button>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ---------------------------------------------------------------- */}
-      {/* Trust                                                             */}
-      {/* ---------------------------------------------------------------- */}
-      <Section id="trust" tone="charcoal">
-        <Container>
-          <SectionHead
-            eyebrow="Scientific scope"
-            tone="dark"
-            title="What these results do and do not support"
-            lede="Stated up front, because the limits of the method are part of the result."
-          />
-          <div className="trust-grid">
-            {TRUST.map((item) => (
-              <Card key={item.title} className="trust-card">
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-              </Card>
+              </Reveal>
             ))}
           </div>
         </Container>
-      </Section>
+      </section>
 
       {/* ---------------------------------------------------------------- */}
-      {/* Launch                                                            */}
+      {/* Integrity                                                         */}
       {/* ---------------------------------------------------------------- */}
-      <Section id="launch" tone="canopy">
+      <section className="integrity">
         <Container>
-          <div className="launch">
-            <div>
-              <SectionHead
-                eyebrow="Start"
-                tone="dark"
-                title="Run an analysis on a region you care about"
-                lede="Draw an area, choose one period or two, and the pipeline runs on live satellite data."
-              />
+          <div className="integrity__layout">
+            <Reveal className="integrity__lead">
+              <h2 className="integrity__title">
+                What these results
+                <br />
+                <em>do not</em> claim
+              </h2>
+            </Reveal>
+            <Reveal className="integrity__body" delay={90}>
+              <p>
+                A vegetation index responds to chlorophyll and canopy density. It does
+                not measure biomass, carbon stock, habitat quality or biodiversity, and
+                the product never says it does.
+              </p>
+              <p>
+                Comparing two dates cannot separate land-cover change from phenology,
+                harvest, drought or a difference in illumination. Results say where the
+                index changed and by how much — never why.
+              </p>
+              <p>
+                Written interpretation is generated from the measured evidence and
+                checked back against it. A figure that was never measured is rejected
+                before anyone reads it.
+              </p>
+              <p className="integrity__link">
+                <button type="button" onClick={() => navigate('/methodology')}>
+                  Read the methodology
+                </button>
+              </p>
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      {/* ---------------------------------------------------------------- */}
+      {/* Invitation                                                        */}
+      {/* ---------------------------------------------------------------- */}
+      <section className="invitation">
+        <Container>
+          <Reveal>
+            <h2 className="invitation__title">
+              Run it on somewhere
+              <br />
+              <em>you care about</em>
+            </h2>
+            <p className="invitation__body">
+              Draw a region, choose one period or two, and the pipeline runs on live
+              Sentinel-2 data.
+            </p>
+            <div className="invitation__actions">
               <Button variant="primary" size="lg" onClick={() => navigate('/analysis', 'workspace')}>
                 Launch analysis
               </Button>
             </div>
+
             {health && (
-              <ul className="launch__status" aria-label="Service status">
-                <li>
-                  <span>Imagery source</span>
-                  <strong className="mono">{health.imagery_provider}</strong>
-                </li>
-                <li>
-                  <span>Land-cover model</span>
-                  <strong className="mono">
-                    {health.checks?.land_cover_model?.ok ? health.land_cover_model : 'not installed'}
-                  </strong>
-                </li>
-                <li>
-                  <span>Interpretation</span>
-                  <strong className="mono">
+              <dl className="invitation__status">
+                <div>
+                  <dt>Imagery</dt>
+                  <dd className="mono">{health.imagery_provider}</dd>
+                </div>
+                <div>
+                  <dt>Land-cover model</dt>
+                  <dd className="mono">
+                    {health.checks?.land_cover_model?.ok
+                      ? health.land_cover_model
+                      : 'not installed'}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Interpretation</dt>
+                  <dd className="mono">
                     {health.checks?.interpretation?.ok ? 'configured' : 'not configured'}
-                  </strong>
-                </li>
-              </ul>
+                  </dd>
+                </div>
+              </dl>
             )}
-          </div>
+          </Reveal>
         </Container>
-      </Section>
+      </section>
     </>
   )
 }

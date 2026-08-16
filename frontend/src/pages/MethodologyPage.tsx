@@ -86,7 +86,6 @@ export function MethodologyPage() {
       <Section tone="canopy" className="page-head">
         <Container>
           <SectionHead
-            eyebrow="Methodology"
             tone="dark"
             title="How a measurement becomes a result"
             lede="Each stage constrains what the next one is allowed to claim. This page documents those constraints."
@@ -110,7 +109,7 @@ export function MethodologyPage() {
 
       <Section id="sources" tone="charcoal">
         <Container>
-          <SectionHead eyebrow="Provenance" tone="dark" title="Data sources" />
+          <SectionHead tone="dark" title="Data sources" />
           <ul className="source-list">
             {SOURCES.map((source) => (
               <li key={source.name}>
@@ -128,7 +127,6 @@ export function MethodologyPage() {
         <Section tone="cream">
           <Container>
             <SectionHead
-              eyebrow="Model card"
               title="Installed land-cover model"
               lede="Measured on spatially held-out regions. Where performance is weak, it is published as weak."
             />
@@ -205,7 +203,6 @@ export function MethodologyPage() {
       <Section id="limitations" tone="canopy">
         <Container>
           <SectionHead
-            eyebrow="Scientific scope"
             tone="dark"
             title="Limitations"
             lede="Included in every generated report, and specific to each run."

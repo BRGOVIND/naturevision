@@ -65,7 +65,10 @@
   --line-light: var(--cream-3);
 
   /* --- typography ------------------------------------------------------------ */
-  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  /* High-contrast editorial serif: dramatic thick/thin modulation and fine
+     hairline serifs. Reserved for display sizes — its hairlines disappear
+     below roughly 24px, which is exactly why body text stays sans. */
+  --font-display: "Bodoni Moda", "Didot", "Bodoni MT", "Playfair Display", Georgia, serif;
   --font-body: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
@@ -76,8 +79,9 @@
   --step-1: 1.2rem;
   --step-2: clamp(1.3rem, 1.1rem + 0.8vw, 1.6rem);
   --step-3: clamp(1.6rem, 1.3rem + 1.4vw, 2.1rem);
-  --step-4: clamp(2rem, 1.5rem + 2.4vw, 3rem);
-  --step-5: clamp(2.6rem, 1.7rem + 4.2vw, 4.4rem);
+  --step-4: clamp(2.1rem, 1.5rem + 2.9vw, 3.6rem);
+  --step-5: clamp(2.9rem, 1.6rem + 6.2vw, 6.6rem);
+  --step-6: clamp(3.4rem, 1.5rem + 8.6vw, 9rem);
 
   --tracking-label: 0.14em;
   --tracking-tight: -0.02em;
@@ -112,6 +116,10 @@
   --t-fast: 120ms;
   --t-base: 220ms;
   --t-slow: 420ms;
+
+  /* Vertical fades used to blend adjacent sections into one another instead
+     of butting two flat colour blocks together. */
+  --fade-height: clamp(4rem, 9vw, 9rem);
 
   /* --- the NDVI calibration ramp ---------------------------------------------------- */
   /* These stops mirror the backend's NDVI colour ramp exactly, so the strip on
@@ -172,10 +180,33 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.12;
-  letter-spacing: var(--tracking-tight);
+  font-weight: 500;
+  line-height: 1.06;
+  letter-spacing: -0.015em;
   text-wrap: balance;
+}
+
+/* The display serif is an identity, not a default. Interface chrome, controls
+   and dense data stay in the sans and mono faces so the serif keeps its
+   impact where it is used. */
+.panel__head h3,
+.map-frame__title h3,
+.control-card__head h3,
+.metric__label,
+.report__meta h3,
+.report-list__main h3,
+.stage h3,
+.trust-card h3,
+.source-list h3,
+.pipeline__step h3,
+.capability h2,
+.capability h3,
+.interp__block h3,
+.stack-list h3,
+.footer__column h3,
+.chart-subtitle {
+  font-family: var(--font-body);
+  letter-spacing: 0;
 }
 
 p {

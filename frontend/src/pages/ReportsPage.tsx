@@ -25,7 +25,6 @@ export function ReportsPage({ navigate }: { navigate: Navigate }) {
       <Section tone="canopy" className="page-head">
         <Container>
           <SectionHead
-            eyebrow="Reports"
             tone="dark"
             title="Nature Intelligence Reports"
             lede="Every completed analysis can produce a report covering its region, sources, methodology, results and limitations."

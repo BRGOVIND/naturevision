@@ -8,7 +8,14 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
-export const ROUTES = ['/', '/analysis', '/methodology', '/reports', '/about'] as const
+export const ROUTES = [
+  '/',
+  '/explore',
+  '/analysis',
+  '/methodology',
+  '/reports',
+  '/about',
+] as const
 export type Route = (typeof ROUTES)[number]
 
 function normalise(pathname: string): Route {

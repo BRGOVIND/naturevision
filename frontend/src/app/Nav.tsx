@@ -6,7 +6,7 @@ import { Button } from '../design/primitives'
 import type { Navigate, Route } from './router'
 
 const LINKS: { label: string; route: Route }[] = [
-  { label: 'Explore', route: '/' },
+  { label: 'Explore', route: '/explore' },
   { label: 'Analysis', route: '/analysis' },
   { label: 'Methodology', route: '/methodology' },
   { label: 'Reports', route: '/reports' },

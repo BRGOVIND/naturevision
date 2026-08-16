@@ -9,6 +9,7 @@ const COLUMNS: { heading: string; links: { label: string; route: Route; hash?: s
     heading: 'Product',
     links: [
       { label: 'Analysis workspace', route: '/analysis', hash: 'workspace' },
+      { label: 'What it does', route: '/explore' },
       { label: 'Reports', route: '/reports' },
       { label: 'Methodology', route: '/methodology' },
     ],

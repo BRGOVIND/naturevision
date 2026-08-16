@@ -85,6 +85,10 @@ export function Eyebrow({ children, tone }: { children: ReactNode; tone?: 'dark'
   return <p className={tone === 'dark' ? 'eyebrow eyebrow--dark' : 'eyebrow'}>{children}</p>
 }
 
+/**
+ * A section heading. `eyebrow` exists for the rare case where a small label
+ * genuinely aids navigation; it is not decoration and most sections omit it.
+ */
 export function SectionHead({
   eyebrow,
   title,
