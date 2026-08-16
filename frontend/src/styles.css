@@ -1666,9 +1666,13 @@
 .interp__block--limits {
   grid-column: 1 / -1;
 }
-.interp__block--limits ul {
-  columns: 3;
-  column-gap: var(--s-6);
+/* Both classes are on the element, so this outranks `.interp__block ul`
+   regardless of source order — equal specificity there let the grid display
+   win and silently cancelled the columns. */
+.interp__block.interp__block--limits ul {
+  display: block;
+  columns: 2;
+  column-gap: var(--s-7);
 }
 .interp__block--limits li {
   break-inside: avoid;
@@ -2280,7 +2284,7 @@
   .interp__grid {
     grid-template-columns: 1fr 1fr;
   }
-  .interp__block--limits ul {
+  .interp__block.interp__block--limits ul {
     columns: 2;
   }
   .workspace__grid {
@@ -2321,7 +2325,7 @@
   .interp__grid {
     grid-template-columns: 1fr;
   }
-  .interp__block--limits ul {
+  .interp__block.interp__block--limits ul {
     columns: 1;
   }
   .lifecycle__steps {
