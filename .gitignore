@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Environment and secrets
+.env
+.env.local
+*.pem
+
+# Data and artifacts
+.cache/
+backend/artifacts/analyses/
+backend/artifacts/e2e_report.html
+*.db
+*.sqlite3
+*.tif
+*.tiff
+
+# Trained models are large binaries; the manifest and metrics are kept so the
+# model's provenance and measured accuracy stay in version control.
+backend/artifacts/models/**/model.joblib
+backend/artifacts/models/**/model.pt
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

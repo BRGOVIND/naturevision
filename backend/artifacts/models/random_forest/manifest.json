@@ -1,0 +1,363 @@
+{
+  "metadata": {
+    "name": "naturevision-landcover",
+    "version": "1.0.0",
+    "backend": "random_forest",
+    "feature_names": [
+      "blue",
+      "green",
+      "red",
+      "nir",
+      "swir16",
+      "swir22",
+      "ndvi",
+      "ndwi",
+      "ndbi",
+      "nbr",
+      "bsi_partial"
+    ],
+    "feature_version": "1.0.0",
+    "class_labels": {
+      "0": "Forest",
+      "1": "Agriculture",
+      "2": "Water",
+      "3": "Urban / built-up",
+      "4": "Bare land"
+    },
+    "trained_at": "2026-08-16T15:27:30.942060+00:00",
+    "training_samples": 322522,
+    "evaluation_samples": 82617,
+    "overall_accuracy": 0.5922,
+    "macro_f1": 0.5268,
+    "per_class_metrics": {
+      "Forest": {
+        "precision": 0.5845,
+        "recall": 0.5804,
+        "f1": 0.5824,
+        "support": 22305
+      },
+      "Agriculture": {
+        "precision": 0.4781,
+        "recall": 0.7778,
+        "f1": 0.5922,
+        "support": 20224
+      },
+      "Water": {
+        "precision": 0.9438,
+        "recall": 0.4341,
+        "f1": 0.5947,
+        "support": 26583
+      },
+      "Urban / built-up": {
+        "precision": 0.6569,
+        "recall": 0.7752,
+        "f1": 0.7112,
+        "support": 10688
+      },
+      "Bare land": {
+        "precision": 0.1559,
+        "recall": 0.1509,
+        "f1": 0.1533,
+        "support": 2817
+      }
+    },
+    "confusion_matrix": [
+      [
+        12946,
+        8799,
+        149,
+        404,
+        7
+      ],
+      [
+        3574,
+        15730,
+        229,
+        446,
+        245
+      ],
+      [
+        5367,
+        6850,
+        11539,
+        2054,
+        773
+      ],
+      [
+        212,
+        906,
+        9,
+        8285,
+        1276
+      ],
+      [
+        51,
+        618,
+        300,
+        1423,
+        425
+      ]
+    ],
+    "evaluation_protocol": "Spatially disjoint hold-out: the model is fitted only on the training regions and scored on evaluation regions that share no pixels, scenes or landscapes with them. No pixel-level random split is used, because spatial autocorrelation between adjacent 10 m pixels would inflate the reported accuracy.",
+    "label_source": {
+      "name": "ESA WorldCover v200 (2021)",
+      "resolution_m": 10,
+      "license": "CC BY 4.0",
+      "url": "https://esa-worldcover.org/",
+      "role": "Reference labels for supervised training and held-out evaluation."
+    },
+    "training_regions": [
+      {
+        "key": "western_ghats",
+        "name": "Western Ghats, India",
+        "bbox": [
+          76.6,
+          10.1,
+          76.78,
+          10.28
+        ],
+        "period": "2021-01-01/2021-02-15",
+        "biome": "Tropical moist broadleaf forest and plantation mosaic",
+        "role": "train"
+      },
+      {
+        "key": "po_valley",
+        "name": "Po Valley, Italy",
+        "bbox": [
+          9.1,
+          45.1,
+          9.28,
+          45.28
+        ],
+        "period": "2021-06-01/2021-07-16",
+        "biome": "Intensive irrigated cropland with dense settlement",
+        "role": "train"
+      },
+      {
+        "key": "brandenburg",
+        "name": "Brandenburg, Germany",
+        "bbox": [
+          13.05,
+          52.3,
+          13.23,
+          52.48
+        ],
+        "period": "2021-07-01/2021-08-15",
+        "biome": "Temperate mixed forest, lakes and peri-urban development",
+        "role": "train"
+      },
+      {
+        "key": "nile_delta",
+        "name": "Nile Delta margin, Egypt",
+        "bbox": [
+          31.05,
+          30.35,
+          31.23,
+          30.53
+        ],
+        "period": "2021-03-01/2021-04-15",
+        "biome": "Irrigated delta cropland adjoining arid bare ground",
+        "role": "train"
+      },
+      {
+        "key": "mato_grosso",
+        "name": "Mato Grosso frontier, Brazil",
+        "bbox": [
+          -55.3,
+          -12.2,
+          -55.12,
+          -12.02
+        ],
+        "period": "2021-07-01/2021-08-15",
+        "biome": "Amazon-Cerrado transition with mechanised agriculture",
+        "role": "train"
+      },
+      {
+        "key": "sonoran_desert",
+        "name": "Sonoran Desert margin, Arizona",
+        "bbox": [
+          -111.5,
+          32.2,
+          -111.32,
+          32.38
+        ],
+        "period": "2021-04-01/2021-05-16",
+        "biome": "Desert scrub and exposed bare ground",
+        "role": "train"
+      },
+      {
+        "key": "sahel_niger",
+        "name": "Sahel, south-west Niger",
+        "bbox": [
+          2.0,
+          13.4,
+          2.18,
+          13.58
+        ],
+        "period": "2021-02-01/2021-03-18",
+        "biome": "Dry-season Sahelian savanna, sparse tree cover and bare soil",
+        "role": "train"
+      },
+      {
+        "key": "sacramento_valley",
+        "name": "Sacramento Valley margin, California",
+        "bbox": [
+          -122.1,
+          38.5,
+          -121.92,
+          38.68
+        ],
+        "period": "2021-06-01/2021-07-16",
+        "biome": "Mediterranean oak woodland, irrigated cropland and dry grassland",
+        "role": "train"
+      },
+      {
+        "key": "finnish_lakeland",
+        "name": "Finnish Lakeland",
+        "bbox": [
+          25.5,
+          61.8,
+          25.68,
+          61.98
+        ],
+        "period": "2021-07-01/2021-08-15",
+        "biome": "Boreal coniferous forest and lakes",
+        "role": "train"
+      },
+      {
+        "key": "murray_basin",
+        "name": "Murray Basin, Australia",
+        "bbox": [
+          144.3,
+          -35.4,
+          144.48,
+          -35.22
+        ],
+        "period": "2021-01-01/2021-02-15",
+        "biome": "Semi-arid rangeland, dryland cropping and river channels",
+        "role": "evaluate"
+      },
+      {
+        "key": "iberian_meseta",
+        "name": "Iberian Meseta, Spain",
+        "bbox": [
+          -4.85,
+          40.55,
+          -4.67,
+          40.73
+        ],
+        "period": "2021-06-01/2021-07-16",
+        "biome": "Mediterranean dehesa, cereal steppe and bare rock",
+        "role": "evaluate"
+      },
+      {
+        "key": "zambezi_miombo",
+        "name": "Miombo woodland, Zambia",
+        "bbox": [
+          27.6,
+          -14.5,
+          27.78,
+          -14.32
+        ],
+        "period": "2021-06-01/2021-07-16",
+        "biome": "Dry miombo woodland with smallholder cultivation",
+        "role": "evaluate"
+      }
+    ],
+    "hyperparameters": {
+      "n_estimators": 300,
+      "max_depth": 22,
+      "min_samples_leaf": 4,
+      "max_features": "sqrt",
+      "class_weight": "balanced_subsample",
+      "n_jobs": -1,
+      "random_state": 42
+    },
+    "notes": [
+      "Shrubland and grassland are merged into Agriculture, so that class denotes managed or herbaceous cover rather than cropland specifically.",
+      "Mangroves are reported as Forest.",
+      "Snow, ice, moss and lichen are reported as Bare land.",
+      "Herbaceous wetland is reported as Water.",
+      "Accuracy is measured against ESA WorldCover, which is itself a model product with its own error; agreement with it is not ground truth.",
+      "The classifier is per-pixel and uses no spatial context, so it produces salt-and-pepper noise at class boundaries and on mixed pixels.",
+      "Training scenes are single-date. Cropland appearance varies strongly with phenology, so agriculture and bare land can be confused outside the growing season."
+    ]
+  },
+  "artifact": "model.joblib",
+  "artifact_sha256": "11be4f137212259e59e75ec8b9470b31de7a16f96b40c746423a0969af78e581",
+  "training_observations": [
+    {
+      "region": "western_ghats",
+      "source_id": "S2B_43PFM_20210207_3_L2A",
+      "date": "2021-02-07"
+    },
+    {
+      "region": "po_valley",
+      "source_id": "S2B_32TNR_20210710_0_L2A",
+      "date": "2021-07-10"
+    },
+    {
+      "region": "brandenburg",
+      "source_id": "S2A_33UUU_20210814_1_L2A",
+      "date": "2021-08-14"
+    },
+    {
+      "region": "nile_delta",
+      "source_id": "S2A_36RUU_20210413_1_L2A",
+      "date": "2021-04-13"
+    },
+    {
+      "region": "mato_grosso",
+      "source_id": "S2B_21LXG_20210720_1_L2A",
+      "date": "2021-07-20"
+    },
+    {
+      "region": "sonoran_desert",
+      "source_id": "S2B_12SVA_20210409_1_L2A",
+      "date": "2021-04-09"
+    },
+    {
+      "region": "sahel_niger",
+      "source_id": "S2A_31PCQ_20210212_1_L2A",
+      "date": "2021-02-12"
+    },
+    {
+      "region": "sacramento_valley",
+      "source_id": "S2A_10SEH_20210618_1_L2A",
+      "date": "2021-06-18"
+    },
+    {
+      "region": "finnish_lakeland",
+      "source_id": "S2A_35VMJ_20210716_1_L2A",
+      "date": "2021-07-16"
+    },
+    {
+      "region": "murray_basin",
+      "source_id": "S2A_55HBA_20210120_1_L2A",
+      "date": "2021-01-20"
+    },
+    {
+      "region": "iberian_meseta",
+      "source_id": "S2A_30TUL_20210630_1_L2A",
+      "date": "2021-06-30"
+    },
+    {
+      "region": "zambezi_miombo",
+      "source_id": "S2B_35LNE_20210601_1_L2A",
+      "date": "2021-06-01"
+    }
+  ],
+  "feature_importances": {
+    "blue": 0.058254,
+    "green": 0.052751,
+    "red": 0.082054,
+    "nir": 0.109046,
+    "swir16": 0.119381,
+    "swir22": 0.089759,
+    "ndvi": 0.138676,
+    "ndwi": 0.083489,
+    "ndbi": 0.065827,
+    "nbr": 0.079831,
+    "bsi_partial": 0.120932
+  }
+}

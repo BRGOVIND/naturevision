@@ -1,0 +1,63 @@
+{
+  "type": "FeatureCollection",
+  "name": "NatureVision sample regions",
+  "description": "Real study areas with known cloud-free Sentinel-2 coverage, useful for exercising the analysis workflow. Coordinates are WGS84 (EPSG:4326), longitude first.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Western Ghats, India",
+        "biome": "Tropical moist broadleaf forest and plantation mosaic",
+        "suggested_period_a": "2021-01-01/2021-02-28",
+        "suggested_period_b": "2024-01-01/2024-02-29",
+        "note": "Dry season gives reliably low cloud. Dense canopy, NDVI typically 0.7-0.8."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[76.60,10.10],[76.72,10.10],[76.72,10.22],[76.60,10.22],[76.60,10.10]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Po Valley, Italy",
+        "biome": "Intensive irrigated cropland with dense settlement",
+        "suggested_period_a": "2021-04-01/2021-05-15",
+        "suggested_period_b": "2021-07-01/2021-08-15",
+        "note": "Strong within-season phenology; good for seeing crop-cycle change that is not land-cover conversion."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[9.10,45.10],[9.24,45.10],[9.24,45.24],[9.10,45.24],[9.10,45.10]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mato Grosso frontier, Brazil",
+        "biome": "Amazon-Cerrado transition with mechanised agriculture",
+        "suggested_period_a": "2019-07-01/2019-08-15",
+        "suggested_period_b": "2023-07-01/2023-08-15",
+        "note": "Dry-season window. Sharp field boundaries against remnant forest."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[-55.30,-12.20],[-55.16,-12.20],[-55.16,-12.06],[-55.30,-12.06],[-55.30,-12.20]]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nile Delta margin, Egypt",
+        "biome": "Irrigated delta cropland adjoining arid bare ground",
+        "suggested_period_a": "2021-03-01/2021-04-15",
+        "suggested_period_b": "2024-03-01/2024-04-15",
+        "note": "Very high contrast between irrigated land and desert; useful for land-cover class separation."
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[[31.05,30.35],[31.19,30.35],[31.19,30.49],[31.05,30.49],[31.05,30.35]]]
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+name: naturevision
+
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-naturevision}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-naturevision}
+      POSTGRES_DB: ${POSTGRES_DB:-naturevision}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-naturevision} -d ${POSTGRES_DB:-naturevision}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:-naturevision}:${POSTGRES_PASSWORD:-naturevision}@db:5432/${POSTGRES_DB:-naturevision}
+      APP_ENV: ${APP_ENV:-development}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      LOG_FORMAT: ${LOG_FORMAT:-json}
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      LANGUAGE_MODEL: ${LANGUAGE_MODEL:-llama-3.3-70b-versatile}
+      VISION_MODEL: ${VISION_MODEL:-meta-llama/llama-4-scout-17b-16e-instruct}
+      STAC_ENDPOINT: ${STAC_ENDPOINT:-https://earth-search.aws.element84.com/v1}
+      STAC_COLLECTION: ${STAC_COLLECTION:-sentinel-2-l2a}
+      LAND_COVER_BACKEND: ${LAND_COVER_BACKEND:-random_forest}
+      TARGET_RASTER_MAX_DIM: ${TARGET_RASTER_MAX_DIM:-768}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:5173,http://localhost:3000,http://localhost:8080}
+    volumes:
+      # Trained model artifacts are mounted rather than baked in, so a model can
+      # be retrained and swapped without rebuilding the image.
+      - ./backend/artifacts:/app/artifacts
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  db_data:

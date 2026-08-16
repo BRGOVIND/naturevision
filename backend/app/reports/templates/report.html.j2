@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ report.title }}</title>
+<style>
+  :root {
+    --ink: #12211a;
+    --muted: #5a6b62;
+    --line: #d8e0da;
+    --paper: #ffffff;
+    --wash: #f4f7f4;
+    --observed: #1b6b3a;
+    --model: #7a5320;
+    --interpretation: #2f4f7a;
+    --metadata: #55605a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 2.5rem 1.5rem;
+    font: 15px/1.65 "Segoe UI", -apple-system, system-ui, sans-serif;
+    color: var(--ink); background: var(--wash);
+  }
+  .sheet { max-width: 60rem; margin: 0 auto; background: var(--paper);
+           border: 1px solid var(--line); border-radius: 6px; padding: 2.5rem; }
+  header { border-bottom: 3px solid var(--observed); padding-bottom: 1.25rem; margin-bottom: 1.75rem; }
+  h1 { font-size: 1.6rem; margin: 0 0 .4rem; letter-spacing: -.01em; }
+  h2 { font-size: 1.1rem; margin: 0; display: flex; align-items: baseline;
+       gap: .6rem; flex-wrap: wrap; }
+  .meta { color: var(--muted); font-size: .85rem; }
+  section { border-top: 1px solid var(--line); padding: 1.4rem 0; }
+  section:first-of-type { border-top: none; }
+  .tag { font-size: .68rem; text-transform: uppercase; letter-spacing: .07em;
+         padding: .16rem .5rem; border-radius: 3px; border: 1px solid currentColor;
+         font-weight: 600; white-space: nowrap; }
+  .tag.observed { color: var(--observed); }
+  .tag.model_prediction { color: var(--model); }
+  .tag.interpretation { color: var(--interpretation); }
+  .tag.metadata { color: var(--metadata); }
+  ul { margin: .8rem 0; padding-left: 1.15rem; }
+  li { margin: .3rem 0; }
+  p { margin: .8rem 0; }
+  .table-wrap { overflow-x: auto; margin: .9rem 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .88rem; min-width: 30rem; }
+  th, td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--line); }
+  th { background: var(--wash); font-weight: 600; white-space: nowrap; }
+  .notes { margin-top: .9rem; padding: .75rem .9rem; background: var(--wash);
+           border-left: 3px solid var(--line); font-size: .84rem; color: var(--muted); }
+  .notes p { margin: .3rem 0; }
+  .legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: .8rem; font-size: .8rem; }
+  footer { margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--line);
+           color: var(--muted); font-size: .8rem; }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .sheet { border: none; padding: 0; }
+    section { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <h1>{{ report.title }}</h1>
+    <p class="meta">
+      {{ report.kind }} &middot; Analysis {{ report.analysis_id }} &middot;
+      Generated {{ report.generated_at }}
+    </p>
+    <div class="legend">
+      {% for key, label in report.provenance_legend.items() %}
+        <span><span class="tag {{ key }}">{{ label }}</span></span>
+      {% endfor %}
+    </div>
+  </header>
+
+  {% for section in report.sections %}
+  <section>
+    <h2>
+      {{ loop.index }}. {{ section.title }}
+      <span class="tag {{ section.provenance }}">
+        {{ report.provenance_legend.get(section.provenance, section.provenance) }}
+      </span>
+    </h2>
+
+    {% if section.body %}<p>{{ section.body }}</p>{% endif %}
+
+    {% if section['items'] %}
+    <ul>
+      {% for item in section['items'] %}<li>{{ item }}</li>{% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if section.table %}
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>{% for column in section.table[0].keys() %}<th>{{ column }}</th>{% endfor %}</tr>
+        </thead>
+        <tbody>
+          {% for row in section.table %}
+          <tr>{% for value in row.values() %}<td>{{ value if value is not none else '—' }}</td>{% endfor %}</tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% endif %}
+
+    {% if section.notes %}
+    <div class="notes">
+      {% for note in section.notes %}<p>{{ note }}</p>{% endfor %}
+    </div>
+    {% endif %}
+  </section>
+  {% endfor %}
+
+  <footer>
+    <p>
+      Measured values in this report are produced by deterministic geospatial
+      processing of Sentinel-2 Level-2A surface reflectance. Sections tagged
+      "Model prediction" are outputs of a statistical classifier and carry
+      classification error. Sections tagged "Generated interpretation" are
+      written by a language model from the measured evidence and contain no
+      independent measurement.
+    </p>
+  </footer>
+</div>
+</body>
+</html>

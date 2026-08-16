@@ -1,0 +1,75 @@
+{
+  "overall_accuracy": 0.5922,
+  "macro_f1": 0.5268,
+  "per_class_metrics": {
+    "Forest": {
+      "precision": 0.5845,
+      "recall": 0.5804,
+      "f1": 0.5824,
+      "support": 22305
+    },
+    "Agriculture": {
+      "precision": 0.4781,
+      "recall": 0.7778,
+      "f1": 0.5922,
+      "support": 20224
+    },
+    "Water": {
+      "precision": 0.9438,
+      "recall": 0.4341,
+      "f1": 0.5947,
+      "support": 26583
+    },
+    "Urban / built-up": {
+      "precision": 0.6569,
+      "recall": 0.7752,
+      "f1": 0.7112,
+      "support": 10688
+    },
+    "Bare land": {
+      "precision": 0.1559,
+      "recall": 0.1509,
+      "f1": 0.1533,
+      "support": 2817
+    }
+  },
+  "confusion_matrix": [
+    [
+      12946,
+      8799,
+      149,
+      404,
+      7
+    ],
+    [
+      3574,
+      15730,
+      229,
+      446,
+      245
+    ],
+    [
+      5367,
+      6850,
+      11539,
+      2054,
+      773
+    ],
+    [
+      212,
+      906,
+      9,
+      8285,
+      1276
+    ],
+    [
+      51,
+      618,
+      300,
+      1423,
+      425
+    ]
+  ],
+  "evaluation_samples": 82617,
+  "trained_at": "2026-08-16T15:27:30.942060+00:00"
+}

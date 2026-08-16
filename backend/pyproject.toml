@@ -1,0 +1,72 @@
+[project]
+name = "naturevision-backend"
+version = "0.1.0"
+description = "Geospatial environmental intelligence backend for NatureVision"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "sqlalchemy>=2.0.36",
+    "alembic>=1.14",
+    "asyncpg>=0.30",
+    "psycopg[binary]>=3.2",
+    "geoalchemy2>=0.16",
+    "greenlet>=3.1",
+    "httpx>=0.28",
+    "numpy>=2.1",
+    "pandas>=2.2",
+    "rasterio>=1.4",
+    "shapely>=2.0",
+    "pyproj>=3.7",
+    "geopandas>=1.0",
+    "xarray>=2024.10",
+    "scikit-learn>=1.5",
+    "joblib>=1.4",
+    "torch>=2.5",
+    "pillow>=11.0",
+    "matplotlib>=3.9",
+    "jinja2>=3.1",
+    "structlog>=24.4",
+    "python-multipart>=0.0.17",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "pytest-cov>=6.0",
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "types-requests",
+    "aiosqlite>=0.20",
+]
+pdf = ["weasyprint>=63.0"]
+
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM", "RUF"]
+ignore = ["B008", "RUF012"]
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+warn_unused_ignores = false
+disallow_untyped_defs = false
+plugins = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::DeprecationWarning"]
