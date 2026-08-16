@@ -15,6 +15,9 @@ those measured values and is validated against them before it is shown.
 
 ## What it does
 
+The public site explains the method and its limits; the workspace runs the real
+pipeline. Both live in the same application.
+
 1. Draw a bounding box or polygon on an interactive map.
 2. Choose one period, or two to compare.
 3. Search the Sentinel-2 catalogue and inspect candidate observations.
@@ -28,6 +31,10 @@ those measured values and is validated against them before it is shown.
 
 ```
 frontend/  React + TypeScript + Vite, MapLibre GL map, Recharts
+           └ design/     tokens and shared primitives (one source of truth)
+             app/        router, navigation, footer, site content
+             pages/      landing, workspace, methodology, reports, about
+             features/   metrics, charts, panels, controls, lifecycle
 backend/   FastAPI, SQLAlchemy, rasterio/shapely/pyproj, scikit-learn + PyTorch
            └ app/geospatial   geometry validation, raster grid, rendering
              app/imagery      provider-agnostic imagery layer + Sentinel-2 STAC
@@ -107,15 +114,24 @@ with the measured hold-out scores.
 All configuration is environment-based; see [.env.example](.env.example).
 No secrets are committed and no API key is hardcoded.
 
-`GROQ_API_KEY` is optional. Without it, analyses run in full and reports are
-generated with the interpretation section explicitly marked unavailable.
+### Interpretation provider
+
+`GROQ_API_KEY` is optional and backend-only. It is never sent to the browser and
+never appears in an API response. Without it, analyses run in full and reports
+are generated with the interpretation section explicitly marked unavailable.
+
+Vision interpretation additionally requires a vision-capable model on the
+account. `/health` probes the provider's model list rather than assuming, so the
+UI only offers the control when the model can actually be called.
+
+Copy `.env.example` to `.env` and set the key there; `.env` is gitignored.
 
 ## Development commands
 
 ```bash
 # Backend
 cd backend
-pytest -q                                   # 127 tests
+pytest -q                                   # 130 tests
 pytest -q --cov=app --cov-report=term-missing
 ruff check app training tests && ruff format --check app training tests
 mypy app training
@@ -144,6 +160,7 @@ Interactive documentation at `/docs`. Core endpoints:
 | `GET` | `/api/v1/analysis/{id}/layers/{key}` | Rendered map overlay (PNG) |
 | `GET` | `/api/v1/analysis` | Analysis history |
 | `POST` | `/api/v1/ai/report` | Generate a Nature Intelligence Report |
+| `GET` | `/api/v1/analysis/{id}/report` | Fetch the report an analysis already has |
 | `GET` | `/api/v1/reports/{id}/export` | Export the report as HTML or PDF |
 
 ## Scientific scope

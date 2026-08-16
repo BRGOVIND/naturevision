@@ -26,6 +26,16 @@ logger = get_logger(__name__)
 #: Numbers in text are matched with their sign and optional percent sign.
 _NUMBER_PATTERN = re.compile(r"-?\d+(?:\.\d+)?")
 
+#: ISO dates and date ranges are removed before numbers are extracted. Without
+#: this, "2021-02-28" is read as the three values 2021, -02 and -28, and a
+#: correctly grounded response is rejected for citing its own observation date.
+_DATE_PATTERN = re.compile(r"\b\d{4}-\d{2}-\d{2}\b")
+
+#: Ordinal and unit-bearing date fragments that are prose rather than measurements.
+_DATE_WORD_PATTERN = re.compile(
+    r"\b\d{1,4}\s*(?:day|days|month|months|year|years)\b", re.IGNORECASE
+)
+
 #: Relative tolerance when matching a stated number against measured evidence.
 NUMERIC_TOLERANCE = 0.02
 
@@ -106,7 +116,9 @@ def validate_interpretation(
     (0.68) and the text may legitimately state them as percentages (68%).
     """
     report = GroundingReport()
-    text = _interpretation_text(interpretation)
+    # Dates are stripped before number extraction; they are provenance the model
+    # is expected to restate, not measurements to verify.
+    text = _DATE_WORD_PATTERN.sub(" ", _DATE_PATTERN.sub(" ", _interpretation_text(interpretation)))
 
     allowed = list(evidence_numbers.values())
     allowed += [v * 100.0 for v in evidence_numbers.values() if abs(v) <= 1.0]

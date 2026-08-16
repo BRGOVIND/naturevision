@@ -1,111 +1,138 @@
 /**
  * Headline environmental metrics.
  *
- * Every card carries a provenance chip. Measured values and model predictions
- * are never styled identically, because the difference matters to how the
- * number should be read.
+ * Each card carries a provenance register, because the difference between a
+ * measured value and a model prediction changes how the number should be read.
+ * Cards vary in internal layout by what they have to say — a change value gets
+ * a direction indicator, a distribution gets a bar — rather than being six
+ * copies of one template.
  */
 
+import { ProvenanceBadge, type Provenance } from '../design/primitives'
 import type { AnalysisDetail, Metric } from '../types/api'
 
-interface Props {
-  detail: AnalysisDetail
-}
-
-function findMetric(metrics: Metric[], key: string, period?: string): Metric | undefined {
+function find(metrics: Metric[], key: string, period?: string): Metric | undefined {
   return metrics.find((m) => m.key === key && (period === undefined || m.period === period))
 }
 
-function formatValue(metric: Metric | undefined, digits = 3, signed = false): string {
-  if (!metric || metric.value === null) return '—'
-  const value = metric.value
-  const text = signed ? value.toFixed(digits) : Math.abs(value).toFixed(digits)
-  const prefix = signed && value > 0 ? '+' : signed && value < 0 ? '−' : ''
-  const body = signed ? `${prefix}${Math.abs(value).toFixed(digits)}` : text
-  if (metric.unit === 'percent') return `${body}%`
-  if (metric.unit === 'km2') return `${body} km²`
-  return body
+function fmt(value: number | null | undefined, digits = 3): string {
+  return value === null || value === undefined ? '—' : value.toFixed(digits)
 }
 
-export function MetricCards({ detail }: Props) {
+interface CardModel {
+  key: string
+  label: string
+  value: string
+  unit?: string
+  provenance: Provenance
+  note: string
+  direction?: 'up' | 'down' | 'flat'
+  bar?: number
+  belowThreshold?: boolean
+}
+
+export function MetricCards({ detail }: { detail: AnalysisDetail }) {
   const metrics = detail.metrics
-  const meanA = findMetric(metrics, 'mean_ndvi', 'A')
-  const meanB = findMetric(metrics, 'mean_ndvi', 'B')
-  const change = findMetric(metrics, 'ndvi_change')
-  const changedArea = findMetric(metrics, 'changed_area_percent')
-  const forest = findMetric(metrics, 'land_cover_forest')
+  const meanA = find(metrics, 'mean_ndvi', 'A')
+  const meanB = find(metrics, 'mean_ndvi', 'B')
+  const change = find(metrics, 'ndvi_change')
+  const changedArea = find(metrics, 'changed_area_percent')
+  const forest = find(metrics, 'land_cover_forest')
   const prediction = detail.predictions[0]
 
   const thresholds = change?.details as { moderate?: number } | undefined
-  const belowNoiseFloor =
-    change?.value !== null &&
-    change?.value !== undefined &&
-    thresholds?.moderate !== undefined &&
-    Math.abs(change.value) < thresholds.moderate
+  const moderate = thresholds?.moderate
+  const belowThreshold =
+    change?.value != null && moderate != null && Math.abs(change.value) < moderate
 
-  const cards = [
+  const current = meanB ?? meanA
+  const cards: CardModel[] = [
     {
+      key: 'ndvi',
       label: 'Mean NDVI',
-      sub: meanB ? 'Period B' : 'Period A',
-      value: formatValue(meanB ?? meanA),
-      provenance: 'observed' as const,
-      note: meanA && meanB ? `Period A: ${formatValue(meanA)}` : 'Single-date analysis',
+      value: fmt(current?.value),
+      provenance: 'observed',
+      note: meanA && meanB ? `Period A measured ${fmt(meanA.value)}` : 'Single-date analysis',
+      bar: current?.value != null ? Math.max(0, Math.min(1, current.value)) : undefined,
     },
     {
+      key: 'change',
       label: 'NDVI change',
-      sub: 'Period B − Period A',
-      value: change ? formatValue(change, 3, true) : '—',
-      provenance: 'observed' as const,
-      note: belowNoiseFloor
-        ? `Below the ${thresholds?.moderate} detection threshold`
+      value:
+        change?.value == null
+          ? '—'
+          : `${change.value > 0 ? '+' : change.value < 0 ? '−' : ''}${Math.abs(change.value).toFixed(3)}`,
+      provenance: 'observed',
+      direction:
+        change?.value == null ? undefined : change.value > 0 ? 'up' : change.value < 0 ? 'down' : 'flat',
+      note: belowThreshold
+        ? `Below the ${moderate} detection threshold`
         : change
           ? 'Mean over pixels valid in both periods'
-          : 'Requires two periods',
+          : 'Requires a second period',
+      belowThreshold,
     },
     {
+      key: 'changed-area',
       label: 'Changed area',
-      sub: 'Beyond moderate threshold',
-      value: formatValue(changedArea, 2),
-      provenance: 'observed' as const,
-      note: changedArea ? 'Share of comparable area' : 'Requires two periods',
+      value: changedArea?.value == null ? '—' : changedArea.value.toFixed(2),
+      unit: '%',
+      provenance: 'observed',
+      note: changedArea ? 'Share exceeding the moderate threshold' : 'Requires a second period',
+      bar: changedArea?.value != null ? changedArea.value / 100 : undefined,
     },
     {
+      key: 'forest',
       label: 'Forest cover',
-      sub: 'Predicted share',
-      value: formatValue(forest, 1),
-      provenance: 'model_prediction' as const,
+      value: forest?.value == null ? '—' : forest.value.toFixed(1),
+      unit: '%',
+      provenance: 'model_prediction',
       note: forest ? 'Classifier output, not a measurement' : 'Land cover not run',
+      bar: forest?.value != null ? forest.value / 100 : undefined,
     },
     {
+      key: 'confidence',
       label: 'Model confidence',
-      sub: 'Mean max class probability',
-      value:
-        prediction?.mean_confidence != null
-          ? prediction.mean_confidence.toFixed(3)
-          : '—',
-      provenance: 'model_prediction' as const,
+      value: fmt(prediction?.mean_confidence),
+      provenance: 'model_prediction',
       note:
         prediction?.evaluation_metrics?.overall_accuracy != null
-          ? `Held-out accuracy ${prediction.evaluation_metrics.overall_accuracy.toFixed(3)}`
-          : 'No held-out evaluation recorded',
+          ? `Hold-out accuracy ${prediction.evaluation_metrics.overall_accuracy.toFixed(3)}`
+          : 'No hold-out evaluation recorded',
+      bar: prediction?.mean_confidence ?? undefined,
     },
   ]
 
   return (
-    <div className="metric-grid">
+    <ul className="metrics">
       {cards.map((card) => (
-        <article key={card.label} className={`metric-card ${card.provenance}`}>
-          <header>
-            <span className="metric-label">{card.label}</span>
-            <span className={`chip ${card.provenance}`}>
-              {card.provenance === 'observed' ? 'Observed' : 'Model'}
-            </span>
-          </header>
-          <p className="metric-value">{card.value}</p>
-          <p className="metric-sub">{card.sub}</p>
-          <p className="metric-note">{card.note}</p>
-        </article>
+        <li key={card.key} className={`metric metric--${card.provenance}`}>
+          <div className="metric__top">
+            <h3 className="metric__label">{card.label}</h3>
+            <ProvenanceBadge kind={card.provenance} />
+          </div>
+
+          <p className="metric__value tabular">
+            {card.direction && (
+              <span className={`metric__arrow metric__arrow--${card.direction}`} aria-hidden="true">
+                {card.direction === 'up' ? '↑' : card.direction === 'down' ? '↓' : '→'}
+              </span>
+            )}
+            {card.value}
+            {card.unit && <span className="metric__unit">{card.unit}</span>}
+          </p>
+
+          {card.bar !== undefined && (
+            <div className="metric__bar" aria-hidden="true">
+              <span style={{ width: `${Math.round(card.bar * 100)}%` }} />
+            </div>
+          )}
+
+          <p className={card.belowThreshold ? 'metric__note metric__note--caution' : 'metric__note'}>
+            {card.note}
+          </p>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }

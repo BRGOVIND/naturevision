@@ -1,0 +1,247 @@
+/*
+ * NatureVision design system.
+ *
+ * One source of truth for colour, type, spacing and motion. Components read
+ * these tokens and never define their own palette values.
+ *
+ * The palette is drawn from the subject: forest canopy, lichen, cream paper,
+ * clay soil and ochre. The three provenance colours are deliberately
+ * distinguishable, because the difference between a measured value, a model
+ * prediction and a generated interpretation is the product's core claim.
+ */
+
+:root {
+  /* --- ground and surface ------------------------------------------- */
+  --canopy: #10241a; /* deepest forest — primary dark ground */
+  --canopy-2: #16301f; /* raised dark surface */
+  --canopy-3: #1c3a28; /* hover / active dark surface */
+  --moss: #1d4b33; /* mid environmental green — identity */
+  --moss-bright: #2c6b48; /* interactive green */
+  --lichen: #7fa650; /* warm olive-green — living vegetation */
+  --lichen-soft: #a3c078;
+
+  --cream: #f4efe4; /* soft cream — reading surface */
+  --cream-2: #eae3d4; /* recessed cream */
+  --cream-3: #ded5c2; /* cream borders */
+
+  --charcoal: #23262a; /* rich charcoal — structural contrast */
+  --charcoal-2: #2f3338;
+
+  /* --- earthy accents ------------------------------------------------ */
+  --clay: #b5713f; /* soil / terracotta, used sparingly */
+  --ochre: #d3a03c; /* muted gold */
+  --sandstone: #c9b28a;
+
+  /* --- provenance registers ------------------------------------------ */
+  /* Observed: measured by deterministic processing. */
+  --observed: #7fa650;
+  --observed-ink: #3f5c22;
+  /* Model: statistical prediction, carries error. */
+  --model: #d3a03c;
+  --model-ink: #7a5a12;
+  /* Interpreted: language-model synthesis. Deliberately outside the earth
+     palette so it never reads as a measurement. */
+  --interpreted: #6b8299;
+  --interpreted-ink: #3c4f61;
+
+  /* --- semantic ------------------------------------------------------- */
+  --danger: #b4462f;
+  --danger-soft: #e08c78;
+  --warning: var(--ochre);
+
+  /* --- text on dark ---------------------------------------------------- */
+  --ink-on-dark: #eef3ec;
+  --ink-on-dark-muted: #9cb2a4;
+  --ink-on-dark-faint: #6f887a;
+
+  /* --- text on light ---------------------------------------------------- */
+  --ink: #1b211d;
+  --ink-muted: #56635a;
+  --ink-faint: #7d8a81;
+
+  /* --- lines --------------------------------------------------------------- */
+  --line-dark: #24402f;
+  --line-dark-soft: #1d3526;
+  --line-light: var(--cream-3);
+
+  /* --- typography ------------------------------------------------------------ */
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-body: "Inter", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Type scale, 1.25 ratio from a 16px base, clamped for fluid headings. */
+  --step--2: 0.694rem;
+  --step--1: 0.833rem;
+  --step-0: 1rem;
+  --step-1: 1.2rem;
+  --step-2: clamp(1.3rem, 1.1rem + 0.8vw, 1.6rem);
+  --step-3: clamp(1.6rem, 1.3rem + 1.4vw, 2.1rem);
+  --step-4: clamp(2rem, 1.5rem + 2.4vw, 3rem);
+  --step-5: clamp(2.6rem, 1.7rem + 4.2vw, 4.4rem);
+
+  --tracking-label: 0.14em;
+  --tracking-tight: -0.02em;
+
+  /* --- space ------------------------------------------------------------------- */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+  --s-9: 6rem;
+
+  --measure: 62ch;
+  --container: 76rem;
+  --container-wide: 88rem;
+
+  /* --- radii and elevation ------------------------------------------------------- */
+  --r-1: 3px;
+  --r-2: 6px;
+  --r-3: 10px;
+  --r-4: 16px;
+
+  --shadow-1: 0 1px 2px rgb(8 20 14 / 0.16);
+  --shadow-2: 0 2px 4px rgb(8 20 14 / 0.14), 0 8px 20px rgb(8 20 14 / 0.12);
+  --shadow-3: 0 4px 8px rgb(8 20 14 / 0.16), 0 18px 44px rgb(8 20 14 / 0.2);
+
+  /* --- motion ------------------------------------------------------------------------ */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 120ms;
+  --t-base: 220ms;
+  --t-slow: 420ms;
+
+  /* --- the NDVI calibration ramp ---------------------------------------------------- */
+  /* These stops mirror the backend's NDVI colour ramp exactly, so the strip on
+     the page is the same scale the map legend uses. */
+  --ndvi-ramp: linear-gradient(
+    90deg,
+    #0c2c5c 0%,
+    #486074 12%,
+    #a28660 22%,
+    #d6c47a 32%,
+    #b0c460 48%,
+    #6ea846 62%,
+    #2c7a34 80%,
+    #0a4a22 100%
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Reset and base                                                            */
+/* ------------------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  /* Belt and braces: no layout mistake should ever produce a sideways-
+     scrolling page on a phone. */
+  overflow-x: clip;
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--canopy);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/* Numerals line up in tables and metric readouts. */
+.tabular,
+table,
+.metric-value {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ------------------------------------------------------------------------ */
+/* Accessibility                                                             */
+/* ------------------------------------------------------------------------ */
+:focus-visible {
+  outline: 2px solid var(--lichen);
+  outline-offset: 2px;
+  border-radius: var(--r-1);
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--s-4);
+  top: -4rem;
+  z-index: 200;
+  padding: var(--s-3) var(--s-4);
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: var(--r-2);
+  font-weight: 600;
+  transition: top var(--t-base) var(--ease);
+}
+.skip-link:focus {
+  top: var(--s-4);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

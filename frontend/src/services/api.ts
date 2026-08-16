@@ -133,6 +133,9 @@ export const api = {
 
   report: (id: string) => request<ReportResponse>(`/reports/${id}`),
 
+  analysisReport: (analysisId: string) =>
+    request<ReportResponse>(`/analysis/${analysisId}/report`),
+
   reportExportUrl: (id: string, format: 'html' | 'pdf' = 'html') =>
     `${BASE}/reports/${id}/export?format=${format}`,
 

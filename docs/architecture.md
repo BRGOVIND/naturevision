@@ -102,6 +102,26 @@ land-cover model installed, language provider configured, PDF toolchain
 available. The frontend disables controls for genuinely unavailable features
 instead of letting a user trigger a guaranteed failure.
 
+### The frontend is a product site and a workspace in one application
+
+The landing, methodology, reports and about routes explain the method; the
+workspace runs it. They share one design system (`src/design/tokens.css`), so a
+class colour, a provenance badge or a type scale is defined once and is
+identical on a marketing section and on a live result.
+
+Routing is a ~40-line history router rather than a routing library: five flat
+routes, no nesting, no data loaders, and scroll restoration we control.
+
+An analysis id in the query string opens that run directly, so a result is
+linkable and survives a reload.
+
+### Provenance is carried into the visual language
+
+Observed, model-predicted and generated values never share a colour. The first
+two use palette greens and ochre; the interpretation register is deliberately a
+muted slate from outside the earth palette, so generated text can never be
+mistaken for a measurement at a glance.
+
 ## Request flow
 
 ```
@@ -124,7 +144,7 @@ POST /ai/report
 
 ## Testing strategy
 
-127 tests, no network access required.
+130 tests, no network access required.
 
 - **Geospatial**: coordinate and polygon validation, CRS handling, geodesic
   area, grid alignment, clipping, windowing.

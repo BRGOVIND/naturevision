@@ -118,6 +118,48 @@ def test_percentage_form_of_a_fraction_is_accepted():
     assert report.passed
 
 
+def test_iso_dates_are_not_parsed_as_measurements():
+    """Regression: "2021-02-28" must not be read as 2021, -2 and -28.
+
+    A live provider restating its own observation dates was rejected as
+    ungrounded until dates were stripped before number extraction.
+    """
+    payload = dict(VALID_RESPONSE)
+    payload["summary"] = (
+        "Observations from 2021-01-01 to 2021-02-28 and 2024-01-01 to "
+        "2024-02-29 give a mean NDVI of 0.702 and 0.722 respectively."
+    )
+    report = validate_interpretation(
+        Interpretation.model_validate(payload), _evidence().numeric_claims()
+    )
+    assert report.passed, report.unsupported_numbers
+    assert -28.0 not in report.unsupported_numbers
+
+
+def test_elapsed_day_counts_are_not_treated_as_measurements():
+    payload = dict(VALID_RESPONSE)
+    payload["uncertainty"] = (
+        "The acquisitions are separated by 1080 days, which is long enough for "
+        "seasonal differences to contribute to the comparison."
+    )
+    report = validate_interpretation(
+        Interpretation.model_validate(payload), _evidence().numeric_claims()
+    )
+    assert report.passed, report.unsupported_numbers
+
+
+def test_source_metadata_is_citable_evidence():
+    """Scene cloud cover lives in data_sources and must be quotable."""
+    package = EvidencePackage(
+        region={},
+        periods={},
+        data_sources=[{"cloud_cover_percent": 0.165205, "resolution_m": 10.0}],
+    )
+    claims = package.numeric_claims()
+    assert 0.165205 in claims.values()
+    assert 10.0 in claims.values()
+
+
 def test_years_are_not_treated_as_measurements():
     payload = dict(VALID_RESPONSE)
     payload["summary"] = (

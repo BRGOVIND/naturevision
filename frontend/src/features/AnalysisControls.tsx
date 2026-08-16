@@ -1,15 +1,11 @@
-/** Region selection, period configuration and imagery preview controls. */
+/** Region, period and configuration controls. */
 
 import { useState } from 'react'
 
+import { Button, Spinner } from '../design/primitives'
 import { api } from '../services/api'
 import type { GeoJSONPolygon, Observation } from '../types/api'
-import {
-  describeCentre,
-  formatBounds,
-  polygonBounds,
-  validatePolygon,
-} from '../map/geometry'
+import { describeCentre, formatBounds, polygonBounds, validatePolygon } from '../map/geometry'
 import type { DrawMode } from '../map/MapView'
 
 export interface AnalysisFormValues {
@@ -80,9 +76,7 @@ export function AnalysisControls({
       setObservations(response.observations)
     } catch (error) {
       setObservations(null)
-      setSearchError(
-        error instanceof Error ? error.message : 'The imagery search failed.',
-      )
+      setSearchError(error instanceof Error ? error.message : 'The imagery search failed.')
     } finally {
       setSearching(false)
     }
@@ -90,213 +84,258 @@ export function AnalysisControls({
 
   return (
     <div className="controls">
-      <section className="control-block">
-        <h3>1. Select a region</h3>
-        <div className="button-row">
-          <button
-            type="button"
-            className={drawMode === 'rectangle' ? 'active' : undefined}
-            onClick={() => onDrawModeChange(drawMode === 'rectangle' ? 'none' : 'rectangle')}
-          >
-            Draw box
-          </button>
-          <button
-            type="button"
-            className={drawMode === 'polygon' ? 'active' : undefined}
-            onClick={() => onDrawModeChange(drawMode === 'polygon' ? 'none' : 'polygon')}
-          >
-            Draw polygon
-          </button>
-          <button type="button" onClick={onClearSelection} disabled={!selection}>
-            Clear
-          </button>
-        </div>
+      {/* --- 1. Region ------------------------------------------------- */}
+      <section className="control-card">
+        <header className="control-card__head">
+          <span className="control-card__step mono">01</span>
+          <h3>Region</h3>
+        </header>
 
-        {selection && bounds ? (
-          <dl className="region-facts">
-            <div>
-              <dt>Centre</dt>
-              <dd>{describeCentre(bounds)}</dd>
+        <div className="control-card__body">
+          <div className="draw-modes" role="group" aria-label="Selection tool">
+            <button
+              type="button"
+              className={drawMode === 'rectangle' ? 'seg seg--active' : 'seg'}
+              aria-pressed={drawMode === 'rectangle'}
+              onClick={() => onDrawModeChange(drawMode === 'rectangle' ? 'none' : 'rectangle')}
+            >
+              Box
+            </button>
+            <button
+              type="button"
+              className={drawMode === 'polygon' ? 'seg seg--active' : 'seg'}
+              aria-pressed={drawMode === 'polygon'}
+              onClick={() => onDrawModeChange(drawMode === 'polygon' ? 'none' : 'polygon')}
+            >
+              Polygon
+            </button>
+            <button type="button" className="seg" onClick={onClearSelection} disabled={!selection}>
+              Clear
+            </button>
+          </div>
+
+          {selection && bounds ? (
+            <dl className="region-facts">
+              <div>
+                <dt>Centre</dt>
+                <dd className="mono">{describeCentre(bounds)}</dd>
+              </div>
+              <div>
+                <dt>Area</dt>
+                <dd className="mono">{validation.areaKm2.toFixed(2)} km²</dd>
+              </div>
+              <div className="region-facts__wide">
+                <dt>Bounds</dt>
+                <dd className="mono">{formatBounds(bounds)}</dd>
+              </div>
+            </dl>
+          ) : (
+            <p className="control-hint">
+              Draw a box or polygon on the map. Regions between 0.01 and 2,500 km² can be
+              analysed in one run.
+            </p>
+          )}
+
+          {validation.message && selection && (
+            <p className="control-error" role="alert">
+              {validation.message}
+            </p>
+          )}
+
+          <label className="field">
+            <span>Region name</span>
+            <input
+              type="text"
+              value={values.regionName}
+              maxLength={200}
+              placeholder="Optional"
+              onChange={(e) => set('regionName', e.target.value)}
+            />
+          </label>
+        </div>
+      </section>
+
+      {/* --- 2. Periods ------------------------------------------------- */}
+      <section className="control-card">
+        <header className="control-card__head">
+          <span className="control-card__step mono">02</span>
+          <h3>Observation periods</h3>
+        </header>
+
+        <div className="control-card__body">
+          <fieldset className="period">
+            <legend>Period A</legend>
+            <div className="field-row">
+              <label className="field">
+                <span>From</span>
+                <input
+                  type="date"
+                  value={values.periodAStart}
+                  onChange={(e) => set('periodAStart', e.target.value)}
+                />
+              </label>
+              <label className="field">
+                <span>To</span>
+                <input
+                  type="date"
+                  value={values.periodAEnd}
+                  onChange={(e) => set('periodAEnd', e.target.value)}
+                />
+              </label>
             </div>
-            <div>
-              <dt>Area</dt>
-              <dd>{validation.areaKm2.toFixed(2)} km²</dd>
-            </div>
-            <div>
-              <dt>Bounds</dt>
-              <dd className="mono small">{formatBounds(bounds)}</dd>
-            </div>
-            <div>
-              <dt>CRS</dt>
-              <dd>EPSG:4326</dd>
-            </div>
-          </dl>
-        ) : (
-          <p className="footnote">
-            Draw a box or polygon on the map. Regions between 0.01 and 2,500 km² can be
-            analysed in one run.
+          </fieldset>
+
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={values.compareTwoPeriods}
+              onChange={(e) => set('compareTwoPeriods', e.target.checked)}
+            />
+            <span className="switch__track" aria-hidden="true">
+              <span className="switch__thumb" />
+            </span>
+            <span className="switch__label">Compare against a second period</span>
+          </label>
+
+          {values.compareTwoPeriods && (
+            <fieldset className="period">
+              <legend>Period B</legend>
+              <div className="field-row">
+                <label className="field">
+                  <span>From</span>
+                  <input
+                    type="date"
+                    value={values.periodBStart}
+                    onChange={(e) => set('periodBStart', e.target.value)}
+                  />
+                </label>
+                <label className="field">
+                  <span>To</span>
+                  <input
+                    type="date"
+                    value={values.periodBEnd}
+                    onChange={(e) => set('periodBEnd', e.target.value)}
+                  />
+                </label>
+              </div>
+            </fieldset>
+          )}
+
+          {!datesValid && (
+            <p className="control-error" role="alert">
+              Each period must start on or before it ends.
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* --- 3. Configuration --------------------------------------------- */}
+      <section className="control-card">
+        <header className="control-card__head">
+          <span className="control-card__step mono">03</span>
+          <h3>Configuration</h3>
+        </header>
+
+        <div className="control-card__body">
+          <label className="field">
+            <span>
+              Maximum scene cloud cover
+              <strong className="mono field__value">{values.maxCloudCover}%</strong>
+            </span>
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={5}
+              value={values.maxCloudCover}
+              onChange={(e) => set('maxCloudCover', Number(e.target.value))}
+            />
+          </label>
+          <p className="control-hint">
+            A wider window and a higher limit make a usable scene more likely. Cloudy pixels
+            are masked regardless, using the Level-2A scene classification.
+          </p>
+
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={values.includeLandCover && landCoverAvailable}
+              disabled={!landCoverAvailable}
+              onChange={(e) => set('includeLandCover', e.target.checked)}
+            />
+            <span className="switch__track" aria-hidden="true">
+              <span className="switch__thumb" />
+            </span>
+            <span className="switch__label">
+              Land-cover classification
+              {!landCoverAvailable && <em> — no trained model installed</em>}
+            </span>
+          </label>
+
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={values.includeInterpretation && interpretationAvailable}
+              disabled={!interpretationAvailable}
+              onChange={(e) => set('includeInterpretation', e.target.checked)}
+            />
+            <span className="switch__track" aria-hidden="true">
+              <span className="switch__thumb" />
+            </span>
+            <span className="switch__label">
+              Written interpretation
+              {!interpretationAvailable && <em> — no provider configured</em>}
+            </span>
+          </label>
+        </div>
+      </section>
+
+      {/* --- Run ------------------------------------------------------------ */}
+      <div className="control-run">
+        <Button variant="primary" size="lg" full onClick={onSubmit} disabled={!canRun}>
+          {busy ? 'Running analysis…' : 'Run analysis'}
+        </Button>
+        <Button variant="quiet" full onClick={previewObservations} disabled={!selection || searching}>
+          {searching ? 'Searching…' : 'Preview available imagery'}
+        </Button>
+
+        {searchError && (
+          <p className="control-error" role="alert">
+            {searchError}
           </p>
         )}
 
-        {validation.message && selection && (
-          <p className="inline-error">{validation.message}</p>
-        )}
+        {searching && <Spinner label="Searching the satellite catalogue" />}
 
-        <label className="field">
-          <span>Region name (optional)</span>
-          <input
-            type="text"
-            value={values.regionName}
-            maxLength={200}
-            placeholder="e.g. Northern catchment"
-            onChange={(e) => set('regionName', e.target.value)}
-          />
-        </label>
-      </section>
-
-      <section className="control-block">
-        <h3>2. Choose periods</h3>
-        <div className="field-row">
-          <label className="field">
-            <span>Period A start</span>
-            <input
-              type="date"
-              value={values.periodAStart}
-              onChange={(e) => set('periodAStart', e.target.value)}
-            />
-          </label>
-          <label className="field">
-            <span>Period A end</span>
-            <input
-              type="date"
-              value={values.periodAEnd}
-              onChange={(e) => set('periodAEnd', e.target.value)}
-            />
-          </label>
-        </div>
-
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            checked={values.compareTwoPeriods}
-            onChange={(e) => set('compareTwoPeriods', e.target.checked)}
-          />
-          <span>Compare against a second period</span>
-        </label>
-
-        {values.compareTwoPeriods && (
-          <div className="field-row">
-            <label className="field">
-              <span>Period B start</span>
-              <input
-                type="date"
-                value={values.periodBStart}
-                onChange={(e) => set('periodBStart', e.target.value)}
-              />
-            </label>
-            <label className="field">
-              <span>Period B end</span>
-              <input
-                type="date"
-                value={values.periodBEnd}
-                onChange={(e) => set('periodBEnd', e.target.value)}
-              />
-            </label>
-          </div>
-        )}
-
-        {!datesValid && (
-          <p className="inline-error">Each period must start on or before it ends.</p>
-        )}
-
-        <label className="field">
-          <span>
-            Maximum scene cloud cover: <strong>{values.maxCloudCover}%</strong>
-          </span>
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={5}
-            value={values.maxCloudCover}
-            onChange={(e) => set('maxCloudCover', Number(e.target.value))}
-          />
-        </label>
-        <p className="footnote">
-          A wider window and a higher cloud limit make it more likely that a usable
-          scene exists. Cloudy pixels are removed regardless, using the Level-2A
-          scene classification.
-        </p>
-      </section>
-
-      <section className="control-block">
-        <h3>3. Options</h3>
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            checked={values.includeLandCover && landCoverAvailable}
-            disabled={!landCoverAvailable}
-            onChange={(e) => set('includeLandCover', e.target.checked)}
-          />
-          <span>
-            Run land-cover classification
-            {!landCoverAvailable && ' (no trained model installed)'}
-          </span>
-        </label>
-        <label className="checkbox">
-          <input
-            type="checkbox"
-            checked={values.includeInterpretation && interpretationAvailable}
-            disabled={!interpretationAvailable}
-            onChange={(e) => set('includeInterpretation', e.target.checked)}
-          />
-          <span>
-            Generate written interpretation
-            {!interpretationAvailable && ' (no language provider configured)'}
-          </span>
-        </label>
-      </section>
-
-      <section className="control-block">
-        <div className="button-row">
-          <button
-            type="button"
-            onClick={previewObservations}
-            disabled={!selection || searching}
-          >
-            {searching ? 'Searching…' : 'Preview available imagery'}
-          </button>
-          <button type="button" className="primary run" onClick={onSubmit} disabled={!canRun}>
-            {busy ? 'Running analysis…' : 'Run analysis'}
-          </button>
-        </div>
-        {searchError && <p className="inline-error">{searchError}</p>}
-        {observations && (
-          <div className="observation-preview">
-            <p className="footnote">
-              {observations.length} observation{observations.length === 1 ? '' : 's'} match
-              this region and window. The pipeline picks the best by coverage, then cloud.
+        {observations && !searching && (
+          <div className="preview">
+            <p className="preview__count">
+              {observations.length} observation{observations.length === 1 ? '' : 's'} match this
+              region and window
             </p>
-            <ul>
-              {observations.slice(0, 6).map((o) => (
+            <ul className="preview__list">
+              {observations.slice(0, 5).map((o) => (
                 <li key={o.source_id}>
-                  <span className="mono small">{o.observation_date}</span>
-                  <span>
+                  <span className="mono">{o.observation_date}</span>
+                  <span className="preview__cloud">
                     {o.cloud_cover_percent !== null
                       ? `${o.cloud_cover_percent.toFixed(1)}% cloud`
                       : 'cloud unknown'}
                   </span>
-                  <span>
-                    {o.region_coverage !== null
-                      ? `${Math.round(o.region_coverage * 100)}% coverage`
-                      : ''}
-                  </span>
+                  {o.region_coverage !== null && (
+                    <span className="preview__coverage mono">
+                      {Math.round(o.region_coverage * 100)}%
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>
+            <p className="control-hint">
+              The pipeline selects by regional coverage first, then cloud cover.
+            </p>
           </div>
         )}
-      </section>
+      </div>
     </div>
   )
 }

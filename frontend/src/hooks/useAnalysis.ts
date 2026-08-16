@@ -61,6 +61,23 @@ export function useAnalysis() {
     async (id: string) => {
       const detail = await api.analysis(id)
       setState((s) => ({ ...s, detail, busy: false }))
+      // Reflect the open analysis in the URL so the view is linkable and
+      // survives a reload, without adding a history entry per poll.
+      const url = new URL(window.location.href)
+      if (url.searchParams.get('analysis') !== id) {
+        url.searchParams.set('analysis', id)
+        window.history.replaceState({}, '', url)
+      }
+      // An analysis that already has a report shows it immediately, rather
+      // than offering to generate one that exists.
+      if (detail.has_report) {
+        try {
+          const report = await api.analysisReport(id)
+          setState((s) => ({ ...s, report }))
+        } catch {
+          // A missing or unreadable report must not block the results view.
+        }
+      }
       void refreshHistory()
       return detail
     },

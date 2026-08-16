@@ -129,6 +129,27 @@ async def generate_report(
     return _report_response(report)
 
 
+@router.get(
+    "/analysis/{analysis_id}/report",
+    response_model=ReportResponse,
+    summary="Fetch the report for an analysis",
+)
+async def get_analysis_report(analysis_id: str, service: AnalysisServiceDep) -> ReportResponse:
+    """Return the report already generated for an analysis.
+
+    Reopening an analysis should show the interpretation it already has,
+    without regenerating it and without a second provider call.
+    """
+    analysis = await service.get(analysis_id)
+    report = next(iter(analysis.reports), None)
+    if report is None:
+        raise ResourceNotFoundError(
+            "No report has been generated for this analysis yet.",
+            details={"analysis_id": analysis_id},
+        )
+    return _report_response(report)
+
+
 @router.get("/reports/{report_id}", response_model=ReportResponse, summary="Fetch a report")
 async def get_report(report_id: str, service: AnalysisServiceDep) -> ReportResponse:
     report = await _load_report(service, report_id)

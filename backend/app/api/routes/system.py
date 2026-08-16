@@ -11,6 +11,7 @@ from app.core.config import settings
 from app.core.logging import get_logger
 from app.db.session import get_engine
 from app.imagery.bands import BAND_SPECS
+from app.interpretation.language_service import LanguageInterpretationService
 from app.models_ml.features import FEATURE_NAMES, FEATURE_VERSION
 from app.models_ml.labels import CLASS_INFO, CLASS_ORDER
 from app.models_ml.registry import available_models
@@ -53,11 +54,22 @@ async def health() -> HealthResponse:
     }
 
     interpretation_state = "configured" if settings.language_enabled else "not_configured"
+    # Vision is probed against the provider's model list rather than inferred
+    # from configuration, so the client never offers a capability that would
+    # fail on use.
+    vision_enabled = False
+    if settings.language_enabled:
+        service = LanguageInterpretationService()
+        try:
+            vision_enabled = await service.vision_supported()
+        finally:
+            await service.close()
     checks["interpretation"] = {
         "ok": settings.language_enabled,
         "provider": "Groq" if settings.language_enabled else None,
         "model": settings.language_model if settings.language_enabled else None,
-        "vision_enabled": settings.language_enabled and settings.enable_vision_interpretation,
+        "vision_enabled": vision_enabled,
+        "vision_model": settings.vision_model if settings.language_enabled else None,
     }
     checks["report_export"] = {"html": True, "pdf": pdf_available()}
     checks["imagery"] = {

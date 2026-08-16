@@ -245,6 +245,11 @@ Its output is then verified, because a prompt is not an enforcement mechanism:
    of a stored fraction. Years and small counting numbers are excluded.
    **A number that does not correspond to a measured value is fatal** — a
    fabricated figure is indistinguishable from a measured one once printed.
+   Two failure modes found against a live provider and fixed: ISO dates were
+   being read as negative numbers (`2021-02-28` parsed as `2021`, `-2`, `-28`),
+   and source metadata such as scene cloud cover was not in the citable set, so
+   a correctly grounded response was rejected for quoting its own observation
+   date. Both are covered by regression tests.
 3. **Claim screening.** Assertions the methodology cannot support — deforestation,
    biodiversity loss, climate attribution, specific human causes, "proves",
    "certainly" — are flagged and surfaced in the report.

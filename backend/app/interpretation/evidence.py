@@ -56,6 +56,9 @@ class EvidencePackage:
         walk("model_predictions", self.model_predictions)
         walk("region", self.region)
         walk("data_quality", self.data_quality)
+        # Source metadata carries citable figures too — scene cloud cover and
+        # ground resolution are values an interpretation legitimately quotes.
+        walk("data_sources", self.data_sources)
         return claims
 
 

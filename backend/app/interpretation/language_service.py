@@ -49,6 +49,7 @@ class LanguageInterpretationService:
     def __init__(self, client: httpx.AsyncClient | None = None) -> None:
         self._client = client
         self._owns_client = client is None
+        self._model_cache: set[str] | None = None
 
     @property
     def available(self) -> bool:
@@ -71,6 +72,42 @@ class LanguageInterpretationService:
         if self._client is not None and self._owns_client:
             await self._client.aclose()
             self._client = None
+
+    # --- capability probing --------------------------------------------------
+    async def available_models(self) -> set[str] | None:
+        """Model identifiers this account can actually serve.
+
+        Returns None when the catalogue cannot be reached. Cached for the life
+        of the service, since an account's model list does not change during a
+        process lifetime.
+        """
+        if not self.available:
+            return set()
+        if self._model_cache is not None:
+            return self._model_cache
+        try:
+            response = await self.client.get("/models")
+            response.raise_for_status()
+            self._model_cache = {str(entry.get("id")) for entry in response.json().get("data", [])}
+        except (httpx.HTTPError, ValueError, KeyError) as exc:
+            logger.warning("model_catalogue_unavailable", error=str(exc)[:200])
+            return None
+        return self._model_cache
+
+    async def vision_supported(self) -> bool:
+        """Whether visual interpretation can genuinely run on this deployment.
+
+        Vision needs three things: a configured provider, the feature enabled,
+        and a vision-capable model the account can actually call. Reporting the
+        capability without the third check would offer the user a button that
+        is guaranteed to fail.
+        """
+        if not self.available or not settings.enable_vision_interpretation:
+            return False
+        models = await self.available_models()
+        if models is None:
+            return False
+        return settings.vision_model in models
 
     # --- text interpretation ------------------------------------------------
     async def interpret(self, evidence: EvidencePackage) -> InterpretationEnvelope:
@@ -156,7 +193,8 @@ class LanguageInterpretationService:
         self, image_data_url: str, layer_label: str, context: str
     ) -> VisualInterpretation | None:
         """Describe a rendered analysis layer with a vision-capable model."""
-        if not self.available or not settings.enable_vision_interpretation:
+        if not await self.vision_supported():
+            logger.info("vision_interpretation_skipped", model=settings.vision_model)
             return None
 
         messages: list[dict[str, Any]] = [
