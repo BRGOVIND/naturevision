@@ -1,0 +1,62 @@
+[
+  {
+    "check": "config loads",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "feature sets reference real features",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "dataset non-empty",
+    "passed": true,
+    "note": "313580 samples"
+  },
+  {
+    "check": "dataset carries blocks",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "spatial split has test samples",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "no spatial leakage",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "no index overlap (spatial)",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "no index overlap (random)",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "random split is reproducible",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "no temporal leakage",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "metrics on perfect predictions",
+    "passed": true,
+    "note": ""
+  },
+  {
+    "check": "confusion matrix is square",
+    "passed": true,
+    "note": ""
+  }
+]

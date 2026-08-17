@@ -1,0 +1,64 @@
+{
+  "experiment": "baseline",
+  "research_version": "1.0.0",
+  "dataset_version": "1.0.0",
+  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
+  "started_at": "2026-08-17T04:37:19.705708+00:00",
+  "finished_at": "2026-08-17T04:37:19.760520+00:00",
+  "seeds": [
+    42,
+    123,
+    2024
+  ],
+  "config_hash": "8fe8e54b86e531c4",
+  "dataset_manifest_hash": "9bfd4980d18a5856",
+  "dataset_cache_sha256": "8ff45eb8d1752cf8338ecde187b086c46ac1a749206c2430a272ea415cb91ee1",
+  "scene_ids": [
+    "S2A_10SEH_20210119_1_L2A",
+    "S2A_12SVA_20240329_0_L2A",
+    "S2A_30TUL_20240415_0_L2A",
+    "S2A_31PCQ_20210413_1_L2A",
+    "S2A_32TNR_20210225_1_L2A",
+    "S2A_32TNR_20240111_0_L2A",
+    "S2A_32UQD_20210222_1_L2A",
+    "S2A_32UQD_20240308_0_L2A",
+    "S2A_34KHB_20240322_0_L2A",
+    "S2A_35VMJ_20240305_0_L2A",
+    "S2A_55HBA_20240404_0_L2A",
+    "S2B_10SEH_20240408_0_L2A",
+    "S2B_21LXG_20210421_0_L2A",
+    "S2B_21LXG_20240215_0_L2A",
+    "S2B_30TUL_20210106_1_L2A",
+    "S2B_34KHB_20210412_1_L2A",
+    "S2B_35LNE_20210422_0_L2A",
+    "S2B_35LNE_20240426_0_L2A",
+    "S2B_35VMJ_20210419_1_L2A",
+    "S2B_36RUU_20240113_0_L2A",
+    "S2B_43PFM_20210207_3_L2A",
+    "S2B_43PFM_20240123_0_L2A",
+    "S2B_55HBA_20210405_2_L2A"
+  ],
+  "label_source": {
+    "name": "ESA WorldCover",
+    "version": "v200",
+    "epoch": "2021",
+    "identifier": "ESA WorldCover 2021 v200",
+    "resolution_m": 10,
+    "license": "CC BY 4.0",
+    "url": "https://esa-worldcover.org/",
+    "role": "Reference land-cover map used as training and evaluation labels. It is a model product with its own error, not ground truth."
+  },
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "notes": [
+    "The research dataset resamples pixels independently of the production training run, so an exact match is not expected; the comparison is against a documented tolerance."
+  ],
+  "limitations": [
+    "The published baseline was trained on a separately drawn pixel sample; differences within tolerance reflect sampling, not a change in method."
+  ],
+  "outputs": {},
+  "output_hashes": {
+    "config.json": "d8f48df266934bdfffa4034d14927cf5d2620ef3e28815c35da2ca4f09d98d23",
+    "metrics.json": "3ac42206f1533253cc84ccfe7b16e780f6da29aeac208050132aa14e5f895df3"
+  }
+}

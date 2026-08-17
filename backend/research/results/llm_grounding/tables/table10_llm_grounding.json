@@ -1,0 +1,80 @@
+[
+  {
+    "case_id": "94056654-ef5a-49f9-a603-81503d49af52",
+    "region": "Western Ghats test block",
+    "mode": "baseline",
+    "provider": "Groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt_version": "grounding-eval-1.0.0",
+    "temperature": 0.2,
+    "generated_at": "2026-08-17T04:43:46.822552+00:00",
+    "status": "rejected",
+    "error": "InterpretationProviderError",
+    "detail": "The interpretation provider rejected the request."
+  },
+  {
+    "case_id": "94056654-ef5a-49f9-a603-81503d49af52",
+    "region": "Western Ghats test block",
+    "mode": "grounded",
+    "provider": "Groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt_version": "grounding-eval-1.0.0",
+    "temperature": 0.2,
+    "generated_at": "2026-08-17T04:43:50.906866+00:00",
+    "status": "rejected",
+    "error": "InterpretationProviderError",
+    "detail": "The interpretation provider rejected the request."
+  },
+  {
+    "case_id": "9d5307c0-a9ee-4c7d-8df7-4529aa828959",
+    "region": null,
+    "mode": "baseline",
+    "provider": "Groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt_version": "grounding-eval-1.0.0",
+    "temperature": 0.2,
+    "generated_at": "2026-08-17T04:43:51.006728+00:00",
+    "status": "rejected",
+    "error": "InterpretationProviderError",
+    "detail": "The interpretation provider rejected the request."
+  },
+  {
+    "case_id": "9d5307c0-a9ee-4c7d-8df7-4529aa828959",
+    "region": null,
+    "mode": "grounded",
+    "provider": "Groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt_version": "grounding-eval-1.0.0",
+    "temperature": 0.2,
+    "generated_at": "2026-08-17T04:43:51.074485+00:00",
+    "status": "rejected",
+    "error": "InterpretationProviderError",
+    "detail": "The interpretation provider rejected the request."
+  },
+  {
+    "case_id": "4cf9a8a7-1327-42ac-8ea2-b4f13dda61aa",
+    "region": null,
+    "mode": "baseline",
+    "provider": "Groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt_version": "grounding-eval-1.0.0",
+    "temperature": 0.2,
+    "generated_at": "2026-08-17T04:43:51.172274+00:00",
+    "status": "rejected",
+    "error": "InterpretationProviderError",
+    "detail": "The interpretation provider rejected the request."
+  },
+  {
+    "case_id": "4cf9a8a7-1327-42ac-8ea2-b4f13dda61aa",
+    "region": null,
+    "mode": "grounded",
+    "provider": "Groq",
+    "model": "llama-3.3-70b-versatile",
+    "prompt_version": "grounding-eval-1.0.0",
+    "temperature": 0.2,
+    "generated_at": "2026-08-17T04:43:51.240274+00:00",
+    "status": "rejected",
+    "error": "InterpretationProviderError",
+    "detail": "The interpretation provider rejected the request."
+  }
+]

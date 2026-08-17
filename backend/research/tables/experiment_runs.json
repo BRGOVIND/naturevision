@@ -1,0 +1,32 @@
+[
+  {
+    "experiment": "feature_ablation",
+    "status": "completed",
+    "runtime_seconds": 506.71,
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\feature_ablation"
+  },
+  {
+    "experiment": "temporal_transfer",
+    "status": "completed",
+    "runtime_seconds": 659.61,
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\temporal_transfer"
+  },
+  {
+    "experiment": "confidence_analysis",
+    "status": "completed",
+    "runtime_seconds": 49.05,
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\confidence_analysis"
+  },
+  {
+    "experiment": "feature_importance",
+    "status": "completed",
+    "runtime_seconds": 68.13,
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\feature_importance"
+  },
+  {
+    "experiment": "class_imbalance",
+    "status": "completed",
+    "runtime_seconds": 48.1,
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\class_imbalance"
+  }
+]

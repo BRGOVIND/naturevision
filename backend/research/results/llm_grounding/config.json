@@ -1,0 +1,12 @@
+{
+  "modes": {
+    "baseline": "minimal instruction, no grounding constraints, no validation",
+    "grounded": "production system prompt and production validators, unchanged"
+  },
+  "provider": "Groq",
+  "model": "llama-3.3-70b-versatile",
+  "temperature": 0.2,
+  "prompt_version": "grounding-eval-1.0.0",
+  "n_cases": 3,
+  "claim_patterns_checked": 13
+}

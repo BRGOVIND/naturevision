@@ -1,0 +1,39 @@
+{
+  "models": {
+    "random_forest": {
+      "n_estimators": 300,
+      "max_depth": 22,
+      "min_samples_leaf": 4,
+      "max_features": "sqrt",
+      "class_weight": "balanced_subsample",
+      "n_jobs": -1
+    },
+    "hist_gradient_boosting": {
+      "max_iter": 200,
+      "learning_rate": 0.1,
+      "max_leaf_nodes": 31,
+      "l2_regularization": 1.0,
+      "early_stopping": true,
+      "validation_fraction": 0.15
+    },
+    "linear_svm": {
+      "C": 1.0,
+      "max_iter": 3000,
+      "class_weight": "balanced"
+    },
+    "mlp": {
+      "hidden_sizes": [
+        128,
+        64
+      ],
+      "dropout": 0.15,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001,
+      "batch_size": 1024,
+      "epochs": 30
+    }
+  },
+  "feature_set": "D_full",
+  "protocol": "spatial_holdout",
+  "period": "p2021"
+}

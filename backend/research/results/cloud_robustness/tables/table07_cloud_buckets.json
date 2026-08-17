@@ -1,0 +1,38 @@
+[
+  {
+    "bucket": "0-5",
+    "n_observations": 21,
+    "status": "reported",
+    "mean_valid_pixel_fraction": 0.9433,
+    "mean_masked_fraction": 0.0271,
+    "mean_ndvi": 0.5506,
+    "std_of_mean_ndvi": 0.1488
+  },
+  {
+    "bucket": "5-10",
+    "n_observations": 7,
+    "status": "reported",
+    "mean_valid_pixel_fraction": 0.868,
+    "mean_masked_fraction": 0.0975,
+    "mean_ndvi": 0.6207,
+    "std_of_mean_ndvi": 0.1213
+  },
+  {
+    "bucket": "10-20",
+    "n_observations": 3,
+    "status": "reported",
+    "mean_valid_pixel_fraction": 0.7175,
+    "mean_masked_fraction": 0.2233,
+    "mean_ndvi": 0.4041,
+    "std_of_mean_ndvi": 0.3217
+  },
+  {
+    "bucket": "20-30",
+    "n_observations": 3,
+    "status": "reported",
+    "mean_valid_pixel_fraction": 0.7329,
+    "mean_masked_fraction": 0.2074,
+    "mean_ndvi": 0.5746,
+    "std_of_mean_ndvi": 0.1669
+  }
+]

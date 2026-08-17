@@ -41,14 +41,19 @@ jobs:
 
       - name: Lint
         run: |
-          ruff check app training tests
-          ruff format --check app training tests
+          ruff check app training tests research
+          ruff format --check app training tests research
 
       - name: Type check
-        run: mypy app training
+        run: mypy app training research
 
       - name: Tests
         run: pytest -q --cov=app --cov-report=term-missing --cov-report=xml
+
+      # Structural validation of the research layer only. The full benchmark
+      # fetches imagery and is triggered manually, never on every pull request.
+      - name: Research configuration and split validation
+        run: python -m research.run --experiment smoke
 
       - name: Upload coverage
         uses: actions/upload-artifact@v4

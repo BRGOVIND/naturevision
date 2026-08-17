@@ -1,0 +1,34 @@
+[
+  {
+    "metric": "accuracy",
+    "random_pixel_mean": 0.8413,
+    "random_pixel_std": 0.0019,
+    "spatial_holdout_mean": 0.5325,
+    "spatial_holdout_std": 0.0024,
+    "difference": 0.3088
+  },
+  {
+    "metric": "balanced_accuracy",
+    "random_pixel_mean": 0.8414,
+    "random_pixel_std": 0.0025,
+    "spatial_holdout_mean": 0.543,
+    "spatial_holdout_std": 0.0022,
+    "difference": 0.2984
+  },
+  {
+    "metric": "macro_f1",
+    "random_pixel_mean": 0.8375,
+    "random_pixel_std": 0.0028,
+    "spatial_holdout_mean": 0.515,
+    "spatial_holdout_std": 0.0024,
+    "difference": 0.3225
+  },
+  {
+    "metric": "weighted_f1",
+    "random_pixel_mean": 0.8417,
+    "random_pixel_std": 0.0018,
+    "spatial_holdout_mean": 0.5349,
+    "spatial_holdout_std": 0.0025,
+    "difference": 0.3068
+  }
+]

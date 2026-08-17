@@ -1,0 +1,54 @@
+{
+  "feature_sets": {
+    "A_raw_bands": [
+      "blue",
+      "green",
+      "red",
+      "nir",
+      "swir16",
+      "swir22"
+    ],
+    "B_bands_ndvi": [
+      "blue",
+      "green",
+      "red",
+      "nir",
+      "swir16",
+      "swir22",
+      "ndvi"
+    ],
+    "C_bands_indices": [
+      "blue",
+      "green",
+      "red",
+      "nir",
+      "swir16",
+      "swir22",
+      "ndvi",
+      "ndwi",
+      "ndbi"
+    ],
+    "D_full": [
+      "blue",
+      "green",
+      "red",
+      "nir",
+      "swir16",
+      "swir22",
+      "ndvi",
+      "ndwi",
+      "ndbi",
+      "nbr",
+      "bsi_partial"
+    ]
+  },
+  "model": "random_forest",
+  "protocol": "spatial_holdout",
+  "index_definitions": {
+    "ndvi": "(NIR - Red) / (NIR + Red)",
+    "ndwi": "(Green - NIR) / (Green + NIR)",
+    "ndbi": "(SWIR1 - NIR) / (SWIR1 + NIR)",
+    "nbr": "(NIR - SWIR2) / (NIR + SWIR2)",
+    "bsi_partial": "(SWIR1 - Blue) / (SWIR1 + Blue)"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "published_baseline": {
+    "accuracy": 0.5922,
+    "macro_f1": 0.5268,
+    "evaluation_samples": 82617
+  },
+  "reproduced": {
+    "accuracy": {
+      "mean": 0.5325,
+      "std": 0.0024,
+      "min": 0.5302,
+      "max": 0.535,
+      "n_runs": 3
+    },
+    "balanced_accuracy": {
+      "mean": 0.543,
+      "std": 0.0022,
+      "min": 0.5406,
+      "max": 0.5448,
+      "n_runs": 3
+    },
+    "macro_f1": {
+      "mean": 0.515,
+      "std": 0.0024,
+      "min": 0.5124,
+      "max": 0.5171,
+      "n_runs": 3
+    },
+    "weighted_f1": {
+      "mean": 0.5349,
+      "std": 0.0025,
+      "min": 0.5325,
+      "max": 0.5374,
+      "n_runs": 3
+    }
+  },
+  "accuracy_gap": -0.0597,
+  "macro_f1_gap": -0.0118,
+  "within_tolerance": true,
+  "per_seed": [
+    {
+      "seed": 42,
+      "accuracy": 0.5302,
+      "balanced_accuracy": 0.5406,
+      "macro_f1": 0.5124,
+      "weighted_f1": 0.5325,
+      "test_samples": 37647
+    },
+    {
+      "seed": 123,
+      "accuracy": 0.535,
+      "balanced_accuracy": 0.5448,
+      "macro_f1": 0.5171,
+      "weighted_f1": 0.5374,
+      "test_samples": 37647
+    },
+    {
+      "seed": 2024,
+      "accuracy": 0.5323,
+      "balanced_accuracy": 0.5437,
+      "macro_f1": 0.5156,
+      "weighted_f1": 0.5349,
+      "test_samples": 37647
+    }
+  ],
+  "per_class": {
+    "Forest": {
+      "precision": 0.5093,
+      "recall": 0.5339,
+      "f1": 0.5213,
+      "support": 10302
+    },
+    "Agriculture": {
+      "precision": 0.4604,
+      "recall": 0.5178,
+      "f1": 0.4874,
+      "support": 8221
+    },
+    "Water": {
+      "precision": 0.8561,
+      "recall": 0.4587,
+      "f1": 0.5974,
+      "support": 11645
+    },
+    "Urban / built-up": {
+      "precision": 0.4417,
+      "recall": 0.8276,
+      "f1": 0.576,
+      "support": 4688
+    },
+    "Bare land": {
+      "precision": 0.4123,
+      "recall": 0.3805,
+      "f1": 0.3958,
+      "support": 2791
+    }
+  }
+}

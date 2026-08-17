@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 42,
+    "accuracy": 0.5302,
+    "balanced_accuracy": 0.5406,
+    "macro_f1": 0.5124,
+    "weighted_f1": 0.5325,
+    "test_samples": 37647
+  },
+  {
+    "seed": 123,
+    "accuracy": 0.535,
+    "balanced_accuracy": 0.5448,
+    "macro_f1": 0.5171,
+    "weighted_f1": 0.5374,
+    "test_samples": 37647
+  },
+  {
+    "seed": 2024,
+    "accuracy": 0.5323,
+    "balanced_accuracy": 0.5437,
+    "macro_f1": 0.5156,
+    "weighted_f1": 0.5349,
+    "test_samples": 37647
+  }
+]

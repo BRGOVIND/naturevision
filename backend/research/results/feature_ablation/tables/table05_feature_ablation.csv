@@ -1,0 +1,5 @@
+feature_set,n_features,accuracy_mean,macro_f1_mean,macro_f1_std,delta_macro_f1_vs_full
+A_raw_bands,6,0.5217,0.5106,0.0005,-0.0044
+B_bands_ndvi,7,0.5263,0.5134,0.0009,-0.0016
+C_bands_indices,9,0.5366,0.5156,0.0023,0.0006
+D_full,11,0.5325,0.515,0.0024,0.0

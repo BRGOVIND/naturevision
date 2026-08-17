@@ -1,0 +1,40 @@
+{
+  "experiment": "llm_grounding",
+  "research_version": "1.0.0",
+  "dataset_version": "1.0.0",
+  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
+  "started_at": "2026-08-17T04:43:51.338480+00:00",
+  "finished_at": "2026-08-17T04:43:51.407730+00:00",
+  "seeds": [],
+  "config_hash": "4e824d2053bec47c",
+  "dataset_manifest_hash": null,
+  "dataset_cache_sha256": null,
+  "scene_ids": [],
+  "label_source": {
+    "name": "ESA WorldCover",
+    "version": "v200",
+    "epoch": "2021",
+    "identifier": "ESA WorldCover 2021 v200",
+    "resolution_m": 10,
+    "license": "CC BY 4.0",
+    "url": "https://esa-worldcover.org/",
+    "role": "Reference land-cover map used as training and evaluation labels. It is a model product with its own error, not ground truth."
+  },
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "notes": [
+    "Both modes are scored by the same deterministic checker, so the comparison isolates the effect of grounding rather than of scoring.",
+    "A rejected grounded generation counts as a rejection, not as a pass; the validator was not relaxed for this experiment."
+  ],
+  "limitations": [
+    "The checker is lexical, not semantic. It matches numbers against the evidence and screens a fixed list of causal phrasings; it cannot judge whether an interpretation is scientifically sound.",
+    "Numeric matching allows a relative tolerance and the percentage form of a stored fraction, so a coincidental match is possible.",
+    "Language-model output is non-deterministic and the hosted model may change without notice, so these figures describe one provider at one point in time.",
+    "The case count is small; these are indicative measurements, not a powered comparison."
+  ],
+  "outputs": {},
+  "output_hashes": {
+    "config.json": "1b598216443771aaec774936ff08068860b8a6a423dab81ce1c376223dbae792",
+    "metrics.json": "00c3d2a6b6e353a30f26cfd76c0871bd08a74c2dd559748cd14463d9e4043d15"
+  }
+}

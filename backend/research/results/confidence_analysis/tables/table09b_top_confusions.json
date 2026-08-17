@@ -1,0 +1,142 @@
+[
+  {
+    "true_class": "Water",
+    "predicted_class": "Forest",
+    "count": 4390,
+    "share_of_errors": 0.2482,
+    "mean_confidence": 0.5946
+  },
+  {
+    "true_class": "Forest",
+    "predicted_class": "Agriculture",
+    "count": 3351,
+    "share_of_errors": 0.1895,
+    "mean_confidence": 0.6612
+  },
+  {
+    "true_class": "Agriculture",
+    "predicted_class": "Urban / built-up",
+    "count": 2372,
+    "share_of_errors": 0.1341,
+    "mean_confidence": 0.5536
+  },
+  {
+    "true_class": "Bare land",
+    "predicted_class": "Urban / built-up",
+    "count": 1596,
+    "share_of_errors": 0.0902,
+    "mean_confidence": 0.6286
+  },
+  {
+    "true_class": "Water",
+    "predicted_class": "Agriculture",
+    "count": 1276,
+    "share_of_errors": 0.0722,
+    "mean_confidence": 0.5972
+  },
+  {
+    "true_class": "Agriculture",
+    "predicted_class": "Forest",
+    "count": 928,
+    "share_of_errors": 0.0525,
+    "mean_confidence": 0.6783
+  },
+  {
+    "true_class": "Forest",
+    "predicted_class": "Urban / built-up",
+    "count": 725,
+    "share_of_errors": 0.041,
+    "mean_confidence": 0.494
+  },
+  {
+    "true_class": "Urban / built-up",
+    "predicted_class": "Bare land",
+    "count": 521,
+    "share_of_errors": 0.0295,
+    "mean_confidence": 0.5977
+  },
+  {
+    "true_class": "Forest",
+    "predicted_class": "Water",
+    "count": 498,
+    "share_of_errors": 0.0282,
+    "mean_confidence": 0.4314
+  },
+  {
+    "true_class": "Agriculture",
+    "predicted_class": "Bare land",
+    "count": 433,
+    "share_of_errors": 0.0245,
+    "mean_confidence": 0.5029
+  },
+  {
+    "true_class": "Water",
+    "predicted_class": "Urban / built-up",
+    "count": 360,
+    "share_of_errors": 0.0204,
+    "mean_confidence": 0.5345
+  },
+  {
+    "true_class": "Water",
+    "predicted_class": "Bare land",
+    "count": 340,
+    "share_of_errors": 0.0192,
+    "mean_confidence": 0.6014
+  },
+  {
+    "true_class": "Agriculture",
+    "predicted_class": "Water",
+    "count": 246,
+    "share_of_errors": 0.0139,
+    "mean_confidence": 0.8685
+  },
+  {
+    "true_class": "Forest",
+    "predicted_class": "Bare land",
+    "count": 193,
+    "share_of_errors": 0.0109,
+    "mean_confidence": 0.4008
+  },
+  {
+    "true_class": "Urban / built-up",
+    "predicted_class": "Agriculture",
+    "count": 147,
+    "share_of_errors": 0.0083,
+    "mean_confidence": 0.5641
+  },
+  {
+    "true_class": "Bare land",
+    "predicted_class": "Water",
+    "count": 124,
+    "share_of_errors": 0.007,
+    "mean_confidence": 0.7234
+  },
+  {
+    "true_class": "Urban / built-up",
+    "predicted_class": "Forest",
+    "count": 89,
+    "share_of_errors": 0.005,
+    "mean_confidence": 0.5634
+  },
+  {
+    "true_class": "Urban / built-up",
+    "predicted_class": "Water",
+    "count": 60,
+    "share_of_errors": 0.0034,
+    "mean_confidence": 0.58
+  },
+  {
+    "true_class": "Bare land",
+    "predicted_class": "Agriculture",
+    "count": 30,
+    "share_of_errors": 0.0017,
+    "mean_confidence": 0.5074
+  },
+  {
+    "true_class": "Bare land",
+    "predicted_class": "Forest",
+    "count": 6,
+    "share_of_errors": 0.0003,
+    "mean_confidence": 0.4292
+  }
+]

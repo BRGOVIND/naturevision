@@ -1,0 +1,74 @@
+[
+  {
+    "protocol": "random_pixel",
+    "seed": 42,
+    "accuracy": 0.8417,
+    "balanced_accuracy": 0.8409,
+    "macro_f1": 0.8374,
+    "weighted_f1": 0.8421,
+    "train_samples": 100023,
+    "val_samples": 23082,
+    "test_samples": 30776,
+    "n_test_blocks": 11
+  },
+  {
+    "protocol": "spatial_holdout",
+    "seed": 42,
+    "accuracy": 0.5302,
+    "balanced_accuracy": 0.5406,
+    "macro_f1": 0.5124,
+    "weighted_f1": 0.5325,
+    "train_samples": 104121,
+    "val_samples": 12113,
+    "test_samples": 37647,
+    "n_test_blocks": 3
+  },
+  {
+    "protocol": "random_pixel",
+    "seed": 123,
+    "accuracy": 0.843,
+    "balanced_accuracy": 0.8441,
+    "macro_f1": 0.8403,
+    "weighted_f1": 0.8433,
+    "train_samples": 100023,
+    "val_samples": 23082,
+    "test_samples": 30776,
+    "n_test_blocks": 11
+  },
+  {
+    "protocol": "spatial_holdout",
+    "seed": 123,
+    "accuracy": 0.535,
+    "balanced_accuracy": 0.5448,
+    "macro_f1": 0.5171,
+    "weighted_f1": 0.5374,
+    "train_samples": 104121,
+    "val_samples": 12113,
+    "test_samples": 37647,
+    "n_test_blocks": 3
+  },
+  {
+    "protocol": "random_pixel",
+    "seed": 2024,
+    "accuracy": 0.8393,
+    "balanced_accuracy": 0.8391,
+    "macro_f1": 0.8347,
+    "weighted_f1": 0.8398,
+    "train_samples": 100023,
+    "val_samples": 23082,
+    "test_samples": 30776,
+    "n_test_blocks": 11
+  },
+  {
+    "protocol": "spatial_holdout",
+    "seed": 2024,
+    "accuracy": 0.5323,
+    "balanced_accuracy": 0.5437,
+    "macro_f1": 0.5156,
+    "weighted_f1": 0.5349,
+    "train_samples": 104121,
+    "val_samples": 12113,
+    "test_samples": 37647,
+    "n_test_blocks": 3
+  }
+]

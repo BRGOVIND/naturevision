@@ -1,0 +1,277 @@
+{
+  "summary": {
+    "random_forest": {
+      "accuracy": {
+        "mean": 0.5325,
+        "std": 0.0024,
+        "min": 0.5302,
+        "max": 0.535,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.543,
+        "std": 0.0022,
+        "min": 0.5406,
+        "max": 0.5448,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.515,
+        "std": 0.0024,
+        "min": 0.5124,
+        "max": 0.5171,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5349,
+        "std": 0.0025,
+        "min": 0.5325,
+        "max": 0.5374,
+        "n_runs": 3
+      }
+    },
+    "hist_gradient_boosting": {
+      "accuracy": {
+        "mean": 0.5544,
+        "std": 0.0027,
+        "min": 0.5513,
+        "max": 0.5564,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.5702,
+        "std": 0.0013,
+        "min": 0.5687,
+        "max": 0.5712,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.5461,
+        "std": 0.0013,
+        "min": 0.5446,
+        "max": 0.5469,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5592,
+        "std": 0.0033,
+        "min": 0.5554,
+        "max": 0.5614,
+        "n_runs": 3
+      }
+    },
+    "linear_svm": {
+      "accuracy": {
+        "mean": 0.5513,
+        "std": 0.0002,
+        "min": 0.5512,
+        "max": 0.5515,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.575,
+        "std": 0.0002,
+        "min": 0.5748,
+        "max": 0.5752,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.5499,
+        "std": 0.0002,
+        "min": 0.5497,
+        "max": 0.5501,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5545,
+        "std": 0.0002,
+        "min": 0.5544,
+        "max": 0.5547,
+        "n_runs": 3
+      }
+    },
+    "mlp": {
+      "accuracy": {
+        "mean": 0.5506,
+        "std": 0.0114,
+        "min": 0.5385,
+        "max": 0.5612,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.5952,
+        "std": 0.0107,
+        "min": 0.5831,
+        "max": 0.6034,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.5585,
+        "std": 0.0101,
+        "min": 0.5472,
+        "max": 0.5665,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5518,
+        "std": 0.0099,
+        "min": 0.5412,
+        "max": 0.5609,
+        "n_runs": 3
+      }
+    }
+  },
+  "ranked_by_macro_f1": [
+    "mlp",
+    "linear_svm",
+    "hist_gradient_boosting",
+    "random_forest"
+  ],
+  "per_run": [
+    {
+      "model": "random_forest",
+      "seed": 42,
+      "accuracy": 0.5302,
+      "balanced_accuracy": 0.5406,
+      "macro_f1": 0.5124,
+      "weighted_f1": 0.5325,
+      "train_seconds": 51.45,
+      "inference_seconds": 0.8423,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "random_forest",
+      "seed": 123,
+      "accuracy": 0.535,
+      "balanced_accuracy": 0.5448,
+      "macro_f1": 0.5171,
+      "weighted_f1": 0.5374,
+      "train_seconds": 54.277,
+      "inference_seconds": 0.7557,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "random_forest",
+      "seed": 2024,
+      "accuracy": 0.5323,
+      "balanced_accuracy": 0.5437,
+      "macro_f1": 0.5156,
+      "weighted_f1": 0.5349,
+      "train_seconds": 49.926,
+      "inference_seconds": 0.7649,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "seed": 42,
+      "accuracy": 0.5513,
+      "balanced_accuracy": 0.5706,
+      "macro_f1": 0.5468,
+      "weighted_f1": 0.5554,
+      "train_seconds": 50.064,
+      "inference_seconds": 2.3408,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "seed": 123,
+      "accuracy": 0.5554,
+      "balanced_accuracy": 0.5687,
+      "macro_f1": 0.5446,
+      "weighted_f1": 0.5609,
+      "train_seconds": 48.636,
+      "inference_seconds": 2.3483,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "hist_gradient_boosting",
+      "seed": 2024,
+      "accuracy": 0.5564,
+      "balanced_accuracy": 0.5712,
+      "macro_f1": 0.5469,
+      "weighted_f1": 0.5614,
+      "train_seconds": 48.656,
+      "inference_seconds": 2.211,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "linear_svm",
+      "seed": 42,
+      "accuracy": 0.5515,
+      "balanced_accuracy": 0.5752,
+      "macro_f1": 0.5501,
+      "weighted_f1": 0.5547,
+      "train_seconds": 13.815,
+      "inference_seconds": 0.0944,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "linear_svm",
+      "seed": 123,
+      "accuracy": 0.5513,
+      "balanced_accuracy": 0.5749,
+      "macro_f1": 0.5498,
+      "weighted_f1": 0.5545,
+      "train_seconds": 12.799,
+      "inference_seconds": 0.1047,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "linear_svm",
+      "seed": 2024,
+      "accuracy": 0.5512,
+      "balanced_accuracy": 0.5748,
+      "macro_f1": 0.5497,
+      "weighted_f1": 0.5544,
+      "train_seconds": 11.751,
+      "inference_seconds": 0.0905,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "mlp",
+      "seed": 42,
+      "accuracy": 0.5385,
+      "balanced_accuracy": 0.5831,
+      "macro_f1": 0.5472,
+      "weighted_f1": 0.5412,
+      "train_seconds": 70.577,
+      "inference_seconds": 0.088,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "mlp",
+      "seed": 123,
+      "accuracy": 0.5521,
+      "balanced_accuracy": 0.5992,
+      "macro_f1": 0.5618,
+      "weighted_f1": 0.5532,
+      "train_seconds": 402.081,
+      "inference_seconds": 0.0329,
+      "train_samples": 104121,
+      "test_samples": 37647
+    },
+    {
+      "model": "mlp",
+      "seed": 2024,
+      "accuracy": 0.5612,
+      "balanced_accuracy": 0.6034,
+      "macro_f1": 0.5665,
+      "weighted_f1": 0.5609,
+      "train_seconds": 51.583,
+      "inference_seconds": 0.0313,
+      "train_samples": 104121,
+      "test_samples": 37647
+    }
+  ],
+  "note": "Ranking is by macro-F1 rather than accuracy, and training and inference cost are reported alongside, so model selection is not reduced to a single number."
+}

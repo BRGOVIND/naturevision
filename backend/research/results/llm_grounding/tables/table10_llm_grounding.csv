@@ -1,0 +1,7 @@
+case_id,region,mode,provider,model,prompt_version,temperature,generated_at,status,error,detail
+94056654-ef5a-49f9-a603-81503d49af52,Western Ghats test block,baseline,Groq,llama-3.3-70b-versatile,grounding-eval-1.0.0,0.2,2026-08-17T04:43:46.822552+00:00,rejected,InterpretationProviderError,The interpretation provider rejected the request.
+94056654-ef5a-49f9-a603-81503d49af52,Western Ghats test block,grounded,Groq,llama-3.3-70b-versatile,grounding-eval-1.0.0,0.2,2026-08-17T04:43:50.906866+00:00,rejected,InterpretationProviderError,The interpretation provider rejected the request.
+9d5307c0-a9ee-4c7d-8df7-4529aa828959,,baseline,Groq,llama-3.3-70b-versatile,grounding-eval-1.0.0,0.2,2026-08-17T04:43:51.006728+00:00,rejected,InterpretationProviderError,The interpretation provider rejected the request.
+9d5307c0-a9ee-4c7d-8df7-4529aa828959,,grounded,Groq,llama-3.3-70b-versatile,grounding-eval-1.0.0,0.2,2026-08-17T04:43:51.074485+00:00,rejected,InterpretationProviderError,The interpretation provider rejected the request.
+4cf9a8a7-1327-42ac-8ea2-b4f13dda61aa,,baseline,Groq,llama-3.3-70b-versatile,grounding-eval-1.0.0,0.2,2026-08-17T04:43:51.172274+00:00,rejected,InterpretationProviderError,The interpretation provider rejected the request.
+4cf9a8a7-1327-42ac-8ea2-b4f13dda61aa,,grounded,Groq,llama-3.3-70b-versatile,grounding-eval-1.0.0,0.2,2026-08-17T04:43:51.240274+00:00,rejected,InterpretationProviderError,The interpretation provider rejected the request.

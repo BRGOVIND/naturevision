@@ -1,0 +1,37 @@
+{
+  "experiment": "threshold_sensitivity",
+  "research_version": "1.0.0",
+  "dataset_version": "1.0.0",
+  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
+  "started_at": "2026-08-17T04:43:47.391671+00:00",
+  "finished_at": "2026-08-17T04:43:51.684489+00:00",
+  "seeds": [],
+  "config_hash": "8408974c7e9a0f76",
+  "dataset_manifest_hash": null,
+  "dataset_cache_sha256": null,
+  "scene_ids": [],
+  "label_source": {
+    "name": "ESA WorldCover",
+    "version": "v200",
+    "epoch": "2021",
+    "identifier": "ESA WorldCover 2021 v200",
+    "resolution_m": 10,
+    "license": "CC BY 4.0",
+    "url": "https://esa-worldcover.org/",
+    "role": "Reference land-cover map used as training and evaluation labels. It is a model product with its own error, not ground truth."
+  },
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "notes": [
+    "This is a research-only sweep. The production defaults are not modified by this experiment."
+  ],
+  "limitations": [
+    "Reported change is change in a reflectance-derived vegetation index. It does not establish land-cover conversion and no causal process is attributed to it.",
+    "Only pixels valid in both periods contribute, so the analysed area differs between region pairs."
+  ],
+  "outputs": {},
+  "output_hashes": {
+    "config.json": "bc86dd029f7d7648309ccf43c33a85848de6c2e6b9dd7b2ece231d64fe670f31",
+    "metrics.json": "d7ff8c3dc6d248a638385df96cf3d15d8b4423a7e75cb2b28d8850588fcd2641"
+  }
+}

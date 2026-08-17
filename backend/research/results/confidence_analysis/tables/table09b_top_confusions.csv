@@ -1,0 +1,21 @@
+true_class,predicted_class,count,share_of_errors,mean_confidence
+Water,Forest,4390,0.2482,0.5946
+Forest,Agriculture,3351,0.1895,0.6612
+Agriculture,Urban / built-up,2372,0.1341,0.5536
+Bare land,Urban / built-up,1596,0.0902,0.6286
+Water,Agriculture,1276,0.0722,0.5972
+Agriculture,Forest,928,0.0525,0.6783
+Forest,Urban / built-up,725,0.041,0.494
+Urban / built-up,Bare land,521,0.0295,0.5977
+Forest,Water,498,0.0282,0.4314
+Agriculture,Bare land,433,0.0245,0.5029
+Water,Urban / built-up,360,0.0204,0.5345
+Water,Bare land,340,0.0192,0.6014
+Agriculture,Water,246,0.0139,0.8685
+Forest,Bare land,193,0.0109,0.4008
+Urban / built-up,Agriculture,147,0.0083,0.5641
+Bare land,Water,124,0.007,0.7234
+Urban / built-up,Forest,89,0.005,0.5634
+Urban / built-up,Water,60,0.0034,0.58
+Bare land,Agriculture,30,0.0017,0.5074
+Bare land,Forest,6,0.0003,0.4292

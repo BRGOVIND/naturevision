@@ -1,0 +1,6 @@
+{
+  "model": "random_forest",
+  "feature_set": "D_full",
+  "permutation_scoring": "f1_macro",
+  "permutation_split": "validation block"
+}

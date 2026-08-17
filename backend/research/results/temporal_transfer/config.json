@@ -1,0 +1,27 @@
+{
+  "pairs": [
+    {
+      "train": "p2021",
+      "test": "p2021",
+      "kind": "same-period"
+    },
+    {
+      "train": "p2021",
+      "test": "p2024",
+      "kind": "forward transfer"
+    },
+    {
+      "train": "p2024",
+      "test": "p2024",
+      "kind": "same-period"
+    },
+    {
+      "train": "p2024",
+      "test": "p2021",
+      "kind": "backward transfer"
+    }
+  ],
+  "model": "random_forest",
+  "feature_set": "D_full",
+  "spatial_holdout": true
+}

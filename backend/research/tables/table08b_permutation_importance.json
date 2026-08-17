@@ -1,0 +1,68 @@
+[
+  {
+    "feature": "ndvi",
+    "importance": 0.096027,
+    "std": 0.001365,
+    "rank": 1
+  },
+  {
+    "feature": "swir16",
+    "importance": 0.068827,
+    "std": 0.002067,
+    "rank": 2
+  },
+  {
+    "feature": "bsi_partial",
+    "importance": 0.044316,
+    "std": 0.001667,
+    "rank": 3
+  },
+  {
+    "feature": "ndwi",
+    "importance": 0.033279,
+    "std": 0.001217,
+    "rank": 4
+  },
+  {
+    "feature": "blue",
+    "importance": 0.022451,
+    "std": 0.000905,
+    "rank": 5
+  },
+  {
+    "feature": "nir",
+    "importance": 0.016171,
+    "std": 0.00072,
+    "rank": 6
+  },
+  {
+    "feature": "green",
+    "importance": 0.012283,
+    "std": 0.000985,
+    "rank": 7
+  },
+  {
+    "feature": "ndbi",
+    "importance": 0.010246,
+    "std": 0.000923,
+    "rank": 8
+  },
+  {
+    "feature": "red",
+    "importance": -0.002132,
+    "std": 0.000358,
+    "rank": 9
+  },
+  {
+    "feature": "swir22",
+    "importance": -0.012116,
+    "std": 0.001439,
+    "rank": 10
+  },
+  {
+    "feature": "nbr",
+    "importance": -0.013182,
+    "std": 0.000537,
+    "rank": 11
+  }
+]

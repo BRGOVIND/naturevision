@@ -1,0 +1,57 @@
+[
+  {
+    "class": "Forest",
+    "dataset_count": 80741,
+    "dataset_proportion": 0.257481,
+    "train_count": 24446,
+    "test_count": 10302,
+    "balanced_weight": 0.7768,
+    "test_f1": 0.5209,
+    "test_recall": 0.5373,
+    "test_precision": 0.5056
+  },
+  {
+    "class": "Agriculture",
+    "dataset_count": 80734,
+    "dataset_proportion": 0.257459,
+    "train_count": 28000,
+    "test_count": 8221,
+    "balanced_weight": 0.7768,
+    "test_f1": 0.4913,
+    "test_recall": 0.516,
+    "test_precision": 0.4689
+  },
+  {
+    "class": "Water",
+    "dataset_count": 64289,
+    "dataset_proportion": 0.205016,
+    "train_count": 17651,
+    "test_count": 11645,
+    "balanced_weight": 0.9755,
+    "test_f1": 0.5914,
+    "test_recall": 0.4533,
+    "test_precision": 0.8505
+  },
+  {
+    "class": "Urban / built-up",
+    "dataset_count": 47584,
+    "dataset_proportion": 0.151744,
+    "train_count": 18320,
+    "test_count": 4688,
+    "balanced_weight": 1.318,
+    "test_f1": 0.5688,
+    "test_recall": 0.8257,
+    "test_precision": 0.4338
+  },
+  {
+    "class": "Bare land",
+    "dataset_count": 40232,
+    "dataset_proportion": 0.128299,
+    "train_count": 15704,
+    "test_count": 2791,
+    "balanced_weight": 1.5589,
+    "test_f1": 0.3896,
+    "test_recall": 0.3708,
+    "test_precision": 0.4104
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "model": "random_forest",
+  "feature_set": "D_full",
+  "features": [
+    "blue",
+    "green",
+    "red",
+    "nir",
+    "swir16",
+    "swir22",
+    "ndvi",
+    "ndwi",
+    "ndbi",
+    "nbr",
+    "bsi_partial"
+  ],
+  "protocol": "spatial_holdout",
+  "period": "p2021",
+  "test_regions": [
+    "murray_basin",
+    "iberian_meseta",
+    "zambezi_miombo"
+  ],
+  "tolerance": 0.08
+}

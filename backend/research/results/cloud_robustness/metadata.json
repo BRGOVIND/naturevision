@@ -1,0 +1,37 @@
+{
+  "experiment": "cloud_robustness",
+  "research_version": "1.0.0",
+  "dataset_version": "1.0.0",
+  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
+  "started_at": "2026-08-17T04:48:40.258277+00:00",
+  "finished_at": "2026-08-17T04:48:41.822712+00:00",
+  "seeds": [],
+  "config_hash": "479e9db2d14417c3",
+  "dataset_manifest_hash": null,
+  "dataset_cache_sha256": null,
+  "scene_ids": [],
+  "label_source": {
+    "name": "ESA WorldCover",
+    "version": "v200",
+    "epoch": "2021",
+    "identifier": "ESA WorldCover 2021 v200",
+    "resolution_m": 10,
+    "license": "CC BY 4.0",
+    "url": "https://esa-worldcover.org/",
+    "role": "Reference land-cover map used as training and evaluation labels. It is a model product with its own error, not ground truth."
+  },
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "notes": [
+    "Buckets containing fewer than the minimum number of real observations are reported as skipped rather than populated."
+  ],
+  "limitations": [
+    "Scene-level cloud cover describes the whole tile, not the analysed region, so a low-cloud scene can still be cloudy over the area of interest and vice versa.",
+    "NDVI variation across dates includes genuine seasonal change, so a bucket difference is not attributable to cloud alone."
+  ],
+  "outputs": {},
+  "output_hashes": {
+    "config.json": "3d80135ff841995c5043e50e66e1575a12c6873fd72c352810b546c1dec61b23",
+    "metrics.json": "b0dc3754804a1859c1a71a09ebe29ad59f53cfe0a19b3115ad686d8992b5bddf"
+  }
+}

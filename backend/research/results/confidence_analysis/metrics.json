@@ -1,0 +1,162 @@
+{
+  "confidence": {
+    "buckets": [
+      {
+        "bucket": "0.0-0.2",
+        "n": 0,
+        "accuracy": null,
+        "mean_confidence": null,
+        "gap": null
+      },
+      {
+        "bucket": "0.2-0.4",
+        "n": 2524,
+        "accuracy": 0.2096,
+        "mean_confidence": 0.3472,
+        "gap": 0.1376
+      },
+      {
+        "bucket": "0.4-0.6",
+        "n": 11736,
+        "accuracy": 0.3611,
+        "mean_confidence": 0.5054,
+        "gap": 0.1442
+      },
+      {
+        "bucket": "0.6-0.8",
+        "n": 11492,
+        "accuracy": 0.5049,
+        "mean_confidence": 0.6991,
+        "gap": 0.1942
+      },
+      {
+        "bucket": "0.8-1.0",
+        "n": 11895,
+        "accuracy": 0.7897,
+        "mean_confidence": 0.9182,
+        "gap": 0.1285
+      }
+    ],
+    "expected_calibration_error": 0.1541,
+    "mean_confidence_correct": 0.7596,
+    "mean_confidence_incorrect": 0.5993,
+    "overall_accuracy": 0.5302,
+    "mean_confidence": 0.6843,
+    "note": "Expected calibration error is a bucketed estimate. A positive gap means the model is overconfident in that bucket."
+  },
+  "metrics": {
+    "accuracy": 0.5302,
+    "balanced_accuracy": 0.5406,
+    "macro_f1": 0.5124,
+    "weighted_f1": 0.5325
+  },
+  "top_confusions": [
+    {
+      "true_class": "Water",
+      "predicted_class": "Forest",
+      "count": 4390,
+      "share_of_errors": 0.2482,
+      "mean_confidence": 0.5946
+    },
+    {
+      "true_class": "Forest",
+      "predicted_class": "Agriculture",
+      "count": 3351,
+      "share_of_errors": 0.1895,
+      "mean_confidence": 0.6612
+    },
+    {
+      "true_class": "Agriculture",
+      "predicted_class": "Urban / built-up",
+      "count": 2372,
+      "share_of_errors": 0.1341,
+      "mean_confidence": 0.5536
+    },
+    {
+      "true_class": "Bare land",
+      "predicted_class": "Urban / built-up",
+      "count": 1596,
+      "share_of_errors": 0.0902,
+      "mean_confidence": 0.6286
+    },
+    {
+      "true_class": "Water",
+      "predicted_class": "Agriculture",
+      "count": 1276,
+      "share_of_errors": 0.0722,
+      "mean_confidence": 0.5972
+    },
+    {
+      "true_class": "Agriculture",
+      "predicted_class": "Forest",
+      "count": 928,
+      "share_of_errors": 0.0525,
+      "mean_confidence": 0.6783
+    },
+    {
+      "true_class": "Forest",
+      "predicted_class": "Urban / built-up",
+      "count": 725,
+      "share_of_errors": 0.041,
+      "mean_confidence": 0.494
+    },
+    {
+      "true_class": "Urban / built-up",
+      "predicted_class": "Bare land",
+      "count": 521,
+      "share_of_errors": 0.0295,
+      "mean_confidence": 0.5977
+    },
+    {
+      "true_class": "Forest",
+      "predicted_class": "Water",
+      "count": 498,
+      "share_of_errors": 0.0282,
+      "mean_confidence": 0.4314
+    },
+    {
+      "true_class": "Agriculture",
+      "predicted_class": "Bare land",
+      "count": 433,
+      "share_of_errors": 0.0245,
+      "mean_confidence": 0.5029
+    },
+    {
+      "true_class": "Water",
+      "predicted_class": "Urban / built-up",
+      "count": 360,
+      "share_of_errors": 0.0204,
+      "mean_confidence": 0.5345
+    },
+    {
+      "true_class": "Water",
+      "predicted_class": "Bare land",
+      "count": 340,
+      "share_of_errors": 0.0192,
+      "mean_confidence": 0.6014
+    },
+    {
+      "true_class": "Agriculture",
+      "predicted_class": "Water",
+      "count": 246,
+      "share_of_errors": 0.0139,
+      "mean_confidence": 0.8685
+    },
+    {
+      "true_class": "Forest",
+      "predicted_class": "Bare land",
+      "count": 193,
+      "share_of_errors": 0.0109,
+      "mean_confidence": 0.4008
+    },
+    {
+      "true_class": "Urban / built-up",
+      "predicted_class": "Agriculture",
+      "count": 147,
+      "share_of_errors": 0.0083,
+      "mean_confidence": 0.5641
+    }
+  ],
+  "hypothesis": "H5: prediction confidence is informative about correctness.",
+  "confidence_separates_correct_and_incorrect": true
+}

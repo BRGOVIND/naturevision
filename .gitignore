@@ -38,3 +38,10 @@ backend/artifacts/models/**/model.pt
 .idea/
 .DS_Store
 Thumbs.db
+
+# Research artifacts.
+# The pixel cache is rebuildable from the manifest and is far too large to
+# track; manifests, tables, figures and experiment records are kept so results
+# stay traceable without committing raster data.
+backend/research/cache/
+backend/research/results/**/predictions_*.csv

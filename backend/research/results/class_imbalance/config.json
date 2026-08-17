@@ -1,0 +1,4 @@
+{
+  "protocol": "spatial_holdout",
+  "model": "random_forest"
+}

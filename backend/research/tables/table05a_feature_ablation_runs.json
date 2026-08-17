@@ -1,0 +1,122 @@
+[
+  {
+    "feature_set": "A_raw_bands",
+    "n_features": 6,
+    "features": "blue green red nir swir16 swir22",
+    "seed": 42,
+    "accuracy": 0.5217,
+    "balanced_accuracy": 0.5426,
+    "macro_f1": 0.5101,
+    "weighted_f1": 0.5223
+  },
+  {
+    "feature_set": "A_raw_bands",
+    "n_features": 6,
+    "features": "blue green red nir swir16 swir22",
+    "seed": 123,
+    "accuracy": 0.5217,
+    "balanced_accuracy": 0.543,
+    "macro_f1": 0.511,
+    "weighted_f1": 0.5222
+  },
+  {
+    "feature_set": "A_raw_bands",
+    "n_features": 6,
+    "features": "blue green red nir swir16 swir22",
+    "seed": 2024,
+    "accuracy": 0.5218,
+    "balanced_accuracy": 0.5431,
+    "macro_f1": 0.5108,
+    "weighted_f1": 0.5226
+  },
+  {
+    "feature_set": "B_bands_ndvi",
+    "n_features": 7,
+    "features": "blue green red nir swir16 swir22 ndvi",
+    "seed": 42,
+    "accuracy": 0.5276,
+    "balanced_accuracy": 0.5448,
+    "macro_f1": 0.5141,
+    "weighted_f1": 0.5304
+  },
+  {
+    "feature_set": "B_bands_ndvi",
+    "n_features": 7,
+    "features": "blue green red nir swir16 swir22 ndvi",
+    "seed": 123,
+    "accuracy": 0.5259,
+    "balanced_accuracy": 0.5442,
+    "macro_f1": 0.5138,
+    "weighted_f1": 0.5285
+  },
+  {
+    "feature_set": "B_bands_ndvi",
+    "n_features": 7,
+    "features": "blue green red nir swir16 swir22 ndvi",
+    "seed": 2024,
+    "accuracy": 0.5255,
+    "balanced_accuracy": 0.543,
+    "macro_f1": 0.5124,
+    "weighted_f1": 0.5283
+  },
+  {
+    "feature_set": "C_bands_indices",
+    "n_features": 9,
+    "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi",
+    "seed": 42,
+    "accuracy": 0.5375,
+    "balanced_accuracy": 0.5439,
+    "macro_f1": 0.5165,
+    "weighted_f1": 0.5413
+  },
+  {
+    "feature_set": "C_bands_indices",
+    "n_features": 9,
+    "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi",
+    "seed": 123,
+    "accuracy": 0.5388,
+    "balanced_accuracy": 0.5449,
+    "macro_f1": 0.5173,
+    "weighted_f1": 0.5424
+  },
+  {
+    "feature_set": "C_bands_indices",
+    "n_features": 9,
+    "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi",
+    "seed": 2024,
+    "accuracy": 0.5336,
+    "balanced_accuracy": 0.5414,
+    "macro_f1": 0.513,
+    "weighted_f1": 0.5368
+  },
+  {
+    "feature_set": "D_full",
+    "n_features": 11,
+    "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi nbr bsi_partial",
+    "seed": 42,
+    "accuracy": 0.5302,
+    "balanced_accuracy": 0.5406,
+    "macro_f1": 0.5124,
+    "weighted_f1": 0.5325
+  },
+  {
+    "feature_set": "D_full",
+    "n_features": 11,
+    "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi nbr bsi_partial",
+    "seed": 123,
+    "accuracy": 0.535,
+    "balanced_accuracy": 0.5448,
+    "macro_f1": 0.5171,
+    "weighted_f1": 0.5374
+  },
+  {
+    "feature_set": "D_full",
+    "n_features": 11,
+    "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi nbr bsi_partial",
+    "seed": 2024,
+    "accuracy": 0.5323,
+    "balanced_accuracy": 0.5437,
+    "macro_f1": 0.5156,
+    "weighted_f1": 0.5349
+  }
+]

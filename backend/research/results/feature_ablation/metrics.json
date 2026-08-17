@@ -1,0 +1,280 @@
+{
+  "summary": {
+    "A_raw_bands": {
+      "accuracy": {
+        "mean": 0.5217,
+        "std": 0.0001,
+        "min": 0.5217,
+        "max": 0.5218,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.5429,
+        "std": 0.0003,
+        "min": 0.5426,
+        "max": 0.5431,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.5106,
+        "std": 0.0005,
+        "min": 0.5101,
+        "max": 0.511,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5224,
+        "std": 0.0002,
+        "min": 0.5222,
+        "max": 0.5226,
+        "n_runs": 3
+      }
+    },
+    "B_bands_ndvi": {
+      "accuracy": {
+        "mean": 0.5263,
+        "std": 0.0011,
+        "min": 0.5255,
+        "max": 0.5276,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.544,
+        "std": 0.0009,
+        "min": 0.543,
+        "max": 0.5448,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.5134,
+        "std": 0.0009,
+        "min": 0.5124,
+        "max": 0.5141,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5291,
+        "std": 0.0012,
+        "min": 0.5283,
+        "max": 0.5304,
+        "n_runs": 3
+      }
+    },
+    "C_bands_indices": {
+      "accuracy": {
+        "mean": 0.5366,
+        "std": 0.0027,
+        "min": 0.5336,
+        "max": 0.5388,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.5434,
+        "std": 0.0018,
+        "min": 0.5414,
+        "max": 0.5449,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.5156,
+        "std": 0.0023,
+        "min": 0.513,
+        "max": 0.5173,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5402,
+        "std": 0.003,
+        "min": 0.5368,
+        "max": 0.5424,
+        "n_runs": 3
+      }
+    },
+    "D_full": {
+      "accuracy": {
+        "mean": 0.5325,
+        "std": 0.0024,
+        "min": 0.5302,
+        "max": 0.535,
+        "n_runs": 3
+      },
+      "balanced_accuracy": {
+        "mean": 0.543,
+        "std": 0.0022,
+        "min": 0.5406,
+        "max": 0.5448,
+        "n_runs": 3
+      },
+      "macro_f1": {
+        "mean": 0.515,
+        "std": 0.0024,
+        "min": 0.5124,
+        "max": 0.5171,
+        "n_runs": 3
+      },
+      "weighted_f1": {
+        "mean": 0.5349,
+        "std": 0.0025,
+        "min": 0.5325,
+        "max": 0.5374,
+        "n_runs": 3
+      }
+    }
+  },
+  "per_run": [
+    {
+      "feature_set": "A_raw_bands",
+      "n_features": 6,
+      "features": "blue green red nir swir16 swir22",
+      "seed": 42,
+      "accuracy": 0.5217,
+      "balanced_accuracy": 0.5426,
+      "macro_f1": 0.5101,
+      "weighted_f1": 0.5223
+    },
+    {
+      "feature_set": "A_raw_bands",
+      "n_features": 6,
+      "features": "blue green red nir swir16 swir22",
+      "seed": 123,
+      "accuracy": 0.5217,
+      "balanced_accuracy": 0.543,
+      "macro_f1": 0.511,
+      "weighted_f1": 0.5222
+    },
+    {
+      "feature_set": "A_raw_bands",
+      "n_features": 6,
+      "features": "blue green red nir swir16 swir22",
+      "seed": 2024,
+      "accuracy": 0.5218,
+      "balanced_accuracy": 0.5431,
+      "macro_f1": 0.5108,
+      "weighted_f1": 0.5226
+    },
+    {
+      "feature_set": "B_bands_ndvi",
+      "n_features": 7,
+      "features": "blue green red nir swir16 swir22 ndvi",
+      "seed": 42,
+      "accuracy": 0.5276,
+      "balanced_accuracy": 0.5448,
+      "macro_f1": 0.5141,
+      "weighted_f1": 0.5304
+    },
+    {
+      "feature_set": "B_bands_ndvi",
+      "n_features": 7,
+      "features": "blue green red nir swir16 swir22 ndvi",
+      "seed": 123,
+      "accuracy": 0.5259,
+      "balanced_accuracy": 0.5442,
+      "macro_f1": 0.5138,
+      "weighted_f1": 0.5285
+    },
+    {
+      "feature_set": "B_bands_ndvi",
+      "n_features": 7,
+      "features": "blue green red nir swir16 swir22 ndvi",
+      "seed": 2024,
+      "accuracy": 0.5255,
+      "balanced_accuracy": 0.543,
+      "macro_f1": 0.5124,
+      "weighted_f1": 0.5283
+    },
+    {
+      "feature_set": "C_bands_indices",
+      "n_features": 9,
+      "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi",
+      "seed": 42,
+      "accuracy": 0.5375,
+      "balanced_accuracy": 0.5439,
+      "macro_f1": 0.5165,
+      "weighted_f1": 0.5413
+    },
+    {
+      "feature_set": "C_bands_indices",
+      "n_features": 9,
+      "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi",
+      "seed": 123,
+      "accuracy": 0.5388,
+      "balanced_accuracy": 0.5449,
+      "macro_f1": 0.5173,
+      "weighted_f1": 0.5424
+    },
+    {
+      "feature_set": "C_bands_indices",
+      "n_features": 9,
+      "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi",
+      "seed": 2024,
+      "accuracy": 0.5336,
+      "balanced_accuracy": 0.5414,
+      "macro_f1": 0.513,
+      "weighted_f1": 0.5368
+    },
+    {
+      "feature_set": "D_full",
+      "n_features": 11,
+      "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi nbr bsi_partial",
+      "seed": 42,
+      "accuracy": 0.5302,
+      "balanced_accuracy": 0.5406,
+      "macro_f1": 0.5124,
+      "weighted_f1": 0.5325
+    },
+    {
+      "feature_set": "D_full",
+      "n_features": 11,
+      "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi nbr bsi_partial",
+      "seed": 123,
+      "accuracy": 0.535,
+      "balanced_accuracy": 0.5448,
+      "macro_f1": 0.5171,
+      "weighted_f1": 0.5374
+    },
+    {
+      "feature_set": "D_full",
+      "n_features": 11,
+      "features": "blue green red nir swir16 swir22 ndvi ndwi ndbi nbr bsi_partial",
+      "seed": 2024,
+      "accuracy": 0.5323,
+      "balanced_accuracy": 0.5437,
+      "macro_f1": 0.5156,
+      "weighted_f1": 0.5349
+    }
+  ],
+  "comparison": [
+    {
+      "feature_set": "A_raw_bands",
+      "n_features": 6,
+      "accuracy_mean": 0.5217,
+      "macro_f1_mean": 0.5106,
+      "macro_f1_std": 0.0005,
+      "delta_macro_f1_vs_full": -0.0044
+    },
+    {
+      "feature_set": "B_bands_ndvi",
+      "n_features": 7,
+      "accuracy_mean": 0.5263,
+      "macro_f1_mean": 0.5134,
+      "macro_f1_std": 0.0009,
+      "delta_macro_f1_vs_full": -0.0016
+    },
+    {
+      "feature_set": "C_bands_indices",
+      "n_features": 9,
+      "accuracy_mean": 0.5366,
+      "macro_f1_mean": 0.5156,
+      "macro_f1_std": 0.0023,
+      "delta_macro_f1_vs_full": 0.0006
+    },
+    {
+      "feature_set": "D_full",
+      "n_features": 11,
+      "accuracy_mean": 0.5325,
+      "macro_f1_mean": 0.515,
+      "macro_f1_std": 0.0024,
+      "delta_macro_f1_vs_full": 0.0
+    }
+  ]
+}

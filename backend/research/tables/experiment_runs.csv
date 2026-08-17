@@ -1,0 +1,6 @@
+experiment,status,runtime_seconds,output
+feature_ablation,completed,506.71,C:\Users\LOQ\naturevision\backend\research\results\feature_ablation
+temporal_transfer,completed,659.61,C:\Users\LOQ\naturevision\backend\research\results\temporal_transfer
+confidence_analysis,completed,49.05,C:\Users\LOQ\naturevision\backend\research\results\confidence_analysis
+feature_importance,completed,68.13,C:\Users\LOQ\naturevision\backend\research\results\feature_importance
+class_imbalance,completed,48.1,C:\Users\LOQ\naturevision\backend\research\results\class_imbalance

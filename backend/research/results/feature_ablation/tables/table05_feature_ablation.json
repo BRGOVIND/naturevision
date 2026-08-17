@@ -1,0 +1,34 @@
+[
+  {
+    "feature_set": "A_raw_bands",
+    "n_features": 6,
+    "accuracy_mean": 0.5217,
+    "macro_f1_mean": 0.5106,
+    "macro_f1_std": 0.0005,
+    "delta_macro_f1_vs_full": -0.0044
+  },
+  {
+    "feature_set": "B_bands_ndvi",
+    "n_features": 7,
+    "accuracy_mean": 0.5263,
+    "macro_f1_mean": 0.5134,
+    "macro_f1_std": 0.0009,
+    "delta_macro_f1_vs_full": -0.0016
+  },
+  {
+    "feature_set": "C_bands_indices",
+    "n_features": 9,
+    "accuracy_mean": 0.5366,
+    "macro_f1_mean": 0.5156,
+    "macro_f1_std": 0.0023,
+    "delta_macro_f1_vs_full": 0.0006
+  },
+  {
+    "feature_set": "D_full",
+    "n_features": 11,
+    "accuracy_mean": 0.5325,
+    "macro_f1_mean": 0.515,
+    "macro_f1_std": 0.0024,
+    "delta_macro_f1_vs_full": 0.0
+  }
+]

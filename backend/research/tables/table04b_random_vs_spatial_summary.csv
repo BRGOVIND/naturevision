@@ -1,0 +1,5 @@
+metric,random_pixel_mean,random_pixel_std,spatial_holdout_mean,spatial_holdout_std,difference
+accuracy,0.8413,0.0019,0.5325,0.0024,0.3088
+balanced_accuracy,0.8414,0.0025,0.543,0.0022,0.2984
+macro_f1,0.8375,0.0028,0.515,0.0024,0.3225
+weighted_f1,0.8417,0.0018,0.5349,0.0025,0.3068

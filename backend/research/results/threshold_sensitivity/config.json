@@ -1,0 +1,18 @@
+{
+  "thresholds_moderate": [
+    0.05,
+    0.1,
+    0.15,
+    0.2
+  ],
+  "significant_rule": "significant = 2 x moderate",
+  "regions": [
+    "brandenburg",
+    "po_valley",
+    "western_ghats"
+  ],
+  "production_defaults_unchanged": {
+    "moderate": 0.1,
+    "significant": 0.2
+  }
+}

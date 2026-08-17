@@ -1,0 +1,1493 @@
+{
+  "dataset_version": "1.0.0",
+  "research_version": "1.0.0",
+  "built_at": "2026-08-17T03:28:22.307168+00:00",
+  "build_seed": 42,
+  "feature_names": [
+    "blue",
+    "green",
+    "red",
+    "nir",
+    "swir16",
+    "swir22",
+    "ndvi",
+    "ndwi",
+    "ndbi",
+    "nbr",
+    "bsi_partial"
+  ],
+  "feature_version": "1.0.0",
+  "samples_per_group": 20000,
+  "sampling_max_dim": 1024,
+  "max_cloud_cover": 20.0,
+  "total_samples": 313580,
+  "label_source": {
+    "name": "ESA WorldCover",
+    "version": "v200",
+    "epoch": "2021",
+    "identifier": "ESA WorldCover 2021 v200",
+    "resolution_m": 10,
+    "license": "CC BY 4.0",
+    "url": "https://esa-worldcover.org/",
+    "role": "Reference land-cover map used as training and evaluation labels. It is a model product with its own error, not ground truth."
+  },
+  "class_labels": {
+    "0": "Forest",
+    "1": "Agriculture",
+    "2": "Water",
+    "3": "Urban / built-up",
+    "4": "Bare land"
+  },
+  "class_counts": {
+    "Forest": 80741,
+    "Agriculture": 80734,
+    "Water": 64289,
+    "Urban / built-up": 47584,
+    "Bare land": 40232
+  },
+  "imagery_provider": {
+    "name": "Element84 Earth Search (AWS Open Data)",
+    "collection": "sentinel-2-l2a",
+    "processing_level": "Level-2A surface reflectance"
+  },
+  "groups": [
+    {
+      "region": "western_ghats",
+      "region_name": "Western Ghats, India",
+      "biome": "Tropical moist broadleaf forest and plantation mosaic",
+      "bbox": [
+        76.6,
+        10.1,
+        76.78,
+        10.28
+      ],
+      "spatial_block": "western_ghats",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2B_43PFM_20210207_3_L2A",
+      "observation_date": "2021-02-07",
+      "cloud_cover_percent": 0.000328,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-43PFM",
+      "samples": 13569,
+      "grid": {
+        "crs": "EPSG:32643",
+        "width": 1014,
+        "height": 1024,
+        "resolution_x": 19.57593688362919,
+        "resolution_y": 19.580078125,
+        "bounds_wgs84": [
+          76.5989913463499,
+          10.098911705201951,
+          76.78109410433105,
+          10.281110450559614
+        ],
+        "transform": [
+          19.57593688362919,
+          0.0,
+          675210.0,
+          0.0,
+          -19.580078125,
+          1136930.0
+        ],
+        "valid_pixels": 1022208,
+        "valid_fraction": 0.984467,
+        "pixel_area_m2": 383.298
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 1.0,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 1453,
+        "Bare land": 116
+      }
+    },
+    {
+      "region": "western_ghats",
+      "region_name": "Western Ghats, India",
+      "biome": "Tropical moist broadleaf forest and plantation mosaic",
+      "bbox": [
+        76.6,
+        10.1,
+        76.78,
+        10.28
+      ],
+      "spatial_block": "western_ghats",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2B_43PFM_20240123_0_L2A",
+      "observation_date": "2024-01-23",
+      "cloud_cover_percent": 0.165205,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-43PFM",
+      "samples": 13571,
+      "grid": {
+        "crs": "EPSG:32643",
+        "width": 1014,
+        "height": 1024,
+        "resolution_x": 19.57593688362919,
+        "resolution_y": 19.580078125,
+        "bounds_wgs84": [
+          76.5989913463499,
+          10.098911705201951,
+          76.78109410433105,
+          10.281110450559614
+        ],
+        "transform": [
+          19.57593688362919,
+          0.0,
+          675210.0,
+          0.0,
+          -19.580078125,
+          1136930.0
+        ],
+        "valid_pixels": 1021732,
+        "valid_fraction": 0.984009,
+        "pixel_area_m2": 383.298
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 1.0,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 1452,
+        "Bare land": 119
+      }
+    },
+    {
+      "region": "po_valley",
+      "region_name": "Po Valley, Italy",
+      "biome": "Intensive irrigated cropland with dense settlement",
+      "bbox": [
+        9.1,
+        45.1,
+        9.28,
+        45.28
+      ],
+      "spatial_block": "po_valley",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2A_32TNR_20210225_1_L2A",
+      "observation_date": "2021-02-25",
+      "cloud_cover_percent": 0.016015,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-32TNR",
+      "samples": 18690,
+      "grid": {
+        "crs": "EPSG:32632",
+        "width": 725,
+        "height": 1024,
+        "resolution_x": 19.6,
+        "resolution_y": 19.58984375,
+        "bounds_wgs84": [
+          9.099519241338793,
+          45.099573366928986,
+          9.281013917840491,
+          45.280445896627214
+        ],
+        "transform": [
+          19.6,
+          0.0,
+          507830.0,
+          0.0,
+          -19.58984375,
+          5014110.0
+        ],
+        "valid_pixels": 736368,
+        "valid_fraction": 0.991875,
+        "pixel_area_m2": 383.961
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.4705,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 2690
+      }
+    },
+    {
+      "region": "po_valley",
+      "region_name": "Po Valley, Italy",
+      "biome": "Intensive irrigated cropland with dense settlement",
+      "bbox": [
+        9.1,
+        45.1,
+        9.28,
+        45.28
+      ],
+      "spatial_block": "po_valley",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2A_32TNR_20240111_0_L2A",
+      "observation_date": "2024-01-11",
+      "cloud_cover_percent": 1.335069,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-32TNR",
+      "samples": 18222,
+      "grid": {
+        "crs": "EPSG:32632",
+        "width": 725,
+        "height": 1024,
+        "resolution_x": 19.6,
+        "resolution_y": 19.58984375,
+        "bounds_wgs84": [
+          9.099519241338793,
+          45.099573366928986,
+          9.281013917840491,
+          45.280445896627214
+        ],
+        "transform": [
+          19.6,
+          0.0,
+          507830.0,
+          0.0,
+          -19.58984375,
+          5014110.0
+        ],
+        "valid_pixels": 675315,
+        "valid_fraction": 0.909638,
+        "pixel_area_m2": 383.961
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.9427,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 2222
+      }
+    },
+    {
+      "region": "brandenburg",
+      "region_name": "Brandenburg, Germany",
+      "biome": "Temperate mixed forest, lakes and peri-urban development",
+      "bbox": [
+        13.05,
+        52.3,
+        13.23,
+        52.48
+      ],
+      "spatial_block": "brandenburg",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2A_32UQD_20210222_1_L2A",
+      "observation_date": "2021-02-22",
+      "cloud_cover_percent": 0.001362,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-32UQD",
+      "samples": 16458,
+      "grid": {
+        "crs": "EPSG:32632",
+        "width": 663,
+        "height": 1024,
+        "resolution_x": 20.24132730015083,
+        "resolution_y": 20.25390625,
+        "bounds_wgs84": [
+          13.033395738253127,
+          52.293575822336294,
+          13.247513628150294,
+          52.486449118920454
+        ],
+        "transform": [
+          20.24132730015083,
+          0.0,
+          774980.0,
+          0.0,
+          -20.25390625,
+          5822860.0
+        ],
+        "valid_pixels": 599387,
+        "valid_fraction": 0.882864,
+        "pixel_area_m2": 409.966
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.9726,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 458
+      }
+    },
+    {
+      "region": "brandenburg",
+      "region_name": "Brandenburg, Germany",
+      "biome": "Temperate mixed forest, lakes and peri-urban development",
+      "bbox": [
+        13.05,
+        52.3,
+        13.23,
+        52.48
+      ],
+      "spatial_block": "brandenburg",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2A_32UQD_20240308_0_L2A",
+      "observation_date": "2024-03-08",
+      "cloud_cover_percent": 0.037234,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-32UQD",
+      "samples": 16458,
+      "grid": {
+        "crs": "EPSG:32632",
+        "width": 663,
+        "height": 1024,
+        "resolution_x": 20.24132730015083,
+        "resolution_y": 20.25390625,
+        "bounds_wgs84": [
+          13.033395738253127,
+          52.293575822336294,
+          13.247513628150294,
+          52.486449118920454
+        ],
+        "transform": [
+          20.24132730015083,
+          0.0,
+          774980.0,
+          0.0,
+          -20.25390625,
+          5822860.0
+        ],
+        "valid_pixels": 599349,
+        "valid_fraction": 0.882808,
+        "pixel_area_m2": 409.966
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.9421,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 458
+      }
+    },
+    {
+      "region": "nile_delta",
+      "region_name": "Nile Delta margin, Egypt",
+      "biome": "Irrigated delta cropland adjoining arid bare ground",
+      "bbox": [
+        31.05,
+        30.35,
+        31.23,
+        30.53
+      ],
+      "spatial_block": "nile_delta",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2B_36RUU_20240113_0_L2A",
+      "observation_date": "2024-01-13",
+      "cloud_cover_percent": 0.00082,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-36RUU",
+      "samples": 19669,
+      "grid": {
+        "crs": "EPSG:32636",
+        "width": 891,
+        "height": 1024,
+        "resolution_x": 19.7979797979798,
+        "resolution_y": 19.794921875,
+        "bounds_wgs84": [
+          31.04627972287107,
+          30.347281740666222,
+          31.23336739665458,
+          30.53271909801901
+        ],
+        "transform": [
+          19.7979797979798,
+          0.0,
+          312560.0,
+          0.0,
+          -19.794921875,
+          3379150.0
+        ],
+        "valid_pixels": 880378,
+        "valid_fraction": 0.96492,
+        "pixel_area_m2": 391.899
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.8736,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 3669
+      }
+    },
+    {
+      "region": "mato_grosso",
+      "region_name": "Mato Grosso frontier, Brazil",
+      "biome": "Amazon-Cerrado transition with mechanised agriculture",
+      "bbox": [
+        -55.3,
+        -12.2,
+        -55.12,
+        -12.02
+      ],
+      "spatial_block": "mato_grosso",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2B_21LXG_20210421_0_L2A",
+      "observation_date": "2021-04-21",
+      "cloud_cover_percent": 0.544265,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-21LXG",
+      "samples": 9859,
+      "grid": {
+        "crs": "EPSG:32721",
+        "width": 1008,
+        "height": 1024,
+        "resolution_x": 19.6031746031746,
+        "resolution_y": 19.599609375,
+        "bounds_wgs84": [
+          -55.30130278713553,
+          -12.201272362345724,
+          -55.118590092166535,
+          -12.018691343173765
+        ],
+        "transform": [
+          19.6031746031746,
+          0.0,
+          684930.0,
+          0.0,
+          -19.599609375,
+          8670680.0
+        ],
+        "valid_pixels": 1008642,
+        "valid_fraction": 0.977184,
+        "pixel_area_m2": 384.215
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue",
+        "decision": "catalogue",
+        "diagnostic": {}
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 612,
+        "Urban / built-up": 807,
+        "Bare land": 440
+      }
+    },
+    {
+      "region": "mato_grosso",
+      "region_name": "Mato Grosso frontier, Brazil",
+      "biome": "Amazon-Cerrado transition with mechanised agriculture",
+      "bbox": [
+        -55.3,
+        -12.2,
+        -55.12,
+        -12.02
+      ],
+      "spatial_block": "mato_grosso",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2B_21LXG_20240215_0_L2A",
+      "observation_date": "2024-02-15",
+      "cloud_cover_percent": 5.68013,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-21LXG",
+      "samples": 10026,
+      "grid": {
+        "crs": "EPSG:32721",
+        "width": 1008,
+        "height": 1024,
+        "resolution_x": 19.6031746031746,
+        "resolution_y": 19.599609375,
+        "bounds_wgs84": [
+          -55.30130278713553,
+          -12.201272362345724,
+          -55.118590092166535,
+          -12.018691343173765
+        ],
+        "transform": [
+          19.6031746031746,
+          0.0,
+          684930.0,
+          0.0,
+          -19.599609375,
+          8670680.0
+        ],
+        "valid_pixels": 1013624,
+        "valid_fraction": 0.982011,
+        "pixel_area_m2": 384.215
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.689,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 774,
+        "Urban / built-up": 809,
+        "Bare land": 443
+      }
+    },
+    {
+      "region": "sonoran_desert",
+      "region_name": "Sonoran Desert margin, Arizona",
+      "biome": "Desert scrub and exposed bare ground",
+      "bbox": [
+        -111.5,
+        32.2,
+        -111.32,
+        32.38
+      ],
+      "spatial_block": "sonoran_desert",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2A_12SVA_20240329_0_L2A",
+      "observation_date": "2024-03-29",
+      "cloud_cover_percent": 0.000564,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-12SVA",
+      "samples": 11720,
+      "grid": {
+        "crs": "EPSG:32612",
+        "width": 871,
+        "height": 1024,
+        "resolution_x": 19.5752009184845,
+        "resolution_y": 19.580078125,
+        "bounds_wgs84": [
+          -111.50114759633294,
+          32.19924062800759,
+          -111.31925686298324,
+          32.38070296536562
+        ],
+        "transform": [
+          19.5752009184845,
+          0.0,
+          452860.0,
+          0.0,
+          -19.580078125,
+          3582680.0
+        ],
+        "valid_pixels": 882003,
+        "valid_fraction": 0.988899,
+        "pixel_area_m2": 383.284
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": -0.1,
+        "scale_source": "catalogue",
+        "decision": "catalogue",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.0061,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 2242,
+        "Agriculture": 4000,
+        "Water": 16,
+        "Urban / built-up": 1462,
+        "Bare land": 4000
+      }
+    },
+    {
+      "region": "sahel_niger",
+      "region_name": "Sahel, south-west Niger",
+      "biome": "Dry-season Sahelian savanna, sparse tree cover and bare soil",
+      "bbox": [
+        2.0,
+        13.4,
+        2.18,
+        13.58
+      ],
+      "spatial_block": "sahel_niger",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2A_31PCQ_20210413_1_L2A",
+      "observation_date": "2021-04-13",
+      "cloud_cover_percent": 0.015793,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-31PCQ",
+      "samples": 20000,
+      "grid": {
+        "crs": "EPSG:32631",
+        "width": 1001,
+        "height": 1024,
+        "resolution_x": 18.07192807192807,
+        "resolution_y": 18.06640625,
+        "bounds_wgs84": [
+          1.999122767960829,
+          13.399186643177186,
+          2.166886684150357,
+          13.5670592145354
+        ],
+        "transform": [
+          18.07192807192807,
+          0.0,
+          391710.0,
+          0.0,
+          -18.06640625,
+          1500000.0
+        ],
+        "valid_pixels": 1014513,
+        "valid_fraction": 0.989746,
+        "pixel_area_m2": 326.495
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": -0.1,
+        "scale_source": "catalogue",
+        "decision": "catalogue",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.0057,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 4000
+      }
+    },
+    {
+      "region": "kalahari_botswana",
+      "region_name": "Kalahari, Botswana",
+      "biome": "Semi-arid savanna woodland on sandveld",
+      "bbox": [
+        24.5,
+        -21.5,
+        24.68,
+        -21.32
+      ],
+      "spatial_block": "kalahari_botswana",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2B_34KHB_20210412_1_L2A",
+      "observation_date": "2021-04-12",
+      "cloud_cover_percent": 4.3e-05,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-34KHB",
+      "samples": 8698,
+      "grid": {
+        "crs": "EPSG:32734",
+        "width": 962,
+        "height": 1024,
+        "resolution_x": 19.927234927234927,
+        "resolution_y": 19.931640625,
+        "bounds_wgs84": [
+          24.49559559404817,
+          -21.503977919598817,
+          24.684695368022922,
+          -21.31597407929874
+        ],
+        "transform": [
+          19.927234927234927,
+          0.0,
+          862680.0,
+          0.0,
+          -19.931640625,
+          7638420.0
+        ],
+        "valid_pixels": 938951,
+        "valid_fraction": 0.953165,
+        "pixel_area_m2": 397.182
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.2701,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 446,
+        "Agriculture": 4000,
+        "Water": 192,
+        "Urban / built-up": 60,
+        "Bare land": 4000
+      }
+    },
+    {
+      "region": "kalahari_botswana",
+      "region_name": "Kalahari, Botswana",
+      "biome": "Semi-arid savanna woodland on sandveld",
+      "bbox": [
+        24.5,
+        -21.5,
+        24.68,
+        -21.32
+      ],
+      "spatial_block": "kalahari_botswana",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2A_34KHB_20240322_0_L2A",
+      "observation_date": "2024-03-22",
+      "cloud_cover_percent": 3e-06,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-34KHB",
+      "samples": 8698,
+      "grid": {
+        "crs": "EPSG:32734",
+        "width": 962,
+        "height": 1024,
+        "resolution_x": 19.927234927234927,
+        "resolution_y": 19.931640625,
+        "bounds_wgs84": [
+          24.49559559404817,
+          -21.503977919598817,
+          24.684695368022922,
+          -21.31597407929874
+        ],
+        "transform": [
+          19.927234927234927,
+          0.0,
+          862680.0,
+          0.0,
+          -19.931640625,
+          7638420.0
+        ],
+        "valid_pixels": 938951,
+        "valid_fraction": 0.953165,
+        "pixel_area_m2": 397.182
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": -0.1,
+        "scale_source": "catalogue",
+        "decision": "catalogue",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.0,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 446,
+        "Agriculture": 4000,
+        "Water": 192,
+        "Urban / built-up": 60,
+        "Bare land": 4000
+      }
+    },
+    {
+      "region": "sacramento_valley",
+      "region_name": "Sacramento Valley margin, California",
+      "biome": "Mediterranean oak woodland, irrigated cropland and dry grassland",
+      "bbox": [
+        -122.1,
+        38.5,
+        -121.92,
+        38.68
+      ],
+      "spatial_block": "sacramento_valley",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2A_10SEH_20210119_1_L2A",
+      "observation_date": "2021-01-19",
+      "cloud_cover_percent": 0.518343,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-10SEH",
+      "samples": 16847,
+      "grid": {
+        "crs": "EPSG:32610",
+        "width": 808,
+        "height": 1024,
+        "resolution_x": 19.7029702970297,
+        "resolution_y": 19.70703125,
+        "bounds_wgs84": [
+          -122.10239640345554,
+          38.49832250671979,
+          -121.9171247763506,
+          38.68170341654331
+        ],
+        "transform": [
+          19.7029702970297,
+          0.0,
+          578270.0,
+          0.0,
+          -19.70703125,
+          4281840.0
+        ],
+        "valid_pixels": 803960,
+        "valid_fraction": 0.97168,
+        "pixel_area_m2": 388.287
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.6906,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 847,
+        "Urban / built-up": 4000,
+        "Bare land": 4000
+      }
+    },
+    {
+      "region": "sacramento_valley",
+      "region_name": "Sacramento Valley margin, California",
+      "biome": "Mediterranean oak woodland, irrigated cropland and dry grassland",
+      "bbox": [
+        -122.1,
+        38.5,
+        -121.92,
+        38.68
+      ],
+      "spatial_block": "sacramento_valley",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2B_10SEH_20240408_0_L2A",
+      "observation_date": "2024-04-08",
+      "cloud_cover_percent": 0.003766,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-10SEH",
+      "samples": 16851,
+      "grid": {
+        "crs": "EPSG:32610",
+        "width": 808,
+        "height": 1024,
+        "resolution_x": 19.7029702970297,
+        "resolution_y": 19.70703125,
+        "bounds_wgs84": [
+          -122.10239640345554,
+          38.49832250671979,
+          -121.9171247763506,
+          38.68170341654331
+        ],
+        "transform": [
+          19.7029702970297,
+          0.0,
+          578270.0,
+          0.0,
+          -19.70703125,
+          4281840.0
+        ],
+        "valid_pixels": 806484,
+        "valid_fraction": 0.97473,
+        "pixel_area_m2": 388.287
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.8319,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 851,
+        "Urban / built-up": 4000,
+        "Bare land": 4000
+      }
+    },
+    {
+      "region": "finnish_lakeland",
+      "region_name": "Finnish Lakeland",
+      "biome": "Boreal coniferous forest and lakes",
+      "bbox": [
+        25.5,
+        61.8,
+        25.68,
+        61.98
+      ],
+      "spatial_block": "finnish_lakeland",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2B_35VMJ_20210419_1_L2A",
+      "observation_date": "2021-04-19",
+      "cloud_cover_percent": 0.000486,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-35VMJ",
+      "samples": 12113,
+      "grid": {
+        "crs": "EPSG:32635",
+        "width": 501,
+        "height": 1024,
+        "resolution_x": 19.820359281437124,
+        "resolution_y": 19.814453125,
+        "bounds_wgs84": [
+          25.490882293806898,
+          61.79799957914926,
+          25.68811122507233,
+          61.98201689140327
+        ],
+        "transform": [
+          19.820359281437124,
+          0.0,
+          420910.0,
+          0.0,
+          -19.814453125,
+          6872880.0
+        ],
+        "valid_pixels": 472337,
+        "valid_fraction": 0.920692,
+        "pixel_area_m2": 392.73
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.936,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 104,
+        "Bare land": 9
+      }
+    },
+    {
+      "region": "finnish_lakeland",
+      "region_name": "Finnish Lakeland",
+      "biome": "Boreal coniferous forest and lakes",
+      "bbox": [
+        25.5,
+        61.8,
+        25.68,
+        61.98
+      ],
+      "spatial_block": "finnish_lakeland",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2A_35VMJ_20240305_0_L2A",
+      "observation_date": "2024-03-05",
+      "cloud_cover_percent": 0.186208,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-35VMJ",
+      "samples": 6805,
+      "grid": {
+        "crs": "EPSG:32635",
+        "width": 501,
+        "height": 1024,
+        "resolution_x": 19.820359281437124,
+        "resolution_y": 19.814453125,
+        "bounds_wgs84": [
+          25.490882293806898,
+          61.79799957914926,
+          25.68811122507233,
+          61.98201689140327
+        ],
+        "transform": [
+          19.820359281437124,
+          0.0,
+          420910.0,
+          0.0,
+          -19.814453125,
+          6872880.0
+        ],
+        "valid_pixels": 104238,
+        "valid_fraction": 0.203183,
+        "pixel_area_m2": 392.73
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.1351,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 5000,
+        "Agriculture": 289,
+        "Water": 1515,
+        "Urban / built-up": 1
+      }
+    },
+    {
+      "region": "murray_basin",
+      "region_name": "Murray Basin, Australia",
+      "biome": "Semi-arid rangeland, dryland cropping and river channels",
+      "bbox": [
+        144.3,
+        -35.4,
+        144.48,
+        -35.22
+      ],
+      "spatial_block": "murray_basin",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2B_55HBA_20210405_2_L2A",
+      "observation_date": "2021-04-05",
+      "cloud_cover_percent": 0.000285,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-55HBA",
+      "samples": 11476,
+      "grid": {
+        "crs": "EPSG:32755",
+        "width": 848,
+        "height": 1024,
+        "resolution_x": 19.952830188679243,
+        "resolution_y": 19.951171875,
+        "bounds_wgs84": [
+          144.29388460968778,
+          -35.40406136265795,
+          144.485732870705,
+          -35.21602058437488
+        ],
+        "transform": [
+          19.952830188679243,
+          0.0,
+          254240.0,
+          0.0,
+          -19.951171875,
+          6099660.0
+        ],
+        "valid_pixels": 821682,
+        "valid_fraction": 0.946255,
+        "pixel_area_m2": 398.082
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.2559,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 979,
+        "Urban / built-up": 688,
+        "Bare land": 1809
+      }
+    },
+    {
+      "region": "murray_basin",
+      "region_name": "Murray Basin, Australia",
+      "biome": "Semi-arid rangeland, dryland cropping and river channels",
+      "bbox": [
+        144.3,
+        -35.4,
+        144.48,
+        -35.22
+      ],
+      "spatial_block": "murray_basin",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2A_55HBA_20240404_0_L2A",
+      "observation_date": "2024-04-04",
+      "cloud_cover_percent": 0.00073,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-55HBA",
+      "samples": 11476,
+      "grid": {
+        "crs": "EPSG:32755",
+        "width": 848,
+        "height": 1024,
+        "resolution_x": 19.952830188679243,
+        "resolution_y": 19.951171875,
+        "bounds_wgs84": [
+          144.29388460968778,
+          -35.40406136265795,
+          144.485732870705,
+          -35.21602058437488
+        ],
+        "transform": [
+          19.952830188679243,
+          0.0,
+          254240.0,
+          0.0,
+          -19.951171875,
+          6099660.0
+        ],
+        "valid_pixels": 821682,
+        "valid_fraction": 0.946255,
+        "pixel_area_m2": 398.082
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.3558,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 979,
+        "Urban / built-up": 688,
+        "Bare land": 1809
+      }
+    },
+    {
+      "region": "iberian_meseta",
+      "region_name": "Iberian Meseta, Spain",
+      "biome": "Mediterranean dehesa, cereal steppe and bare rock",
+      "bbox": [
+        -4.85,
+        40.55,
+        -4.67,
+        40.73
+      ],
+      "spatial_block": "iberian_meseta",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2B_30TUL_20210106_1_L2A",
+      "observation_date": "2021-01-06",
+      "cloud_cover_percent": 0.029655,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-30TUL",
+      "samples": 16982,
+      "grid": {
+        "crs": "EPSG:32630",
+        "width": 792,
+        "height": 1024,
+        "resolution_x": 19.76010101010101,
+        "resolution_y": 19.755859375,
+        "bounds_wgs84": [
+          -4.855152204487944,
+          40.547933979194795,
+          -4.665370573472615,
+          40.73291612898215
+        ],
+        "transform": [
+          19.76010101010101,
+          0.0,
+          343340.0,
+          0.0,
+          -19.755859375,
+          4510450.0
+        ],
+        "valid_pixels": 612044,
+        "valid_fraction": 0.754671,
+        "pixel_area_m2": 390.378
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.3969,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 982
+      }
+    },
+    {
+      "region": "iberian_meseta",
+      "region_name": "Iberian Meseta, Spain",
+      "biome": "Mediterranean dehesa, cereal steppe and bare rock",
+      "bbox": [
+        -4.85,
+        40.55,
+        -4.67,
+        40.73
+      ],
+      "spatial_block": "iberian_meseta",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2A_30TUL_20240415_0_L2A",
+      "observation_date": "2024-04-15",
+      "cloud_cover_percent": 0.30267,
+      "platform": "sentinel-2a",
+      "mgrs_tile": "MGRS-30TUL",
+      "samples": 17008,
+      "grid": {
+        "crs": "EPSG:32630",
+        "width": 792,
+        "height": 1024,
+        "resolution_x": 19.76010101010101,
+        "resolution_y": 19.755859375,
+        "bounds_wgs84": [
+          -4.855152204487944,
+          40.547933979194795,
+          -4.665370573472615,
+          40.73291612898215
+        ],
+        "transform": [
+          19.76010101010101,
+          0.0,
+          343340.0,
+          0.0,
+          -19.755859375,
+          4510450.0
+        ],
+        "valid_pixels": 778150,
+        "valid_fraction": 0.959485,
+        "pixel_area_m2": 390.378
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 0.7556,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 4000,
+        "Agriculture": 4000,
+        "Water": 4000,
+        "Urban / built-up": 4000,
+        "Bare land": 1008
+      }
+    },
+    {
+      "region": "zambezi_miombo",
+      "region_name": "Miombo woodland, Zambia",
+      "biome": "Dry miombo woodland with smallholder cultivation",
+      "bbox": [
+        27.6,
+        -14.5,
+        27.78,
+        -14.32
+      ],
+      "spatial_block": "zambezi_miombo",
+      "temporal_group": "p2021",
+      "period_label": "2021 window",
+      "scene_id": "S2B_35LNE_20210422_0_L2A",
+      "observation_date": "2021-04-22",
+      "cloud_cover_percent": 0.03287,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-35LNE",
+      "samples": 9189,
+      "grid": {
+        "crs": "EPSG:32735",
+        "width": 998,
+        "height": 1024,
+        "resolution_x": 19.529058116232466,
+        "resolution_y": 19.521484375,
+        "bounds_wgs84": [
+          27.599398423680256,
+          -14.50063556855501,
+          27.780744722110292,
+          -14.319377494440156
+        ],
+        "transform": [
+          19.529058116232466,
+          0.0,
+          564640.0,
+          0.0,
+          -19.521484375,
+          8416810.0
+        ],
+        "valid_pixels": 982223,
+        "valid_fraction": 0.961124,
+        "pixel_area_m2": 381.236
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue",
+        "decision": "catalogue",
+        "diagnostic": {}
+      },
+      "class_counts": {
+        "Forest": 2302,
+        "Agriculture": 221,
+        "Water": 6666
+      }
+    },
+    {
+      "region": "zambezi_miombo",
+      "region_name": "Miombo woodland, Zambia",
+      "biome": "Dry miombo woodland with smallholder cultivation",
+      "bbox": [
+        27.6,
+        -14.5,
+        27.78,
+        -14.32
+      ],
+      "spatial_block": "zambezi_miombo",
+      "temporal_group": "p2024",
+      "period_label": "2024 window",
+      "scene_id": "S2B_35LNE_20240426_0_L2A",
+      "observation_date": "2024-04-26",
+      "cloud_cover_percent": 1e-05,
+      "platform": "sentinel-2b",
+      "mgrs_tile": "MGRS-35LNE",
+      "samples": 9195,
+      "grid": {
+        "crs": "EPSG:32735",
+        "width": 998,
+        "height": 1024,
+        "resolution_x": 19.529058116232466,
+        "resolution_y": 19.521484375,
+        "bounds_wgs84": [
+          27.599398423680256,
+          -14.50063556855501,
+          27.780744722110292,
+          -14.319377494440156
+        ],
+        "transform": [
+          19.529058116232466,
+          0.0,
+          564640.0,
+          0.0,
+          -19.521484375,
+          8416810.0
+        ],
+        "valid_pixels": 1013353,
+        "valid_fraction": 0.991586,
+        "pixel_area_m2": 381.236
+      },
+      "radiometric_calibration": {
+        "reflectance_offset": 0.0,
+        "scale_source": "catalogue_scale_with_verified_offset",
+        "decision": "physical_override",
+        "diagnostic": {
+          "probe_band": "red",
+          "declared_offset": -0.1,
+          "negative_fraction_with_offset": 1.0,
+          "negative_fraction_without_offset": 0.0,
+          "threshold": 0.1
+        }
+      },
+      "class_counts": {
+        "Forest": 2305,
+        "Agriculture": 224,
+        "Water": 6666
+      }
+    }
+  ],
+  "limitations": [
+    "ESA WorldCover is a reference land-cover map produced by a model; it is not ground truth, and disagreement with it is not necessarily classifier error.",
+    "Labels are fixed at the 2021 epoch while imagery spans two periods, so genuine land-cover change after 2021 appears as label noise in the later period.",
+    "Pixels are sampled with class stratification, so cached class proportions do not reflect true landscape proportions."
+  ],
+  "cache_sha256": "8ff45eb8d1752cf8338ecde187b086c46ac1a749206c2430a272ea415cb91ee1"
+}

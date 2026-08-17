@@ -1,0 +1,6 @@
+true \ predicted,Forest,Agriculture,Water,Urban / built-up,Bare land
+Forest,6419,2706,107,1047,23
+Agriculture,982,4051,230,2701,257
+Water,4834,1079,4955,194,583
+Urban / built-up,101,137,16,3912,522
+Bare land,8,140,110,744,1789

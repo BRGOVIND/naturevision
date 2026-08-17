@@ -1,0 +1,57 @@
+[
+  {
+    "feature": "ndvi",
+    "importance": 0.13811399338513242,
+    "rank": 1
+  },
+  {
+    "feature": "nir",
+    "importance": 0.1203382543937351,
+    "rank": 2
+  },
+  {
+    "feature": "swir16",
+    "importance": 0.11784494979533275,
+    "rank": 3
+  },
+  {
+    "feature": "ndwi",
+    "importance": 0.0997980157362382,
+    "rank": 4
+  },
+  {
+    "feature": "bsi_partial",
+    "importance": 0.09850882504764395,
+    "rank": 5
+  },
+  {
+    "feature": "red",
+    "importance": 0.09662929979700043,
+    "rank": 6
+  },
+  {
+    "feature": "swir22",
+    "importance": 0.08181712575576028,
+    "rank": 7
+  },
+  {
+    "feature": "green",
+    "importance": 0.07935897761094236,
+    "rank": 8
+  },
+  {
+    "feature": "blue",
+    "importance": 0.06671914178952694,
+    "rank": 9
+  },
+  {
+    "feature": "nbr",
+    "importance": 0.05320829524009747,
+    "rank": 10
+  },
+  {
+    "feature": "ndbi",
+    "importance": 0.04766312144858991,
+    "rank": 11
+  }
+]

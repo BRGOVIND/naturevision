@@ -1,0 +1,816 @@
+[
+  {
+    "case_id": "94056654-ef5a-49f9-a603-81503d49af52",
+    "region_name": "Western Ghats test block",
+    "evidence": {
+      "region": {
+        "name": "Western Ghats test block",
+        "description": "10.160\u00b0N, 76.660\u00b0E (174.5 km\u00b2)",
+        "bbox": [
+          76.6,
+          10.1,
+          76.72,
+          10.22
+        ],
+        "area_km2": 174.5439,
+        "crs": "EPSG:4326"
+      },
+      "periods": {
+        "period_a": "2021-01-01 to 2021-02-28",
+        "period_b": "2024-01-01 to 2024-02-29"
+      },
+      "data_sources": [
+        {
+          "period": "A",
+          "provider": "Element84 Earth Search (AWS Open Data)",
+          "dataset": "sentinel-2-l2a",
+          "source_id": "S2B_43PFM_20210207_3_L2A",
+          "observation_date": "2021-02-07",
+          "processing_level": "S2MSI2A",
+          "platform": "sentinel-2b",
+          "cloud_cover_percent": 0.000328,
+          "resolution_m": 10.0,
+          "bands_used": [
+            "red",
+            "nir",
+            "blue",
+            "green",
+            "swir16",
+            "swir22",
+            "scl"
+          ],
+          "license": "CC-BY-4.0 (Copernicus)"
+        },
+        {
+          "period": "B",
+          "provider": "Element84 Earth Search (AWS Open Data)",
+          "dataset": "sentinel-2-l2a",
+          "source_id": "S2B_43PFM_20240123_0_L2A",
+          "observation_date": "2024-01-23",
+          "processing_level": "S2MSI2A",
+          "platform": "sentinel-2b",
+          "cloud_cover_percent": 0.165205,
+          "resolution_m": 10.0,
+          "bands_used": [
+            "red",
+            "nir",
+            "blue",
+            "green",
+            "swir16",
+            "swir22",
+            "scl"
+          ],
+          "license": "CC-BY-4.0 (Copernicus)"
+        }
+      ],
+      "observed": {
+        "period_a": {
+          "observation_date": "2021-02-07",
+          "mean_ndvi": 0.702736,
+          "median_ndvi": 0.739549,
+          "min_ndvi": -0.255429,
+          "max_ndvi": 0.914537,
+          "std_dev_ndvi": 0.139565,
+          "valid_pixel_count": 574571,
+          "valid_area_km2": 174.158675,
+          "vegetation_density_percentages": {
+            "water_or_nonvegetated": 0.48,
+            "bare_or_sparse": 1.629,
+            "low_vegetation": 2.436,
+            "moderate_vegetation": 9.299,
+            "dense_vegetation": 86.156
+          },
+          "vegetated_fraction": 0.978915
+        },
+        "period_b": {
+          "observation_date": "2024-01-23",
+          "mean_ndvi": 0.722095,
+          "median_ndvi": 0.759538,
+          "min_ndvi": -0.203203,
+          "max_ndvi": 0.905607,
+          "std_dev_ndvi": 0.130444,
+          "valid_pixel_count": 574490,
+          "valid_area_km2": 174.134123,
+          "vegetation_density_percentages": {
+            "water_or_nonvegetated": 0.282,
+            "bare_or_sparse": 1.469,
+            "low_vegetation": 1.805,
+            "moderate_vegetation": 7.536,
+            "dense_vegetation": 88.908
+          },
+          "vegetated_fraction": 0.982489
+        },
+        "change": {
+          "mean_ndvi_period_a": 0.702893,
+          "mean_ndvi_period_b": 0.722222,
+          "absolute_ndvi_change": 0.019329,
+          "relative_ndvi_change_percent": 2.75,
+          "changed_area_percentage": 7.909,
+          "changed_area_km2": 13.759412,
+          "decreased_area_percentage": 3.611,
+          "increased_area_percentage": 4.298,
+          "comparable_pixel_count": 573922,
+          "change_classes": {
+            "Significant decrease": 0.916,
+            "Moderate decrease": 2.695,
+            "Stable": 92.091,
+            "Moderate increase": 3.307,
+            "Significant increase": 0.991
+          },
+          "thresholds": {
+            "moderate": 0.1,
+            "significant": 0.2
+          }
+        }
+      },
+      "model_predictions": {
+        "land_cover": {
+          "distribution_percent": {
+            "Forest": 88.101,
+            "Agriculture": 7.502,
+            "Water": 2.78,
+            "Urban / built-up": 1.605,
+            "Bare land": 0.013
+          },
+          "area_km2": {
+            "Forest": 153.414075,
+            "Agriculture": 13.063469,
+            "Water": 4.840073,
+            "Urban / built-up": 2.794075,
+            "Bare land": 0.02243
+          },
+          "mean_confidence": 0.8916,
+          "low_confidence_fraction": 0.0243,
+          "per_class_mean_confidence": {
+            "Forest": 0.9163,
+            "Agriculture": 0.7121,
+            "Water": 0.7416,
+            "Urban / built-up": 0.6406,
+            "Bare land": 0.4401
+          },
+          "model_name": "naturevision-landcover",
+          "model_version": "1.0.0",
+          "model_backend": "random_forest",
+          "held_out_overall_accuracy": 0.5922,
+          "held_out_macro_f1": 0.5268
+        }
+      },
+      "methodology": {
+        "index_formula": "NDVI = (NIR - Red) / (NIR + Red)",
+        "bands": {
+          "red": "Sentinel-2 B04 (664.6 nm)",
+          "nir": "Sentinel-2 B08 (832.8 nm)"
+        },
+        "cloud_masking": "Sentinel-2 Level-2A scene classification: no-data, saturated, cloud shadow, medium- and high-probability cloud, thin cirrus and snow/ice pixels are excluded.",
+        "analysis_grid": {
+          "crs": "EPSG:32643",
+          "width": 761,
+          "height": 768,
+          "resolution_x": 17.41130091984231,
+          "resolution_y": 17.408854166666668,
+          "bounds_wgs84": [
+            76.59926505687797,
+            10.09922993239631,
+            76.72079646601037,
+            10.220715966283525
+          ],
+          "transform": [
+            17.41130091984231,
+            0.0,
+            675240.0,
+            0.0,
+            -17.408854166666668,
+            1130250.0
+          ],
+          "valid_pixels": 574571,
+          "valid_fraction": 0.9831,
+          "pixel_area_m2": 303.111
+        },
+        "radiometric_calibration": {
+          "reflectance_offset": 0.0,
+          "scale_source": "catalogue_scale_with_verified_offset",
+          "decision": "physical_override",
+          "diagnostic": {
+            "probe_band": "red",
+            "declared_offset": -0.1,
+            "negative_fraction_with_offset": 0.999,
+            "negative_fraction_without_offset": 0.0,
+            "threshold": 0.1
+          }
+        },
+        "change_detection": {
+          "index": "NDVI",
+          "operation": "per-pixel difference: NDVI(period B) - NDVI(period A)",
+          "alignment": "Period B was reprojected onto the period A pixel grid (bilinear) prior to differencing.",
+          "comparable_pixels_rule": "Only pixels valid in both periods after cloud, shadow, cirrus and snow masking contribute to any statistic.",
+          "thresholds_units": "absolute index units",
+          "thresholds": {
+            "moderate": 0.1,
+            "significant": 0.2
+          },
+          "relative_change_rule": "Relative change is reported only when |mean(period A)| >= 0.05, because a near-zero baseline makes a percentage change numerically unstable.",
+          "interpretation_scope": "Results describe change in a reflectance-derived vegetation index. They do not establish land-cover conversion, causation, or ecological outcome."
+        },
+        "land_cover_model": {
+          "name": "naturevision-landcover",
+          "version": "1.0.0",
+          "backend": "random_forest",
+          "features": [
+            "blue",
+            "green",
+            "red",
+            "nir",
+            "swir16",
+            "swir22",
+            "ndvi",
+            "ndwi",
+            "ndbi",
+            "nbr",
+            "bsi_partial"
+          ],
+          "evaluation_protocol": "Spatially disjoint hold-out: the model is fitted only on the training regions and scored on evaluation regions that share no pixels, scenes or landscapes with them. No pixel-level random split is used, because spatial autocorrelation between adjacent 10 m pixels would inflate the reported accuracy.",
+          "label_source": {
+            "name": "ESA WorldCover v200 (2021)",
+            "resolution_m": 10,
+            "license": "CC BY 4.0",
+            "url": "https://esa-worldcover.org/",
+            "role": "Reference labels for supervised training and held-out evaluation."
+          }
+        }
+      },
+      "data_quality": {
+        "period_a_masked_fraction": 0.0023,
+        "period_a_scene_classification": {
+          "Dark area / topographic shadow": 0.44,
+          "Cloud shadow": 0.22,
+          "Vegetation": 94.04,
+          "Not vegetated": 2.51,
+          "Water": 2.0,
+          "Unclassified": 0.79
+        },
+        "period_b_masked_fraction": 0.0024,
+        "period_b_scene_classification": {
+          "Dark area / topographic shadow": 0.48,
+          "Cloud shadow": 0.24,
+          "Vegetation": 94.93,
+          "Not vegetated": 1.65,
+          "Water": 1.92,
+          "Unclassified": 0.78
+        },
+        "days_between_observations": 1080,
+        "comparable_pixel_fraction": 0.982
+      },
+      "limitations": [
+        "Analysis is based on optical satellite imagery, which cannot see through cloud; masked pixels are excluded rather than estimated.",
+        "A vegetation index measures reflectance-derived greenness, not biomass, carbon stock, habitat quality or biodiversity.",
+        "Comparing two acquisition dates cannot separate land-cover change from seasonal phenology, crop cycles, drought response or differences in illumination and view geometry.",
+        "No causal attribution is made. The analysis identifies where and how much the index changed, not why.",
+        "Land-cover classes are per-pixel predictions from a statistical model and carry classification error, particularly on mixed pixels and class boundaries.",
+        "The mean index change is smaller than the moderate-change threshold, so the regional average is not distinguishable from measurement and processing noise."
+      ]
+    },
+    "source": "product analysis (real Sentinel-2 run)"
+  },
+  {
+    "case_id": "9d5307c0-a9ee-4c7d-8df7-4529aa828959",
+    "region_name": null,
+    "evidence": {
+      "region": {
+        "name": "9.079\u00b0N, 76.860\u00b0E (1948.9 km\u00b2)",
+        "description": "9.079\u00b0N, 76.860\u00b0E (1948.9 km\u00b2)",
+        "bbox": [
+          76.6297313419742,
+          8.904589601182224,
+          77.08943342326944,
+          9.253269805125711
+        ],
+        "area_km2": 1948.9475,
+        "crs": "EPSG:4326"
+      },
+      "periods": {
+        "period_a": "2021-01-01 to 2021-02-28",
+        "period_b": "2024-01-01 to 2024-02-29"
+      },
+      "data_sources": [
+        {
+          "period": "A",
+          "provider": "Element84 Earth Search (AWS Open Data)",
+          "dataset": "sentinel-2-l2a",
+          "source_id": "S2B_43PFL_20210207_1_L2A",
+          "observation_date": "2021-02-07",
+          "processing_level": "S2MSI2A",
+          "platform": "sentinel-2b",
+          "cloud_cover_percent": 0.001003,
+          "resolution_m": 10.0,
+          "bands_used": [
+            "red",
+            "nir",
+            "green",
+            "blue",
+            "swir16",
+            "swir22",
+            "scl"
+          ],
+          "license": "CC-BY-4.0 (Copernicus)"
+        },
+        {
+          "period": "B",
+          "provider": "Element84 Earth Search (AWS Open Data)",
+          "dataset": "sentinel-2-l2a",
+          "source_id": "S2A_43PFL_20240118_0_L2A",
+          "observation_date": "2024-01-18",
+          "processing_level": "S2MSI2A",
+          "platform": "sentinel-2a",
+          "cloud_cover_percent": 0.010485,
+          "resolution_m": 10.0,
+          "bands_used": [
+            "red",
+            "nir",
+            "green",
+            "blue",
+            "swir16",
+            "swir22",
+            "scl"
+          ],
+          "license": "CC-BY-4.0 (Copernicus)"
+        }
+      ],
+      "observed": {
+        "period_a": {
+          "observation_date": "2021-02-07",
+          "mean_ndvi": 0.669474,
+          "median_ndvi": 0.693086,
+          "min_ndvi": -0.252976,
+          "max_ndvi": 0.90625,
+          "std_dev_ndvi": 0.11894,
+          "valid_pixel_count": 539645,
+          "valid_area_km2": 1014.711334,
+          "vegetation_density_percentages": {
+            "water_or_nonvegetated": 0.918,
+            "bare_or_sparse": 0.259,
+            "low_vegetation": 1.359,
+            "moderate_vegetation": 15.13,
+            "dense_vegetation": 82.334
+          },
+          "vegetated_fraction": 0.988233
+        },
+        "period_b": {
+          "observation_date": "2024-01-18",
+          "mean_ndvi": 0.707082,
+          "median_ndvi": 0.738919,
+          "min_ndvi": -0.284722,
+          "max_ndvi": 0.924067,
+          "std_dev_ndvi": 0.129171,
+          "valid_pixel_count": 539653,
+          "valid_area_km2": 1014.726376,
+          "vegetation_density_percentages": {
+            "water_or_nonvegetated": 0.889,
+            "bare_or_sparse": 0.273,
+            "low_vegetation": 1.399,
+            "moderate_vegetation": 10.25,
+            "dense_vegetation": 87.19
+          },
+          "vegetated_fraction": 0.988381
+        },
+        "change": {
+          "mean_ndvi_period_a": 0.66951,
+          "mean_ndvi_period_b": 0.707089,
+          "absolute_ndvi_change": 0.037579,
+          "relative_ndvi_change_percent": 5.613,
+          "changed_area_percentage": 17.944,
+          "changed_area_km2": 181.993497,
+          "decreased_area_percentage": 3.963,
+          "increased_area_percentage": 13.981,
+          "comparable_pixel_count": 539385,
+          "change_classes": {
+            "Significant decrease": 1.09,
+            "Moderate decrease": 2.873,
+            "Stable": 82.056,
+            "Moderate increase": 12.587,
+            "Significant increase": 1.393
+          },
+          "thresholds": {
+            "moderate": 0.1,
+            "significant": 0.2
+          }
+        }
+      },
+      "model_predictions": {
+        "land_cover": {
+          "distribution_percent": {
+            "Forest": 74.279,
+            "Agriculture": 19.803,
+            "Water": 2.187,
+            "Urban / built-up": 3.712,
+            "Bare land": 0.02
+          },
+          "area_km2": {
+            "Forest": 753.728884,
+            "Agriculture": 200.941594,
+            "Water": 22.191669,
+            "Urban / built-up": 37.663034,
+            "Bare land": 0.201195
+          },
+          "mean_confidence": 0.7563,
+          "low_confidence_fraction": 0.0498,
+          "per_class_mean_confidence": {
+            "Forest": 0.7882,
+            "Agriculture": 0.6517,
+            "Water": 0.8027,
+            "Urban / built-up": 0.6485,
+            "Bare land": 0.554
+          },
+          "model_name": "naturevision-landcover",
+          "model_version": "1.0.0",
+          "model_backend": "random_forest",
+          "held_out_overall_accuracy": 0.5922,
+          "held_out_macro_f1": 0.5268
+        }
+      },
+      "methodology": {
+        "index_formula": "NDVI = (NIR - Red) / (NIR + Red)",
+        "bands": {
+          "red": "Sentinel-2 B04 (664.6 nm)",
+          "nir": "Sentinel-2 B08 (832.8 nm)"
+        },
+        "cloud_masking": "Sentinel-2 Level-2A scene classification: no-data, saturated, cloud shadow, medium- and high-probability cloud, thin cirrus and snow/ice pixels are excluded.",
+        "analysis_grid": {
+          "crs": "EPSG:32643",
+          "width": 710,
+          "height": 768,
+          "resolution_x": 43.36619718309859,
+          "resolution_y": 43.359375,
+          "bounds_wgs84": [
+            76.62822506713972,
+            8.953363108011349,
+            76.90978075835797,
+            9.255777894117507
+          ],
+          "transform": [
+            43.36619718309859,
+            0.0,
+            679010.0,
+            0.0,
+            -43.359375,
+            1023540.0
+          ],
+          "valid_pixels": 539645,
+          "valid_fraction": 0.989666,
+          "pixel_area_m2": 1880.331
+        },
+        "radiometric_calibration": {
+          "reflectance_offset": 0.0,
+          "scale_source": "catalogue_scale_with_verified_offset",
+          "decision": "physical_override",
+          "diagnostic": {
+            "probe_band": "red",
+            "declared_offset": -0.1,
+            "negative_fraction_with_offset": 0.9968,
+            "negative_fraction_without_offset": 0.0,
+            "threshold": 0.1
+          }
+        },
+        "change_detection": {
+          "index": "NDVI",
+          "operation": "per-pixel difference: NDVI(period B) - NDVI(period A)",
+          "alignment": "Period B was reprojected onto the period A pixel grid (bilinear) prior to differencing.",
+          "comparable_pixels_rule": "Only pixels valid in both periods after cloud, shadow, cirrus and snow masking contribute to any statistic.",
+          "thresholds_units": "absolute index units",
+          "thresholds": {
+            "moderate": 0.1,
+            "significant": 0.2
+          },
+          "relative_change_rule": "Relative change is reported only when |mean(period A)| >= 0.05, because a near-zero baseline makes a percentage change numerically unstable.",
+          "interpretation_scope": "Results describe change in a reflectance-derived vegetation index. They do not establish land-cover conversion, causation, or ecological outcome."
+        },
+        "land_cover_model": {
+          "name": "naturevision-landcover",
+          "version": "1.0.0",
+          "backend": "random_forest",
+          "features": [
+            "blue",
+            "green",
+            "red",
+            "nir",
+            "swir16",
+            "swir22",
+            "ndvi",
+            "ndwi",
+            "ndbi",
+            "nbr",
+            "bsi_partial"
+          ],
+          "evaluation_protocol": "Spatially disjoint hold-out: the model is fitted only on the training regions and scored on evaluation regions that share no pixels, scenes or landscapes with them. No pixel-level random split is used, because spatial autocorrelation between adjacent 10 m pixels would inflate the reported accuracy.",
+          "label_source": {
+            "name": "ESA WorldCover v200 (2021)",
+            "resolution_m": 10,
+            "license": "CC BY 4.0",
+            "url": "https://esa-worldcover.org/",
+            "role": "Reference labels for supervised training and held-out evaluation."
+          }
+        }
+      },
+      "data_quality": {
+        "period_a_masked_fraction": 0.0015,
+        "period_a_scene_classification": {
+          "Dark area / topographic shadow": 0.14,
+          "Cloud shadow": 0.15,
+          "Vegetation": 94.8,
+          "Not vegetated": 3.23,
+          "Water": 1.51,
+          "Unclassified": 0.18
+        },
+        "period_b_masked_fraction": 0.0015,
+        "period_b_scene_classification": {
+          "Dark area / topographic shadow": 0.14,
+          "Cloud shadow": 0.15,
+          "Vegetation": 94.84,
+          "Not vegetated": 3.15,
+          "Water": 1.58,
+          "Unclassified": 0.14
+        },
+        "days_between_observations": 1075,
+        "comparable_pixel_fraction": 0.9892
+      },
+      "limitations": [
+        "Analysis is based on optical satellite imagery, which cannot see through cloud; masked pixels are excluded rather than estimated.",
+        "A vegetation index measures reflectance-derived greenness, not biomass, carbon stock, habitat quality or biodiversity.",
+        "Comparing two acquisition dates cannot separate land-cover change from seasonal phenology, crop cycles, drought response or differences in illumination and view geometry.",
+        "No causal attribution is made. The analysis identifies where and how much the index changed, not why.",
+        "Land-cover classes are per-pixel predictions from a statistical model and carry classification error, particularly on mixed pixels and class boundaries.",
+        "The mean index change is smaller than the moderate-change threshold, so the regional average is not distinguishable from measurement and processing noise."
+      ]
+    },
+    "source": "product analysis (real Sentinel-2 run)"
+  },
+  {
+    "case_id": "4cf9a8a7-1327-42ac-8ea2-b4f13dda61aa",
+    "region_name": null,
+    "evidence": {
+      "region": {
+        "name": "9.094\u00b0N, 76.489\u00b0E (2.1 km\u00b2)",
+        "description": "9.094\u00b0N, 76.489\u00b0E (2.1 km\u00b2)",
+        "bbox": [
+          76.48239597346469,
+          9.088209432953633,
+          76.49644661741956,
+          9.100654365491906
+        ],
+        "area_km2": 2.126,
+        "crs": "EPSG:4326"
+      },
+      "periods": {
+        "period_a": "2021-01-01 to 2021-02-28",
+        "period_b": "2024-01-01 to 2024-02-29"
+      },
+      "data_sources": [
+        {
+          "period": "A",
+          "provider": "Element84 Earth Search (AWS Open Data)",
+          "dataset": "sentinel-2-l2a",
+          "source_id": "S2B_43PFL_20210207_1_L2A",
+          "observation_date": "2021-02-07",
+          "processing_level": "S2MSI2A",
+          "platform": "sentinel-2b",
+          "cloud_cover_percent": 0.001003,
+          "resolution_m": 10.0,
+          "bands_used": [
+            "red",
+            "nir",
+            "green",
+            "blue",
+            "swir16",
+            "swir22",
+            "scl"
+          ],
+          "license": "CC-BY-4.0 (Copernicus)"
+        },
+        {
+          "period": "B",
+          "provider": "Element84 Earth Search (AWS Open Data)",
+          "dataset": "sentinel-2-l2a",
+          "source_id": "S2A_43PFL_20240118_0_L2A",
+          "observation_date": "2024-01-18",
+          "processing_level": "S2MSI2A",
+          "platform": "sentinel-2a",
+          "cloud_cover_percent": 0.010485,
+          "resolution_m": 10.0,
+          "bands_used": [
+            "red",
+            "nir",
+            "green",
+            "blue",
+            "swir16",
+            "swir22",
+            "scl"
+          ],
+          "license": "CC-BY-4.0 (Copernicus)"
+        }
+      ],
+      "observed": {
+        "period_a": {
+          "observation_date": "2021-02-07",
+          "mean_ndvi": 0.435945,
+          "median_ndvi": 0.549097,
+          "min_ndvi": -0.306263,
+          "max_ndvi": 0.814414,
+          "std_dev_ndvi": 0.292576,
+          "valid_pixel_count": 21288,
+          "valid_area_km2": 2.1288,
+          "vegetation_density_percentages": {
+            "water_or_nonvegetated": 16.596,
+            "bare_or_sparse": 4.167,
+            "low_vegetation": 11.579,
+            "moderate_vegetation": 27.875,
+            "dense_vegetation": 39.783
+          },
+          "vegetated_fraction": 0.792371
+        },
+        "period_b": {
+          "observation_date": "2024-01-18",
+          "mean_ndvi": 0.458659,
+          "median_ndvi": 0.554731,
+          "min_ndvi": -0.256654,
+          "max_ndvi": 0.833515,
+          "std_dev_ndvi": 0.272374,
+          "valid_pixel_count": 21299,
+          "valid_area_km2": 2.1299,
+          "vegetation_density_percentages": {
+            "water_or_nonvegetated": 14.55,
+            "bare_or_sparse": 6.526,
+            "low_vegetation": 11.174,
+            "moderate_vegetation": 25.734,
+            "dense_vegetation": 42.016
+          },
+          "vegetated_fraction": 0.789239
+        },
+        "change": {
+          "mean_ndvi_period_a": 0.435945,
+          "mean_ndvi_period_b": 0.458637,
+          "absolute_ndvi_change": 0.022692,
+          "relative_ndvi_change_percent": 5.205,
+          "changed_area_percentage": 23.487,
+          "changed_area_km2": 0.5,
+          "decreased_area_percentage": 7.478,
+          "increased_area_percentage": 16.009,
+          "comparable_pixel_count": 21288,
+          "change_classes": {
+            "Significant decrease": 2.739,
+            "Moderate decrease": 4.74,
+            "Stable": 76.513,
+            "Moderate increase": 14.872,
+            "Significant increase": 1.137
+          },
+          "thresholds": {
+            "moderate": 0.1,
+            "significant": 0.2
+          }
+        }
+      },
+      "model_predictions": {
+        "land_cover": {
+          "distribution_percent": {
+            "Forest": 34.884,
+            "Agriculture": 8.784,
+            "Water": 20.808,
+            "Urban / built-up": 34.664,
+            "Bare land": 0.859
+          },
+          "area_km2": {
+            "Forest": 0.743,
+            "Agriculture": 0.1871,
+            "Water": 0.4432,
+            "Urban / built-up": 0.7383,
+            "Bare land": 0.0183
+          },
+          "mean_confidence": 0.6514,
+          "low_confidence_fraction": 0.229,
+          "per_class_mean_confidence": {
+            "Forest": 0.6038,
+            "Agriculture": 0.48,
+            "Water": 0.775,
+            "Urban / built-up": 0.6713,
+            "Bare land": 0.5376
+          },
+          "model_name": "naturevision-landcover",
+          "model_version": "1.0.0",
+          "model_backend": "random_forest",
+          "held_out_overall_accuracy": 0.5922,
+          "held_out_macro_f1": 0.5268
+        }
+      },
+      "methodology": {
+        "index_formula": "NDVI = (NIR - Red) / (NIR + Red)",
+        "bands": {
+          "red": "Sentinel-2 B04 (664.6 nm)",
+          "nir": "Sentinel-2 B08 (832.8 nm)"
+        },
+        "cloud_masking": "Sentinel-2 Level-2A scene classification: no-data, saturated, cloud shadow, medium- and high-probability cloud, thin cirrus and snow/ice pixels are excluded.",
+        "analysis_grid": {
+          "crs": "EPSG:32643",
+          "width": 158,
+          "height": 142,
+          "resolution_x": 10.0,
+          "resolution_y": 10.0,
+          "bounds_wgs84": [
+            76.48217904170973,
+            9.087994882982713,
+            76.49660586858772,
+            9.100893191383998
+          ],
+          "transform": [
+            10.0,
+            0.0,
+            662890.0,
+            0.0,
+            -10.0,
+            1006340.0
+          ],
+          "valid_pixels": 21288,
+          "valid_fraction": 0.948832,
+          "pixel_area_m2": 100.0
+        },
+        "radiometric_calibration": {
+          "reflectance_offset": 0.0,
+          "scale_source": "catalogue_scale_with_verified_offset",
+          "decision": "physical_override",
+          "diagnostic": {
+            "probe_band": "red",
+            "declared_offset": -0.1,
+            "negative_fraction_with_offset": 0.8723,
+            "negative_fraction_without_offset": 0.0,
+            "threshold": 0.1
+          }
+        },
+        "change_detection": {
+          "index": "NDVI",
+          "operation": "per-pixel difference: NDVI(period B) - NDVI(period A)",
+          "alignment": "Period B was reprojected onto the period A pixel grid (bilinear) prior to differencing.",
+          "comparable_pixels_rule": "Only pixels valid in both periods after cloud, shadow, cirrus and snow masking contribute to any statistic.",
+          "thresholds_units": "absolute index units",
+          "thresholds": {
+            "moderate": 0.1,
+            "significant": 0.2
+          },
+          "relative_change_rule": "Relative change is reported only when |mean(period A)| >= 0.05, because a near-zero baseline makes a percentage change numerically unstable.",
+          "interpretation_scope": "Results describe change in a reflectance-derived vegetation index. They do not establish land-cover conversion, causation, or ecological outcome."
+        },
+        "land_cover_model": {
+          "name": "naturevision-landcover",
+          "version": "1.0.0",
+          "backend": "random_forest",
+          "features": [
+            "blue",
+            "green",
+            "red",
+            "nir",
+            "swir16",
+            "swir22",
+            "ndvi",
+            "ndwi",
+            "ndbi",
+            "nbr",
+            "bsi_partial"
+          ],
+          "evaluation_protocol": "Spatially disjoint hold-out: the model is fitted only on the training regions and scored on evaluation regions that share no pixels, scenes or landscapes with them. No pixel-level random split is used, because spatial autocorrelation between adjacent 10 m pixels would inflate the reported accuracy.",
+          "label_source": {
+            "name": "ESA WorldCover v200 (2021)",
+            "resolution_m": 10,
+            "license": "CC BY 4.0",
+            "url": "https://esa-worldcover.org/",
+            "role": "Reference labels for supervised training and held-out evaluation."
+          }
+        }
+      },
+      "data_quality": {
+        "period_a_masked_fraction": 0.0005,
+        "period_a_scene_classification": {
+          "Dark area / topographic shadow": 0.05,
+          "Cloud shadow": 0.05,
+          "Vegetation": 63.98,
+          "Not vegetated": 15.04,
+          "Water": 20.76,
+          "Unclassified": 0.12
+        },
+        "period_b_masked_fraction": 0.0,
+        "period_b_scene_classification": {
+          "Vegetation": 65.76,
+          "Not vegetated": 14.23,
+          "Water": 19.95,
+          "Unclassified": 0.07
+        },
+        "days_between_observations": 1075,
+        "comparable_pixel_fraction": 0.9488
+      },
+      "limitations": [
+        "Analysis is based on optical satellite imagery, which cannot see through cloud; masked pixels are excluded rather than estimated.",
+        "A vegetation index measures reflectance-derived greenness, not biomass, carbon stock, habitat quality or biodiversity.",
+        "Comparing two acquisition dates cannot separate land-cover change from seasonal phenology, crop cycles, drought response or differences in illumination and view geometry.",
+        "No causal attribution is made. The analysis identifies where and how much the index changed, not why.",
+        "Land-cover classes are per-pixel predictions from a statistical model and carry classification error, particularly on mixed pixels and class boundaries.",
+        "The mean index change is smaller than the moderate-change threshold, so the regional average is not distinguishable from measurement and processing noise."
+      ]
+    },
+    "source": "product analysis (real Sentinel-2 run)"
+  }
+]

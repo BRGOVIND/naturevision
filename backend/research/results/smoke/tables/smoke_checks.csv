@@ -1,0 +1,13 @@
+check,passed,note
+config loads,True,
+feature sets reference real features,True,
+dataset non-empty,True,313580 samples
+dataset carries blocks,True,
+spatial split has test samples,True,
+no spatial leakage,True,
+no index overlap (spatial),True,
+no index overlap (random),True,
+random split is reproducible,True,
+no temporal leakage,True,
+metrics on perfect predictions,True,
+confusion matrix is square,True,

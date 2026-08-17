@@ -1,0 +1,256 @@
+{
+  "model": "random_forest",
+  "feature_set": "D_full",
+  "protocols": [
+    "random_pixel",
+    "spatial_holdout"
+  ],
+  "period": "p2021",
+  "test_regions": [
+    "murray_basin",
+    "iberian_meseta",
+    "zambezi_miombo"
+  ],
+  "splits": [
+    {
+      "name": "random_seed42",
+      "strategy": "random_pixel",
+      "seed": 42,
+      "sizes": {
+        "train": 100023,
+        "val": 23082,
+        "test": 30776
+      },
+      "train_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "val_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "test_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "val_fraction": 0.15,
+      "test_fraction": 0.2,
+      "blocks_shared_across_partitions": true
+    },
+    {
+      "name": "spatial_seed42",
+      "strategy": "spatial_holdout",
+      "seed": 42,
+      "sizes": {
+        "train": 104121,
+        "val": 12113,
+        "test": 37647
+      },
+      "train_blocks": [
+        "brandenburg",
+        "kalahari_botswana",
+        "mato_grosso",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats"
+      ],
+      "val_blocks": [
+        "finnish_lakeland"
+      ],
+      "test_blocks": [
+        "iberian_meseta",
+        "murray_basin",
+        "zambezi_miombo"
+      ],
+      "blocks_shared_across_partitions": false
+    },
+    {
+      "name": "random_seed123",
+      "strategy": "random_pixel",
+      "seed": 123,
+      "sizes": {
+        "train": 100023,
+        "val": 23082,
+        "test": 30776
+      },
+      "train_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "val_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "test_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "val_fraction": 0.15,
+      "test_fraction": 0.2,
+      "blocks_shared_across_partitions": true
+    },
+    {
+      "name": "spatial_seed123",
+      "strategy": "spatial_holdout",
+      "seed": 123,
+      "sizes": {
+        "train": 104121,
+        "val": 12113,
+        "test": 37647
+      },
+      "train_blocks": [
+        "brandenburg",
+        "kalahari_botswana",
+        "mato_grosso",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats"
+      ],
+      "val_blocks": [
+        "finnish_lakeland"
+      ],
+      "test_blocks": [
+        "iberian_meseta",
+        "murray_basin",
+        "zambezi_miombo"
+      ],
+      "blocks_shared_across_partitions": false
+    },
+    {
+      "name": "random_seed2024",
+      "strategy": "random_pixel",
+      "seed": 2024,
+      "sizes": {
+        "train": 100023,
+        "val": 23082,
+        "test": 30776
+      },
+      "train_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "val_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "test_blocks": [
+        "brandenburg",
+        "finnish_lakeland",
+        "iberian_meseta",
+        "kalahari_botswana",
+        "mato_grosso",
+        "murray_basin",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats",
+        "zambezi_miombo"
+      ],
+      "val_fraction": 0.15,
+      "test_fraction": 0.2,
+      "blocks_shared_across_partitions": true
+    },
+    {
+      "name": "spatial_seed2024",
+      "strategy": "spatial_holdout",
+      "seed": 2024,
+      "sizes": {
+        "train": 104121,
+        "val": 12113,
+        "test": 37647
+      },
+      "train_blocks": [
+        "brandenburg",
+        "kalahari_botswana",
+        "mato_grosso",
+        "po_valley",
+        "sacramento_valley",
+        "sahel_niger",
+        "western_ghats"
+      ],
+      "val_blocks": [
+        "finnish_lakeland"
+      ],
+      "test_blocks": [
+        "iberian_meseta",
+        "murray_basin",
+        "zambezi_miombo"
+      ],
+      "blocks_shared_across_partitions": false
+    }
+  ]
+}
