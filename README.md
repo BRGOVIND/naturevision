@@ -131,15 +131,35 @@ Copy `.env.example` to `.env` and set the key there; `.env` is gitignored.
 ```bash
 # Backend
 cd backend
-pytest -q                                   # 130 tests
+pytest -q                                   # 161 tests
 pytest -q --cov=app --cov-report=term-missing
-ruff check app training tests && ruff format --check app training tests
-mypy app training
+ruff check app training tests research && ruff format --check app training tests research
+mypy app training research
 
 # Frontend
 cd frontend
 npm run lint && npm run typecheck && npm run build
 ```
+
+## Research
+
+`backend/research/` is a reproducible experimental framework for the write-up.
+It reads the production pipeline through its public interfaces and changes no
+production behaviour. See [backend/research/README.md](backend/research/README.md).
+
+```bash
+cd backend
+python -m research.run --list                 # what is available
+python -m research.run --experiment smoke     # fast structural check, no network
+python -m research.run --experiment dataset   # build the pixel cache (network, ~15-25 min)
+python -m research.run --experiment core      # 8 experiments from the cache, no network
+python -m research.run --experiment all       # core + the three network experiments
+```
+
+The core suite takes roughly 40 minutes and needs no network once the cache
+exists. Each run writes `research/results/<name>/` with the configuration, the
+metrics, and a metadata record carrying the git commit, seeds, runtime and
+dataset digest that produced them.
 
 ## API
 
