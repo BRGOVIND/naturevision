@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import asyncio
+import datetime as dt
 import json
 import sys
 import time
@@ -22,7 +23,7 @@ from typing import Any
 from app.core.logging import configure_logging, get_logger
 from research import figures
 from research.artifacts import ExperimentRecord, write_table
-from research.config import CONFIG, RESULTS_DIR, ensure_directories
+from research.config import CONFIG, RESULTS_DIR, TABLE_DIR, ensure_directories
 
 logger = get_logger(__name__)
 
@@ -226,6 +227,35 @@ def _study_region_figure() -> None:
     )
 
 
+def _now() -> str:
+    return dt.datetime.now(dt.UTC).isoformat()
+
+
+def _merged_ledger(outcomes: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Combine this invocation's outcomes with those already on record.
+
+    Experiments are run in batches over several sessions, so overwriting the
+    ledger with only the latest batch would make the completed suite look
+    smaller than it is. The newest outcome for an experiment wins, and the
+    order follows the experiment registry rather than execution order.
+    """
+    ledger: dict[str, dict[str, Any]] = {}
+    previous = TABLE_DIR / "experiment_runs.json"
+    if previous.is_file():
+        try:
+            for row in json.loads(previous.read_text(encoding="utf-8")):
+                if isinstance(row, dict) and row.get("experiment"):
+                    ledger[str(row["experiment"])] = row
+        except (json.JSONDecodeError, OSError) as exc:
+            logger.warning("ledger_unreadable", error=str(exc)[:200])
+
+    for row in outcomes:
+        ledger[str(row["experiment"])] = row
+
+    ordered = [ledger.pop(name) for name in EXPERIMENTS if name in ledger]
+    return [*ordered, *ledger.values()]
+
+
 def run_named(names: tuple[str, ...]) -> int:
     """Run a set of experiments, reporting each outcome honestly."""
     ensure_directories()
@@ -241,11 +271,13 @@ def run_named(names: tuple[str, ...]) -> int:
         try:
             record = EXPERIMENTS[name]()
             elapsed = round(time.perf_counter() - started, 2)
+            record.stamp_runtime(elapsed)
             outcomes.append(
                 {
                     "experiment": name,
                     "status": "completed",
                     "runtime_seconds": elapsed,
+                    "finished_at": _now(),
                     "output": str(record.directory),
                 }
             )
@@ -258,6 +290,7 @@ def run_named(names: tuple[str, ...]) -> int:
                     "experiment": name,
                     "status": "failed",
                     "runtime_seconds": elapsed,
+                    "finished_at": _now(),
                     "error": f"{type(exc).__name__}: {exc}",
                 }
             )
@@ -265,7 +298,7 @@ def run_named(names: tuple[str, ...]) -> int:
             print(f"  [FAIL] {name}: {type(exc).__name__}: {exc}")
             logger.error("experiment_failed", experiment=name, error=str(exc)[:400])
 
-    write_table(outcomes, "experiment_runs")
+    write_table(_merged_ledger(outcomes), "experiment_runs")
     summary = RESULTS_DIR / "run_summary.json"
     summary.write_text(json.dumps(outcomes, indent=2, default=str), encoding="utf-8")
     print(f"\n{len(names) - failures}/{len(names)} experiments completed. Summary: {summary}")

@@ -2,14 +2,15 @@
   "experiment": "temporal_transfer",
   "research_version": "1.0.0",
   "dataset_version": "1.0.0",
-  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
-  "started_at": "2026-08-17T16:03:38.750789+00:00",
-  "finished_at": "2026-08-17T16:03:39.806389+00:00",
+  "git_commit": "879e2b0c1a508f95b896a94a3c177adb870a92ec",
+  "started_at": "2026-08-17T20:47:56.849359+00:00",
+  "finished_at": "2026-08-17T20:47:58.258338+00:00",
   "seeds": [
     42,
     123,
     2024
   ],
+  "runtime_seconds": 683.48,
   "config_hash": "adad146b36818764",
   "dataset_manifest_hash": "9bfd4980d18a5856",
   "dataset_cache_sha256": "8ff45eb8d1752cf8338ecde187b086c46ac1a749206c2430a272ea415cb91ee1",

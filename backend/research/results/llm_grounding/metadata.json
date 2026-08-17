@@ -2,10 +2,11 @@
   "experiment": "llm_grounding",
   "research_version": "1.0.0",
   "dataset_version": "1.0.0",
-  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
-  "started_at": "2026-08-17T04:43:51.338480+00:00",
-  "finished_at": "2026-08-17T04:43:51.407730+00:00",
+  "git_commit": "879e2b0c1a508f95b896a94a3c177adb870a92ec",
+  "started_at": "2026-08-17T20:53:51.278785+00:00",
+  "finished_at": "2026-08-17T20:53:51.299602+00:00",
   "seeds": [],
+  "runtime_seconds": 9.91,
   "config_hash": "4e824d2053bec47c",
   "dataset_manifest_hash": null,
   "dataset_cache_sha256": null,
@@ -35,6 +36,6 @@
   "outputs": {},
   "output_hashes": {
     "config.json": "1b598216443771aaec774936ff08068860b8a6a423dab81ce1c376223dbae792",
-    "metrics.json": "00c3d2a6b6e353a30f26cfd76c0871bd08a74c2dd559748cd14463d9e4043d15"
+    "metrics.json": "b3a9a0dfcfcca8bbf6920a95a9d816dcbc6bd1edfa08637b443ab4c9343d892f"
   }
 }

@@ -2,14 +2,15 @@
   "experiment": "feature_ablation",
   "research_version": "1.0.0",
   "dataset_version": "1.0.0",
-  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
-  "started_at": "2026-08-17T15:52:38.872610+00:00",
-  "finished_at": "2026-08-17T15:52:40.123842+00:00",
+  "git_commit": "879e2b0c1a508f95b896a94a3c177adb870a92ec",
+  "started_at": "2026-08-17T20:36:33.656808+00:00",
+  "finished_at": "2026-08-17T20:36:34.908652+00:00",
   "seeds": [
     42,
     123,
     2024
   ],
+  "runtime_seconds": 494.86,
   "config_hash": "d2c8a0c70e376559",
   "dataset_manifest_hash": "9bfd4980d18a5856",
   "dataset_cache_sha256": "8ff45eb8d1752cf8338ecde187b086c46ac1a749206c2430a272ea415cb91ee1",

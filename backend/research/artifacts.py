@@ -63,6 +63,10 @@ class ExperimentRecord:
     notes: list[str] = field(default_factory=list)
     limitations: list[str] = field(default_factory=list)
     outputs: dict[str, str] = field(default_factory=dict)
+    #: Wall-clock cost, stamped by the runner once the experiment returns. Kept
+    #: in the record itself so a result directory reports its own cost without
+    #: depending on the run ledger, which only describes the latest invocation.
+    runtime_seconds: float | None = None
 
     @property
     def directory(self) -> Path:
@@ -78,6 +82,7 @@ class ExperimentRecord:
             "started_at": self.started_at,
             "finished_at": dt.datetime.now(dt.UTC).isoformat(),
             "seeds": self.seeds,
+            "runtime_seconds": self.runtime_seconds,
             "config_hash": config_hash(self.config),
             "dataset_manifest_hash": config_hash(manifest) if manifest else None,
             "dataset_cache_sha256": manifest.get("cache_sha256"),
@@ -115,6 +120,20 @@ class ExperimentRecord:
             json.dumps(metadata, indent=2, default=str), encoding="utf-8"
         )
         return directory
+
+    def stamp_runtime(self, seconds: float) -> None:
+        """Record the run's wall-clock cost after the experiment has returned.
+
+        The metadata file is rewritten rather than regenerated, so the hashes
+        and timestamps already written for this run are preserved.
+        """
+        self.runtime_seconds = seconds
+        path = self.directory / "metadata.json"
+        if not path.is_file():
+            return
+        metadata = json.loads(path.read_text(encoding="utf-8"))
+        metadata["runtime_seconds"] = seconds
+        path.write_text(json.dumps(metadata, indent=2, default=str), encoding="utf-8")
 
 
 def write_table(rows: list[dict[str, Any]], name: str, experiment: str | None = None) -> list[Path]:

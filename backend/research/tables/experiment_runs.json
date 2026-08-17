@@ -1,32 +1,79 @@
 [
   {
+    "experiment": "baseline",
+    "status": "completed",
+    "runtime_seconds": 172.28,
+    "finished_at": "2026-08-17T20:14:19.619342+00:00",
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\baseline"
+  },
+  {
+    "experiment": "spatial_validation",
+    "status": "completed",
+    "runtime_seconds": 310.26,
+    "finished_at": "2026-08-17T20:19:29.911257+00:00",
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\spatial_validation"
+  },
+  {
+    "experiment": "model_comparison",
+    "status": "completed",
+    "runtime_seconds": 530.29,
+    "finished_at": "2026-08-17T20:28:20.227248+00:00",
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\model_comparison"
+  },
+  {
     "experiment": "feature_ablation",
     "status": "completed",
-    "runtime_seconds": 506.71,
+    "runtime_seconds": 494.86,
+    "finished_at": "2026-08-17T20:36:35.120102+00:00",
     "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\feature_ablation"
   },
   {
     "experiment": "temporal_transfer",
     "status": "completed",
-    "runtime_seconds": 659.61,
+    "runtime_seconds": 683.48,
+    "finished_at": "2026-08-17T20:47:58.624007+00:00",
     "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\temporal_transfer"
   },
   {
     "experiment": "confidence_analysis",
     "status": "completed",
-    "runtime_seconds": 49.05,
+    "runtime_seconds": 51.62,
+    "finished_at": "2026-08-17T20:48:50.275906+00:00",
     "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\confidence_analysis"
   },
   {
     "experiment": "feature_importance",
     "status": "completed",
-    "runtime_seconds": 68.13,
+    "runtime_seconds": 69.04,
+    "finished_at": "2026-08-17T20:49:59.340154+00:00",
     "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\feature_importance"
   },
   {
     "experiment": "class_imbalance",
     "status": "completed",
-    "runtime_seconds": 48.1,
+    "runtime_seconds": 47.99,
+    "finished_at": "2026-08-17T20:50:47.370145+00:00",
     "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\class_imbalance"
+  },
+  {
+    "experiment": "cloud_robustness",
+    "status": "completed",
+    "runtime_seconds": 122.45,
+    "finished_at": "2026-08-17T20:52:49.864760+00:00",
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\cloud_robustness"
+  },
+  {
+    "experiment": "threshold_sensitivity",
+    "status": "completed",
+    "runtime_seconds": 51.55,
+    "finished_at": "2026-08-17T20:53:41.443384+00:00",
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\threshold_sensitivity"
+  },
+  {
+    "experiment": "llm_grounding",
+    "status": "completed",
+    "runtime_seconds": 9.91,
+    "finished_at": "2026-08-17T20:53:51.379014+00:00",
+    "output": "C:\\Users\\LOQ\\naturevision\\backend\\research\\results\\llm_grounding"
   }
 ]

@@ -780,9 +780,9 @@ def run_feature_importance(dataset: ResearchDataset | None = None) -> Experiment
         ],
     )
 
-    write_table(impurity, "table08_feature_importance", "feature_importance")
+    write_table(impurity, "table11_feature_importance", "feature_importance")
     if perm_rows:
-        write_table(perm_rows, "table08b_permutation_importance", "feature_importance")
+        write_table(perm_rows, "table11b_permutation_importance", "feature_importance")
     if impurity:
         figures.importance_figure(
             impurity,

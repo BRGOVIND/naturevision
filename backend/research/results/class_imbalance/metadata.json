@@ -2,12 +2,13 @@
   "experiment": "class_imbalance",
   "research_version": "1.0.0",
   "dataset_version": "1.0.0",
-  "git_commit": "731c026c6929993e48bbef1b136a0338697f472d",
-  "started_at": "2026-08-17T16:06:24.260418+00:00",
-  "finished_at": "2026-08-17T16:06:25.160001+00:00",
+  "git_commit": "879e2b0c1a508f95b896a94a3c177adb870a92ec",
+  "started_at": "2026-08-17T20:50:46.198892+00:00",
+  "finished_at": "2026-08-17T20:50:47.221727+00:00",
   "seeds": [
     42
   ],
+  "runtime_seconds": 47.99,
   "config_hash": "a1cd2dc8516024bc",
   "dataset_manifest_hash": "9bfd4980d18a5856",
   "dataset_cache_sha256": "8ff45eb8d1752cf8338ecde187b086c46ac1a749206c2430a272ea415cb91ee1",

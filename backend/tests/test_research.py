@@ -300,6 +300,49 @@ def test_experiment_record_captures_provenance(tmp_path, monkeypatch):
     assert json.loads((directory / "metrics.json").read_text(encoding="utf-8"))["accuracy"] == 0.5
 
 
+def test_runtime_is_stamped_into_the_written_record(tmp_path, monkeypatch):
+    """A result directory must report its own cost, not rely on the run ledger."""
+    monkeypatch.setattr("research.artifacts.RESULTS_DIR", tmp_path)
+    record = ExperimentRecord(experiment="unit_test", seeds=[42], results={"accuracy": 0.5})
+    directory = record.write()
+    assert (
+        json.loads((directory / "metadata.json").read_text(encoding="utf-8"))["runtime_seconds"]
+        is None
+    )
+
+    record.stamp_runtime(12.5)
+    metadata = json.loads((directory / "metadata.json").read_text(encoding="utf-8"))
+    assert metadata["runtime_seconds"] == 12.5
+    # Stamping must not disturb the provenance already written for this run.
+    assert metadata["config_hash"] and metadata["finished_at"]
+
+
+def test_run_ledger_keeps_experiments_from_earlier_invocations(tmp_path, monkeypatch):
+    """Experiments run in separate batches must all remain on the ledger."""
+    from research import run as run_module
+
+    monkeypatch.setattr(run_module, "TABLE_DIR", tmp_path)
+    (tmp_path / "experiment_runs.json").write_text(
+        json.dumps(
+            [
+                {"experiment": "baseline", "status": "completed", "runtime_seconds": 30.0},
+                {"experiment": "class_imbalance", "status": "failed", "runtime_seconds": 1.0},
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    merged = run_module._merged_ledger(
+        [{"experiment": "class_imbalance", "status": "completed", "runtime_seconds": 48.1}]
+    )
+    by_name = {row["experiment"]: row for row in merged}
+    assert set(by_name) == {"baseline", "class_imbalance"}
+    assert by_name["baseline"]["runtime_seconds"] == 30.0
+    # The newer outcome replaces the older one rather than duplicating it.
+    assert by_name["class_imbalance"]["status"] == "completed"
+    assert len(merged) == 2
+
+
 def test_config_hash_is_order_independent():
     assert config_hash({"a": 1, "b": 2}) == config_hash({"b": 2, "a": 1})
     assert config_hash({"a": 1}) != config_hash({"a": 2})

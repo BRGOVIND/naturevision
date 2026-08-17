@@ -7,8 +7,8 @@
     "macro_f1_mean": 0.5585,
     "macro_f1_std": 0.0101,
     "weighted_f1_mean": 0.5518,
-    "mean_train_seconds": 174.747,
-    "mean_inference_seconds": 0.0507
+    "mean_train_seconds": 61.62,
+    "mean_inference_seconds": 0.0906
   },
   {
     "model": "linear_svm",
@@ -18,8 +18,8 @@
     "macro_f1_mean": 0.5499,
     "macro_f1_std": 0.0002,
     "weighted_f1_mean": 0.5545,
-    "mean_train_seconds": 12.788,
-    "mean_inference_seconds": 0.0965
+    "mean_train_seconds": 13.425,
+    "mean_inference_seconds": 0.0956
   },
   {
     "model": "hist_gradient_boosting",
@@ -29,8 +29,8 @@
     "macro_f1_mean": 0.5461,
     "macro_f1_std": 0.0013,
     "weighted_f1_mean": 0.5592,
-    "mean_train_seconds": 49.119,
-    "mean_inference_seconds": 2.3
+    "mean_train_seconds": 47.263,
+    "mean_inference_seconds": 2.1416
   },
   {
     "model": "random_forest",
@@ -40,7 +40,7 @@
     "macro_f1_mean": 0.515,
     "macro_f1_std": 0.0024,
     "weighted_f1_mean": 0.5349,
-    "mean_train_seconds": 51.884,
-    "mean_inference_seconds": 0.7876
+    "mean_train_seconds": 49.374,
+    "mean_inference_seconds": 0.7594
   }
 ]

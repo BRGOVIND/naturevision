@@ -145,9 +145,13 @@ research/
 ```
 
 Every `metadata.json` records the research version, dataset version, git commit,
-seeds, configuration hash, dataset cache SHA-256, contributing scene ids, label
-source and platform — which is what makes a number in a table traceable to the
-code and data that produced it.
+seeds, wall-clock runtime, configuration hash, dataset cache SHA-256,
+contributing scene ids, label source and platform — which is what makes a number
+in a table traceable to the code and data that produced it.
+
+`tables/experiment_runs.csv` is the run ledger. It accumulates across
+invocations, so running the suite in batches still leaves one table describing
+every experiment, with failures recorded as failures rather than omitted.
 
 ---
 
