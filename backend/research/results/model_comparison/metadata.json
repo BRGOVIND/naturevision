@@ -2,15 +2,15 @@
   "experiment": "model_comparison",
   "research_version": "1.0.0",
   "dataset_version": "1.0.0",
-  "git_commit": "879e2b0c1a508f95b896a94a3c177adb870a92ec",
-  "started_at": "2026-08-17T20:28:18.780261+00:00",
-  "finished_at": "2026-08-17T20:28:20.147467+00:00",
+  "git_commit": "2ba284b950704c47b2b777856c645f1e57514238",
+  "started_at": "2026-08-17T21:19:14.761299+00:00",
+  "finished_at": "2026-08-17T21:19:15.056847+00:00",
   "seeds": [
     42,
     123,
     2024
   ],
-  "runtime_seconds": 530.29,
+  "runtime_seconds": 119.53,
   "config_hash": "8f962cf2b1d5abc5",
   "dataset_manifest_hash": "9bfd4980d18a5856",
   "dataset_cache_sha256": "8ff45eb8d1752cf8338ecde187b086c46ac1a749206c2430a272ea415cb91ee1",
@@ -59,6 +59,6 @@
   "outputs": {},
   "output_hashes": {
     "config.json": "011cd9894fd0999e3a841f4469255b87496c5a20a640c395b2f0c9fe0b1665d1",
-    "metrics.json": "878e8e83d25a462fc95e19091d939e1bcfae655a72d9779a2ef2b8da8d9d9f9e"
+    "metrics.json": "3b7aba0d5261627ded643646684bf28c6a29ff2d885572fac5ced62adc601c00"
   }
 }
