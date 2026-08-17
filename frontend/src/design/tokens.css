@@ -82,6 +82,9 @@
   --step-4: clamp(2.1rem, 1.5rem + 2.9vw, 3.6rem);
   --step-5: clamp(2.9rem, 1.6rem + 6.2vw, 6.6rem);
   --step-6: clamp(3.4rem, 1.5rem + 8.6vw, 9rem);
+  /* Hero display size. Capped well below --step-6: Bodoni's hairlines and
+     tight sidebearings make anything larger collide before it impresses. */
+  --step-hero: clamp(2.5rem, 1.1rem + 4.9vw, 5.5rem);
 
   --tracking-label: 0.14em;
   --tracking-tight: -0.02em;
@@ -181,8 +184,8 @@ h3,
 h4 {
   font-family: var(--font-display);
   font-weight: 500;
-  line-height: 1.06;
-  letter-spacing: -0.015em;
+  line-height: 1.12;
+  letter-spacing: -0.008em;
   text-wrap: balance;
 }
 

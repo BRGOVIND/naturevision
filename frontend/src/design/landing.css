@@ -1,6 +1,9 @@
 /* ======================================================================== */
 /* Cinematic opening                                                         */
 /* ======================================================================== */
+/* Opaque from the first painted frame. Fading the overlay *in* would reveal
+   the page underneath for the length of the fade, which is precisely the
+   flash this replaces. Only the exit is animated. */
 .opening {
   position: fixed;
   inset: 0;
@@ -9,25 +12,26 @@
   place-items: center;
   background: var(--canopy);
   overflow: hidden;
-  animation: opening-in 600ms var(--ease) both;
+  opacity: 1;
 }
 .opening--leaving {
   animation: opening-out 700ms var(--ease) forwards;
   pointer-events: none;
 }
-@keyframes opening-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 @keyframes opening-out {
   to {
     opacity: 0;
-    visibility: hidden;
   }
+}
+
+/* The shell is NOT visually hidden during the intro — the overlay above it is
+   fully opaque, which is what conceals it. Hiding it as well cost nothing
+   visually and broke rendering: content under `visibility: hidden` is not
+   rasterised, and the hero photograph never painted once the class was
+   removed. The class now only carries interaction state (inert + aria-hidden,
+   applied in App), and the dissolve belongs entirely to the overlay. */
+.app-shell--introing {
+  pointer-events: none;
 }
 .opening__media {
   position: absolute;
@@ -37,11 +41,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  animation: opening-drift 3200ms var(--ease) both;
+  animation: opening-drift 4200ms var(--ease) both;
 }
 @keyframes opening-drift {
   from {
-    transform: scale(1.06);
+    transform: scale(1.08);
   }
   to {
     transform: scale(1);
@@ -61,16 +65,29 @@
   text-align: center;
   color: #fff;
   padding-inline: var(--s-5);
-  animation: opening-mark 900ms var(--ease) 180ms both;
+  animation: opening-mark 1100ms var(--ease) 500ms both;
 }
 @keyframes opening-mark {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
     transform: none;
+  }
+}
+/* The veil lifts slightly as the mark settles, so the forest reads first and
+   the identity resolves out of it. */
+.opening__veil {
+  animation: opening-veil 2600ms var(--ease) both;
+}
+@keyframes opening-veil {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.82;
   }
 }
 .opening__glyph {
@@ -119,6 +136,9 @@
 /* ======================================================================== */
 /* Hero                                                                      */
 /* ======================================================================== */
+/* Explicit positive layering: media 0, veil 1, content 2. The previous
+   negative z-index approach relied on a subtlety of painting order that put
+   the photograph behind the section's own background. */
 .hero {
   position: relative;
   min-height: min(96vh, 54rem);
@@ -127,12 +147,11 @@
   justify-content: center;
   padding-block: var(--s-9) var(--s-7);
   background: var(--canopy);
-  isolation: isolate;
 }
 .hero__media {
   position: absolute;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
 }
 .hero__media img {
   width: 100%;
@@ -146,7 +165,7 @@
 .hero__veil {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   background:
     linear-gradient(
       103deg,
@@ -164,19 +183,28 @@
 }
 .hero__content {
   position: relative;
+  z-index: 2;
 }
+/* Bodoni is set large but never tightly. A negative tracking plus a
+   sub-1 line height made adjacent glyphs and descenders collide at display
+   sizes; the line box now clears descenders and the tracking is nearly
+   neutral. */
 .hero__title {
-  font-size: var(--step-6);
+  font-size: var(--step-hero);
   font-weight: 400;
-  line-height: 0.94;
-  letter-spacing: -0.025em;
+  line-height: 1.04;
+  letter-spacing: -0.005em;
   color: #fff;
   text-wrap: initial;
+  max-width: 16ch;
+  overflow-wrap: break-word;
 }
 .hero__title em {
   font-style: italic;
   font-weight: 400;
   color: var(--lichen-soft);
+  /* Italic Bodoni leans into the following upright glyph without this. */
+  padding-right: 0.06em;
 }
 .hero__lede {
   margin-top: var(--s-6);
@@ -192,6 +220,7 @@
 }
 .hero__foot {
   position: relative;
+  z-index: 2;
   margin-top: var(--s-8);
 }
 .hero__scale-caption {
@@ -369,7 +398,8 @@
 .invitation__title {
   font-size: var(--step-5);
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.06;
+  letter-spacing: -0.005em;
 }
 .invitation__title em {
   color: var(--lichen);
@@ -435,8 +465,10 @@
 .page-hero__title {
   font-size: var(--step-5);
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.06;
+  letter-spacing: -0.005em;
   color: #fff;
+  max-width: 20ch;
 }
 .page-hero__title em {
   color: var(--lichen);
