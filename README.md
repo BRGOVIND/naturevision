@@ -10,6 +10,7 @@ The project combines a production-oriented analysis pipeline with a controlled
 research framework investigating how remote-sensing machine-learning models
 generalize across geographic and temporal conditions.
 
+Planning to write a research paper on this.
 ---
 
 ## Research
