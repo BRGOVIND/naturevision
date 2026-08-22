@@ -53,21 +53,33 @@ async def health() -> HealthResponse:
         "active_backend": settings.land_cover_backend,
     }
 
-    interpretation_state = "configured" if settings.language_enabled else "not_configured"
     # Vision is probed against the provider's model list rather than inferred
     # from configuration, so the client never offers a capability that would
-    # fail on use.
+    # fail on use. The text interpretation model is checked the same way: a
+    # configured API key proves nothing about whether the *specific* model
+    # is still servable on this account, and a stale model name previously
+    # made /health report interpretation as "ok" while every real request
+    # 404'd with "model does not exist".
     vision_enabled = False
+    language_model_available = False
     if settings.language_enabled:
         service = LanguageInterpretationService()
         try:
+            provider_models = await service.available_models()
+            language_model_available = (
+                provider_models is not None and settings.language_model in provider_models
+            )
             vision_enabled = await service.vision_supported()
         finally:
             await service.close()
+    interpretation_state = (
+        "configured" if settings.language_enabled and language_model_available else "not_configured"
+    )
     checks["interpretation"] = {
-        "ok": settings.language_enabled,
+        "ok": settings.language_enabled and language_model_available,
         "provider": "Groq" if settings.language_enabled else None,
         "model": settings.language_model if settings.language_enabled else None,
+        "model_available": language_model_available,
         "vision_enabled": vision_enabled,
         "vision_model": settings.vision_model if settings.language_enabled else None,
     }

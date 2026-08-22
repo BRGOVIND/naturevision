@@ -256,6 +256,29 @@ async def test_unconfigured_provider_degrades_without_error(monkeypatch):
     assert "is configured" in envelope.unavailable_reason.lower()
 
 
+async def test_available_models_flags_a_decommissioned_language_model(monkeypatch):
+    """A configured API key proves nothing about whether the specific model
+    is still servable — this previously let /health report interpretation
+    as configured while every real request 404'd with "model does not
+    exist" (llama-3.3-70b-versatile was removed from the provider's
+    catalogue). The health check now cross-references the model list the
+    same way vision capability already was."""
+    from app.core.config import settings
+
+    def handler(_request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"data": [{"id": "openai/gpt-oss-120b"}]})
+
+    service = _service(handler, monkeypatch)
+    models = await service.available_models()
+    assert models == {"openai/gpt-oss-120b"}
+
+    monkeypatch.setattr(settings, "language_model", "openai/gpt-oss-120b")
+    assert settings.language_model in models  # a currently-servable model...
+
+    monkeypatch.setattr(settings, "language_model", "llama-3.3-70b-versatile")
+    assert settings.language_model not in models  # ...but a stale model name is correctly flagged
+
+
 async def test_valid_provider_response_is_returned(monkeypatch):
     service = _service(lambda _request: _completion(VALID_RESPONSE), monkeypatch)
     envelope = await service.interpret(_evidence())

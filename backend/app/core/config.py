@@ -66,7 +66,7 @@ class Settings(BaseSettings):
     # --- language interpretation ------------------------------------------
     groq_api_key: str | None = None
     groq_base_url: str = "https://api.groq.com/openai/v1"
-    language_model: str = "llama-3.3-70b-versatile"
+    language_model: str = "openai/gpt-oss-120b"
     vision_model: str = "meta-llama/llama-4-scout-17b-16e-instruct"
     language_timeout_seconds: float = 90.0
     language_max_tokens: int = 2000
