@@ -80,6 +80,9 @@ export function MapView({
       center: [76.66, 10.16],
       zoom: 10,
       attributionControl: { compact: true },
+      // Analysis regions are local, not world-spanning, so extra copies of
+      // the map only mean extra basemap tile requests for no visible gain.
+      renderWorldCopies: false,
     })
     map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-right')
     map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left')
@@ -91,6 +94,27 @@ export function MapView({
     map.on('load', () => {
       ensureVectorLayers(map)
       setReady(true)
+    })
+
+    // Basemap raster tiles come from a third-party server outside this
+    // app's control (network errors, rate limiting, transient corrupt
+    // responses). MapLibre surfaces every failed/undecodable tile as an
+    // `error` event; without a listener those become unhandled console
+    // errors that read as if the map itself broke. A tile source error
+    // just means one tile stays blank — it is not an application error,
+    // so it is logged (not hidden) and otherwise left to MapLibre's own
+    // retry-on-next-pan behaviour. Errors from other sources (the
+    // Sentinel-2 overlay layers, the selection/draft vector sources)
+    // still surface exactly as before.
+    map.on('error', (event) => {
+      // `sourceId` is set by MapLibre on source/tile errors at runtime but
+      // is not part of the public ErrorEvent type, hence the narrow cast.
+      const sourceId = (event as unknown as { sourceId?: string }).sourceId
+      if (sourceId === 'basemap') {
+        console.warn('basemap tile failed to load', event.error)
+        return
+      }
+      console.error('map error', event.error)
     })
 
     mapRef.current = map

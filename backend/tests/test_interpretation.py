@@ -160,6 +160,22 @@ def test_source_metadata_is_citable_evidence():
     assert 10.0 in claims.values()
 
 
+def test_methodology_figures_are_citable_evidence():
+    """The prompt shows the model the full evidence package, methodology
+    included, and tells it every number it writes must appear there — so a
+    methodology figure must be in the allowed set or a faithful citation of
+    it is wrongly rejected as fabricated."""
+    package = EvidencePackage(
+        region={},
+        periods={},
+        data_sources=[],
+        methodology={"analysis_grid": {"resolution_m": 10.0, "valid_pixels": 143100}},
+    )
+    claims = package.numeric_claims()
+    assert 10.0 in claims.values()
+    assert 143100.0 in claims.values()
+
+
 def test_years_are_not_treated_as_measurements():
     payload = dict(VALID_RESPONSE)
     payload["summary"] = (

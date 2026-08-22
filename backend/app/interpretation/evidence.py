@@ -38,7 +38,13 @@ class EvidencePackage:
         """Every number the interpretation is permitted to state.
 
         Used to verify that generated text does not introduce figures that were
-        never measured.
+        never measured. Walks the same structure sent to the model
+        (`to_dict()`) rather than a hand-picked subset of fields, so a number
+        the model was shown can never be rejected as fabricated just because
+        this function forgot to look at the field it came from — that
+        previously happened for `methodology` (grid resolution, radiometric
+        calibration, land-cover model metadata), which the prompt includes
+        and instructs the model to cite, but which this walk omitted.
         """
         claims: dict[str, float] = {}
 
@@ -52,13 +58,7 @@ class EvidencePackage:
             elif isinstance(node, (int, float)) and not isinstance(node, bool):
                 claims[prefix] = float(node)
 
-        walk("observed", self.observed)
-        walk("model_predictions", self.model_predictions)
-        walk("region", self.region)
-        walk("data_quality", self.data_quality)
-        # Source metadata carries citable figures too — scene cloud cover and
-        # ground resolution are values an interpretation legitimately quotes.
-        walk("data_sources", self.data_sources)
+        walk("", self.to_dict())
         return claims
 
 
