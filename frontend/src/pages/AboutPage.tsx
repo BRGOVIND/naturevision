@@ -50,8 +50,12 @@ export function AboutPage({ navigate }: { navigate: Navigate }) {
         <picture>
           <source media="(max-width: 640px)" srcSet="/hero/forest-portrait.webp" type="image/webp" />
           <source srcSet="/hero/forest-wide.webp" type="image/webp" />
-          <img src="/hero/forest-wide.jpg" alt="" loading="lazy" decoding="async" />
+          <img src="/hero/forest-wide.jpg" alt="" decoding="async" />
         </picture>
+        <figcaption>
+          Forest canopy. NatureVision's own measurements are computed from Sentinel-2 surface
+          reflectance, not from photographs.
+        </figcaption>
       </figure>
 
       <Section tone="charcoal">
