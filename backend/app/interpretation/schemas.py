@@ -80,3 +80,8 @@ class InterpretationEnvelope(BaseModel):
     grounding: dict[str, Any] = Field(default_factory=dict)
     available: bool = True
     unavailable_reason: str | None = None
+    #: "language_model" for a Groq-generated, grounding-validated response;
+    #: "measured" for the deterministic evidence summary produced when no
+    #: provider response is available. The client must never present the
+    #: latter as if a language model wrote it.
+    source: str | None = None

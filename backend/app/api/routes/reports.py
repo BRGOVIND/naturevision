@@ -11,6 +11,7 @@ from app.api.deps import AnalysisServiceDep, LanguageDep
 from app.core.errors import AnalysisStateError, ResourceNotFoundError
 from app.core.logging import get_logger
 from app.geospatial.render import RenderedLayer
+from app.interpretation.deterministic import build_deterministic_summary
 from app.interpretation.evidence import EvidencePackage
 from app.interpretation.schemas import InterpretationEnvelope
 from app.models import AnalysisStatus, Report
@@ -72,17 +73,36 @@ async def generate_report(
     if analysis.include_interpretation:
         try:
             envelope = await language.interpret(package)
+            if envelope.available:
+                envelope.source = "language_model"
         except Exception as exc:
             # A provider failure must not destroy a completed analysis.
             logger.warning("interpretation_unavailable", error=str(exc)[:300])
-            envelope = InterpretationEnvelope(
-                available=False,
-                unavailable_reason=(
-                    "The interpretation provider could not produce a response that "
-                    "passed validation, so this section was omitted. All measured "
-                    "results are unaffected."
-                ),
-            )
+            envelope = InterpretationEnvelope(available=False)
+
+        if not envelope.available:
+            # No language-model response passed grounding, or none was
+            # requested — a completed analysis still has measured evidence,
+            # so a deterministic restatement of it stands in. It goes through
+            # the same validator; nothing here is exempt from grounding.
+            fallback = build_deterministic_summary(package)
+            if fallback is not None:
+                summary, grounding = fallback
+                envelope = InterpretationEnvelope(
+                    interpretation=summary,
+                    provider=None,
+                    model=None,
+                    generated_at=dt.datetime.now(dt.UTC).isoformat(),
+                    grounding=grounding.to_dict(),
+                    available=True,
+                    source="measured",
+                )
+            else:
+                envelope.unavailable_reason = (
+                    envelope.unavailable_reason
+                    or "There is not enough measured evidence in this analysis to "
+                    "summarise. All measured results are unaffected."
+                )
     else:
         envelope = InterpretationEnvelope(
             available=False,

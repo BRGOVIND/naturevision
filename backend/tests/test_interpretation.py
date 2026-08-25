@@ -3,16 +3,18 @@
 from __future__ import annotations
 
 import json
+import re
 
 import httpx
 import pytest
 from pydantic import ValidationError
 
 from app.core.errors import InterpretationProviderError
+from app.interpretation.deterministic import build_deterministic_summary
 from app.interpretation.evidence import EvidencePackage, build_evidence
 from app.interpretation.language_service import LanguageInterpretationService, _extract_json
 from app.interpretation.schemas import Interpretation
-from app.interpretation.validation import validate_interpretation
+from app.interpretation.validation import UNSUPPORTED_CLAIM_PATTERNS, validate_interpretation
 
 VALID_RESPONSE = {
     "summary": (
@@ -334,3 +336,50 @@ async def test_vision_failure_returns_none_rather_than_raising(monkeypatch):
     service = _service(lambda _request: httpx.Response(500, text="nope"), monkeypatch)
     result = await service.interpret_image("data:image/png;base64,AAAA", "NDVI map", "context")
     assert result is None
+
+
+# --- deterministic fallback --------------------------------------------------
+def test_deterministic_summary_restates_only_measured_values():
+    """The fallback used when no language-model response is available must
+    itself pass the same grounding check applied to a real response."""
+    summary, grounding = build_deterministic_summary(_evidence())
+    assert grounding.passed
+    assert grounding.unsupported_numbers == []
+    assert "0.702" in summary.summary
+    assert "0.722" in summary.summary
+    # Every observation traces to a real evidence path, not an invented one.
+    claims = _evidence().numeric_claims()
+    for observation in summary.observations:
+        assert observation.evidence_key in claims
+
+
+def test_deterministic_summary_names_no_cause():
+    """The fallback must respect the same causal-overreach screen a
+    language-model response is checked against."""
+    summary, _ = build_deterministic_summary(_evidence())
+    text = (summary.summary + summary.interpretation).lower()
+    for pattern, _issue in UNSUPPORTED_CLAIM_PATTERNS:
+        assert not re.search(pattern, text), f"deterministic summary matched: {pattern}"
+
+
+def test_deterministic_summary_is_none_without_measured_ndvi():
+    """No mean_ndvi in the evidence means nothing safe to restate — the
+    fallback must decline rather than invent a summary."""
+    empty = EvidencePackage(region={}, periods={}, data_sources=[])
+    assert build_deterministic_summary(empty) is None
+
+
+def test_deterministic_summary_handles_a_single_observation_period():
+    """A single-period analysis has no change to describe; the fallback must
+    say so rather than fabricate a comparison."""
+    single_period = EvidencePackage(
+        region={},
+        periods={"period_a": "2021-01-01 to 2021-02-28", "period_b": None},
+        data_sources=[],
+        observed={"period_a": {"mean_ndvi": 0.702}},
+    )
+    result = build_deterministic_summary(single_period)
+    assert result is not None
+    summary, grounding = result
+    assert grounding.passed
+    assert "no second observation period" in summary.summary.lower()
