@@ -1815,14 +1815,28 @@
   margin: 0;
   height: clamp(12rem, 26vw, 20rem);
   overflow: hidden;
+  /* A real fallback, not just a transparent gap, if the image is ever slow
+     or fails to load — the strip still reads as a deliberate dark divider. */
+  background: var(--canopy-2);
 }
-.media-strip picture,
+/* Absolutely positioned against the strip's own explicit height, the same
+   way the landing hero's image is sized — a `<picture>` is not a replaced
+   element, so giving it `height: 100%` and trusting that to resolve through
+   an unpositioned box is the one technique that reliably failed to paint. */
+.media-strip picture {
+  position: absolute;
+  inset: 0;
+}
 .media-strip img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 40%;
+  /* The source photographs are hazy canopy shots where sky fills roughly
+     the top half of the frame and the trees only appear in the bottom
+     third — a container this short needs the crop biased hard toward the
+     bottom, or it shows nothing but pale fog. */
+  object-position: center 88%;
 }
 .media-strip::after {
   content: '';
