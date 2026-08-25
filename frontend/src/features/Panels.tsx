@@ -238,7 +238,7 @@ export function InterpretationPanel({ report, busy, available, onGenerate }: Int
   const interpretation = report.interpretation as
     | {
         summary: string
-        observations: { statement: string }[]
+        observations: { statement: string; evidence_key?: string | null }[]
         interpretation: string
         uncertainty: string
         limitations: string[]
@@ -257,50 +257,63 @@ export function InterpretationPanel({ report, busy, available, onGenerate }: Int
   }
 
   const grounding = (report as unknown as { grounding?: Record<string, number> }).grounding
+  // A response with no provider name only ever comes from the deterministic
+  // fallback (see reports.py) — the language-model path always sets one.
+  const measured = !report.interpretation_provider
 
   return (
     <div className="interp">
       <div className="interp__meta">
-        <ProvenanceBadge kind="interpretation" />
-        <span className="mono">
-          {report.interpretation_provider} · {report.interpretation_model}
-        </span>
-        <span className={`confidence confidence--${interpretation.confidence_qualifier}`}>
-          {interpretation.confidence_qualifier} confidence
-        </span>
+        <ProvenanceBadge kind="interpretation" label={measured ? 'Evidence summary' : undefined} />
+        {measured ? (
+          <span className="mono">Generated deterministically from measured values</span>
+        ) : (
+          <span className="mono">
+            {report.interpretation_provider} · {report.interpretation_model}
+          </span>
+        )}
+        {!measured && (
+          <span className={`confidence confidence--${interpretation.confidence_qualifier}`}>
+            {interpretation.confidence_qualifier} confidence
+          </span>
+        )}
       </div>
 
-      <p className="interp__summary">{interpretation.summary}</p>
-
-      <div className="interp__grid">
-        <section className="interp__block interp__block--observed">
-          <h3>Observed signals</h3>
-          <ul>
-            {interpretation.observations.map((o, i) => (
-              <li key={i}>{o.statement}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section className="interp__block">
-          <h3>Interpretation</h3>
+      <div className="interp__layout">
+        <div className="interp__text">
+          <p className="interp__summary">{interpretation.summary}</p>
+          <h3>{measured ? 'What the values show' : 'Interpretation'}</h3>
           <p>{interpretation.interpretation}</p>
-        </section>
-
-        <section className="interp__block">
           <h3>Uncertainty</h3>
           <p>{interpretation.uncertainty}</p>
-        </section>
-
-        <section className="interp__block interp__block--limits">
-          <h3>Limitations</h3>
-          <ul>
-            {interpretation.limitations.map((l, i) => (
-              <li key={i}>{l}</li>
-            ))}
-          </ul>
-        </section>
+        </div>
+        <div className="interp__field-mark" aria-hidden="true">
+          <svg viewBox="0 0 200 240" preserveAspectRatio="none">
+            <path d="M -10,40 Q 60,10 100,50 T 210,45" />
+            <path d="M -10,95 Q 70,70 110,105 T 210,95" />
+            <path d="M -10,150 Q 55,125 105,160 T 210,150" />
+            <path d="M -10,205 Q 65,180 100,210 T 210,200" />
+          </svg>
+        </div>
       </div>
+
+      <ul className="interp__anchors">
+        {interpretation.observations.map((o, i) => (
+          <li key={i}>
+            <span>{o.statement}</span>
+            {o.evidence_key && <code className="mono">{o.evidence_key}</code>}
+          </li>
+        ))}
+      </ul>
+
+      <section className="interp__block interp__block--limits">
+        <h3>Limitations</h3>
+        <ul>
+          {interpretation.limitations.map((l, i) => (
+            <li key={i}>{l}</li>
+          ))}
+        </ul>
+      </section>
 
       {report.visual_interpretation && (
         <section className="interp__block">
@@ -316,7 +329,9 @@ export function InterpretationPanel({ report, busy, available, onGenerate }: Int
       )}
 
       <p className="interp__footnote">
-        Written by a language model from the measured evidence only.
+        {measured
+          ? 'Generated deterministically from the measured evidence above, not written by a language model — no provider response passed grounding validation for this analysis.'
+          : 'Written by a language model from the measured evidence only.'}
         {grounding?.checked_number_count != null &&
           ` Grounding check: ${grounding.matched_number_count} of ${grounding.checked_number_count} numeric statements matched a measured value.`}{' '}
         It contains no independent measurement.

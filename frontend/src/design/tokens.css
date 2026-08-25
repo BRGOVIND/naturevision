@@ -20,6 +20,14 @@
   --lichen: #7fa650; /* warm olive-green — living vegetation */
   --lichen-soft: #a3c078;
 
+  /* A wider green register, named for what it actually looks like in a
+     forest rather than by function — used to keep the four provenance
+     registers (below) visually distinct without ever leaving the palette. */
+  --olive: #5f6e34; /* moss / olive-green */
+  --forest-deep: #17311f; /* deep forest, darker than --moss */
+  --eucalyptus: #7c9683; /* muted sage / eucalyptus — cooler, greyer */
+  --pine: #37453c; /* dark, desaturated pine */
+
   --cream: #f4efe4; /* soft cream — reading surface */
   --cream-2: #eae3d4; /* recessed cream */
   --cream-3: #ded5c2; /* cream borders */
@@ -33,16 +41,22 @@
   --sandstone: #c9b28a;
 
   /* --- provenance registers ------------------------------------------ */
+  /* Four registers, four distinct greens — never the same shade twice, so
+     the difference reads by value and saturation as well as by the organic
+     silhouette each one is drawn with, not by hue alone. */
   /* Observed: measured by deterministic processing. */
-  --observed: #7fa650;
-  --observed-ink: #3f5c22;
+  --observed: var(--olive);
+  --observed-ink: #3c4720;
   /* Model: statistical prediction, carries error. */
-  --model: #d3a03c;
-  --model-ink: #7a5a12;
-  /* Interpreted: language-model synthesis. Deliberately outside the earth
-     palette so it never reads as a measurement. */
-  --interpreted: #6b8299;
-  --interpreted-ink: #3c4f61;
+  --model: var(--forest-deep);
+  --model-ink: #0e2015;
+  /* Interpreted: language-model synthesis, or — when no model response
+     passes grounding — a deterministic summary of measured values only. */
+  --interpreted: var(--eucalyptus);
+  --interpreted-ink: #445c4e;
+  /* Metadata: configuration and provenance, not a claim about the world. */
+  --metadata: var(--pine);
+  --metadata-ink: #232b26;
 
   /* --- semantic ------------------------------------------------------- */
   --danger: #b4462f;
