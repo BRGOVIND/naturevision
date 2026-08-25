@@ -10,6 +10,7 @@ import { AboutPage } from './pages/AboutPage'
 import { ExplorePage } from './pages/ExplorePage'
 import { LandingPage } from './pages/LandingPage'
 import { MethodologyPage } from './pages/MethodologyPage'
+import { NotFoundPage } from './pages/NotFoundPage'
 import { ReportsPage } from './pages/ReportsPage'
 import { WorkspacePage } from './pages/WorkspacePage'
 import { api } from './services/api'
@@ -22,6 +23,7 @@ const PAGE_TITLES: Record<string, string> = {
   '/methodology': 'Methodology — NatureVision',
   '/reports': 'Reports — NatureVision',
   '/about': 'About — NatureVision',
+  'not-found': 'Not found — NatureVision',
 }
 
 export default function App() {
@@ -108,6 +110,7 @@ export default function App() {
           {route === '/methodology' && <MethodologyPage />}
           {route === '/reports' && <ReportsPage navigate={navigate} />}
           {route === '/about' && <AboutPage navigate={navigate} />}
+          {route === 'not-found' && <NotFoundPage navigate={navigate} />}
         </main>
 
         <Footer navigate={navigate} />

@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 
 import { Button } from '../design/primitives'
-import type { Navigate, Route } from './router'
+import type { Navigate, Route, RouterState } from './router'
 
 const LINKS: { label: string; route: Route }[] = [
   { label: 'Explore', route: '/explore' },
@@ -13,7 +13,7 @@ const LINKS: { label: string; route: Route }[] = [
   { label: 'About', route: '/about' },
 ]
 
-export function Nav({ route, navigate }: { route: Route; navigate: Navigate }) {
+export function Nav({ route, navigate }: { route: RouterState; navigate: Navigate }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 

@@ -18,13 +18,17 @@ export const ROUTES = [
 ] as const
 export type Route = (typeof ROUTES)[number]
 
-function normalise(pathname: string): Route {
+/** `navigate()` only ever targets a real page; `'not-found'` is a render
+ * state the router can land in on its own, for a path nothing matches. */
+export type RouterState = Route | 'not-found'
+
+function normalise(pathname: string): RouterState {
   const candidate = pathname.replace(/\/+$/, '') || '/'
-  return (ROUTES as readonly string[]).includes(candidate) ? (candidate as Route) : '/'
+  return (ROUTES as readonly string[]).includes(candidate) ? (candidate as Route) : 'not-found'
 }
 
 export function useRouter() {
-  const [route, setRoute] = useState<Route>(() => normalise(window.location.pathname))
+  const [route, setRoute] = useState<RouterState>(() => normalise(window.location.pathname))
 
   useEffect(() => {
     const onPop = () => setRoute(normalise(window.location.pathname))
