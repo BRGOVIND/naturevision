@@ -46,6 +46,14 @@ export function AboutPage({ navigate }: { navigate: Navigate }) {
         </Container>
       </Section>
 
+      <figure className="media-strip">
+        <picture>
+          <source media="(max-width: 640px)" srcSet="/hero/forest-portrait.webp" type="image/webp" />
+          <source srcSet="/hero/forest-wide.webp" type="image/webp" />
+          <img src="/hero/forest-wide.jpg" alt="" loading="lazy" decoding="async" />
+        </picture>
+      </figure>
+
       <Section tone="charcoal">
         <Container>
           <SectionHead tone="dark" title="Technology" />

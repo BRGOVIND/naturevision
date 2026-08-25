@@ -247,58 +247,76 @@
 }
 
 /* ======================================================================== */
-/* Provenance badges                                                         */
+/* Provenance marks                                                          */
 /* ======================================================================== */
+/* Four registers a value can carry — observed, predicted, interpreted,
+   metadata — each drawn as its own irregular silhouette in its own shade of
+   green, so the difference reads as an object, not a coloured label. Every
+   mark still carries its text, so nothing depends on colour alone. The four
+   border-radius values are hand-picked, not a formula, so no two badges on
+   a page ever look like copies of one template. */
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.34rem;
-  padding: 0.16rem 0.5rem;
-  border-radius: 100px;
-  border: 1px solid currentColor;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem 0.32rem 0.7rem;
+  border: none;
   font-family: var(--font-mono);
   font-size: var(--step--2);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.04em;
   white-space: nowrap;
+  transition:
+    transform var(--t-base) var(--ease),
+    border-radius var(--t-base) var(--ease);
+}
+.badge:hover {
+  transform: translateY(-1px) scale(1.04) rotate(-1deg);
 }
 .badge__dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
+  flex: none;
   border-radius: 50%;
   background: currentColor;
+  opacity: 0.75;
 }
 .badge--observed {
   color: var(--observed-ink);
-  background: rgb(127 166 80 / 0.14);
+  background: rgb(95 110 52 / 0.16);
+  border-radius: 62% 38% 55% 45% / 43% 51% 49% 57%;
 }
 .badge--model_prediction {
-  color: var(--model-ink);
-  background: rgb(211 160 60 / 0.16);
+  color: #eef3ec;
+  background: var(--forest-deep);
+  border-radius: 38% 62% 47% 53% / 58% 44% 56% 42%;
 }
 .badge--interpretation {
   color: var(--interpreted-ink);
-  background: rgb(107 130 153 / 0.16);
+  background: rgb(124 150 131 / 0.22);
+  border-radius: 51% 49% 63% 37% / 39% 58% 42% 61%;
 }
 .badge--metadata {
-  color: var(--ink-faint);
-  background: rgb(125 138 129 / 0.12);
+  color: #dfe6e1;
+  background: var(--pine);
+  border-radius: 44% 56% 40% 60% / 61% 45% 55% 39%;
 }
 .section--canopy .badge--observed,
 .section--charcoal .badge--observed {
-  color: var(--observed);
-}
-.section--canopy .badge--model_prediction,
-.section--charcoal .badge--model_prediction {
-  color: var(--model);
+  color: var(--ink-on-dark);
+  background: rgb(95 110 52 / 0.4);
 }
 .section--canopy .badge--interpretation,
 .section--charcoal .badge--interpretation {
-  color: #9db4c9;
+  color: var(--ink-on-dark);
+  background: rgb(124 150 131 / 0.32);
 }
-.section--canopy .badge--metadata,
-.section--charcoal .badge--metadata {
-  color: var(--ink-on-dark-muted);
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+  .badge:hover {
+    transform: none;
+  }
 }
 
 /* ======================================================================== */
@@ -377,21 +395,43 @@
   gap: var(--s-5);
 }
 .nav__link {
+  position: relative;
   color: var(--ink-on-dark-muted);
   text-decoration: none;
   font-size: var(--step--1);
   padding: 0.3rem 0;
-  border-bottom: 1px solid transparent;
-  transition:
-    color var(--t-fast) var(--ease),
-    border-color var(--t-fast) var(--ease);
+  transition: color var(--t-fast) var(--ease);
+}
+/* A line that grows from the left on hover rather than a border that snaps
+   on and off — and stays grown, from the left, when the link is active. */
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 100%;
+  background: var(--lichen);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--t-base) var(--ease);
 }
 .nav__link:hover {
   color: var(--ink-on-dark);
 }
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
 .nav__link--active {
   color: var(--lichen);
-  border-bottom-color: var(--lichen);
+}
+.nav__link--active::after {
+  transform: scaleX(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav__link::after {
+    transition: none;
+  }
 }
 .nav__toggle {
   display: none;
@@ -717,7 +757,10 @@
 /* --- map frame ----------------------------------------------------------- */
 .map-frame {
   border: 1px solid var(--line-dark);
-  border-radius: var(--r-3);
+  /* An organic asymmetry on two corners only — enough to read as a drawn
+     edge rather than a stamped rectangle, without softening every corner
+     into the generic rounded-card look. */
+  border-radius: var(--r-3) 2.5rem var(--r-3) var(--r-3);
   overflow: hidden;
   background: var(--canopy-2);
 }
@@ -876,63 +919,103 @@
 .lifecycle--failed .lifecycle__percent {
   color: var(--danger-soft);
 }
-.lifecycle__bar {
-  height: 4px;
-  background: var(--canopy);
-  border-radius: 2px;
-  overflow: hidden;
+
+/* The journey: a fixed contour, a length-bound fill riding the server's own
+   progress fraction, a travelling mark at the fill's leading edge, and seven
+   points along the line where a real stage transition happened. */
+.lifecycle__journey {
+  width: 100%;
+  height: auto;
+  margin-top: var(--s-6);
+  overflow: visible;
 }
-.lifecycle__fill {
-  height: 100%;
-  background: var(--lichen);
-  transition: width var(--t-slow) var(--ease);
+.lifecycle__contour {
+  fill: none;
+  stroke: var(--line-dark);
+  stroke-width: 1.5;
 }
-.lifecycle__fill--failed {
-  background: var(--danger);
+.lifecycle__contour-fill {
+  fill: none;
+  stroke: var(--lichen);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  transition: stroke-dashoffset var(--t-slow) var(--ease);
 }
-.lifecycle__steps {
-  list-style: none;
-  padding: 0;
-  margin-top: var(--s-5);
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: var(--s-3);
+.lifecycle__contour-fill--failed {
+  stroke: var(--danger);
 }
-.lifecycle__step {
-  display: grid;
-  gap: 0.3rem;
-  padding-top: var(--s-3);
-  border-top: 2px solid var(--line-dark);
-  font-size: var(--step--2);
-  color: var(--ink-on-dark-faint);
+.lifecycle__signal {
+  fill: var(--cream);
+  stroke: var(--lichen);
+  stroke-width: 2;
+  animation: signal-pulse 1.8s ease-in-out infinite;
 }
-.lifecycle__step--done {
-  border-top-color: var(--moss-bright);
-  color: var(--ink-on-dark-muted);
+.lifecycle__mark circle {
+  fill: var(--canopy);
+  stroke: var(--line-dark);
+  stroke-width: 1.5;
+  transition:
+    fill var(--t-base) var(--ease),
+    stroke var(--t-base) var(--ease),
+    r var(--t-base) var(--ease);
 }
-.lifecycle__step--current {
-  border-top-color: var(--lichen);
-  color: var(--lichen);
+.lifecycle__mark text {
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.03em;
+  fill: var(--ink-on-dark-faint);
+  transition: fill var(--t-base) var(--ease);
 }
-.lifecycle__step--failed {
-  border-top-color: var(--danger);
-  color: var(--danger-soft);
+.lifecycle__mark--done circle {
+  fill: var(--moss-bright);
+  stroke: var(--moss-bright);
 }
-.lifecycle__marker {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: currentColor;
+.lifecycle__mark--done text {
+  fill: var(--ink-on-dark-muted);
 }
-.lifecycle__step--current .lifecycle__marker {
-  box-shadow: 0 0 0 4px rgb(127 166 80 / 0.2);
+.lifecycle__mark--current circle {
+  fill: var(--lichen);
+  stroke: var(--lichen);
 }
-.lifecycle__step-label {
+.lifecycle__mark--current text {
+  fill: var(--lichen);
   font-weight: 600;
 }
-.lifecycle__step-note {
-  color: var(--ink-on-dark-faint);
-  line-height: 1.4;
+.lifecycle__mark--failed circle {
+  fill: var(--danger);
+  stroke: var(--danger);
+}
+.lifecycle__mark--failed text {
+  fill: var(--danger-soft);
+}
+@keyframes signal-pulse {
+  0%,
+  100% {
+    r: 4.5;
+    opacity: 1;
+  }
+  50% {
+    r: 6;
+    opacity: 0.7;
+  }
+}
+@media (max-width: 640px) {
+  /* Seven labels collide below ~640px; the heading above already names the
+     current stage in full, so the marks stand alone here. */
+  .lifecycle__mark text {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lifecycle__contour-fill {
+    transition: none;
+  }
+  .lifecycle__signal {
+    animation: none;
+  }
+  .lifecycle__mark circle {
+    transition: none;
+  }
 }
 
 .spinner__ring {
@@ -1306,6 +1389,79 @@
   max-width: 60ch;
   margin-bottom: var(--s-6);
 }
+
+/* Editorial text on the left, a quiet field-note texture on the right —
+   a "scientific field note" rather than another boxed panel. */
+.interp__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 12rem;
+  gap: var(--s-7);
+  align-items: start;
+}
+.interp__text h3 {
+  margin-top: var(--s-5);
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--ink-on-dark-faint);
+  font-weight: 500;
+}
+.interp__text p {
+  margin-top: var(--s-2);
+  color: var(--ink-on-dark-muted);
+  font-size: var(--step--1);
+  line-height: 1.6;
+}
+.interp__field-mark {
+  align-self: stretch;
+  min-height: 12rem;
+  opacity: 0.4;
+}
+.interp__field-mark svg {
+  width: 100%;
+  height: 100%;
+}
+.interp__field-mark path {
+  fill: none;
+  stroke: var(--eucalyptus);
+  stroke-width: 1;
+}
+.interp__field-mark path:nth-child(2n) {
+  stroke: var(--lichen-soft);
+}
+
+/* Each restated claim, with the evidence path it was checked against —
+   the grounding connection made visible rather than only asserted below. */
+.interp__anchors {
+  list-style: none;
+  margin: var(--s-6) 0 0;
+  padding: var(--s-4) 0 0;
+  border-top: 1px solid var(--line-dark);
+  display: grid;
+  gap: var(--s-2) var(--s-6);
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+.interp__anchors li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  font-size: var(--step--1);
+  color: var(--ink-on-dark-muted);
+}
+.interp__anchors code {
+  flex: none;
+  font-size: var(--step--2);
+  color: var(--ink-on-dark-faint);
+}
+@media (max-width: 720px) {
+  .interp__layout {
+    grid-template-columns: 1fr;
+  }
+  .interp__field-mark {
+    display: none;
+  }
+}
 /* Observed / interpretation / uncertainty sit side by side; limitations is
    always the longest block, so it spans the full width and flows into columns
    rather than stretching one cell and leaving the others empty. */
@@ -1317,6 +1473,10 @@
 }
 .interp__block--limits {
   grid-column: 1 / -1;
+  border-top-color: var(--pine);
+}
+.interp__block--limits h3 {
+  color: var(--eucalyptus);
 }
 /* Both classes are on the element, so this outranks `.interp__block ul`
    regardless of source order — equal specificity there let the grid display
@@ -1348,12 +1508,6 @@
 }
 .interp__block--observed h3 {
   color: var(--observed);
-}
-.interp__block--limits {
-  border-top-color: var(--model);
-}
-.interp__block--limits h3 {
-  color: var(--model);
 }
 .interp__block p,
 .interp__block li {
@@ -1615,6 +1769,83 @@
 }
 .page-head .calibration {
   margin-top: var(--s-7);
+}
+
+/* -------------------------------------------------------------------- */
+/* Not found: the sole content of its route, so it carries its own       */
+/* vertical rhythm rather than the page-head convention above.           */
+/* -------------------------------------------------------------------- */
+.not-found {
+  padding-block: var(--s-9);
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+.not-found .container {
+  text-align: center;
+}
+.not-found .section-head {
+  margin-inline: auto;
+  margin-bottom: var(--s-6);
+}
+.not-found__mark {
+  font-family: var(--font-display);
+  font-size: clamp(6rem, 4rem + 10vw, 13rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink-on-dark);
+  opacity: 0.14;
+  margin-bottom: var(--s-4);
+}
+.not-found__strip {
+  max-width: 22rem;
+  margin: 0 auto var(--s-7);
+}
+.not-found__actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+}
+
+/* A restrained image bleed between two sections, standing in for a hard
+   divider — used sparingly, once per secondary page at most. */
+.media-strip {
+  position: relative;
+  margin: 0;
+  height: clamp(12rem, 26vw, 20rem);
+  overflow: hidden;
+}
+.media-strip picture,
+.media-strip img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.media-strip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(9 22 15 / 0.5) 0%,
+    rgb(9 22 15 / 0.05) 30%,
+    rgb(9 22 15 / 0.05) 70%,
+    rgb(9 22 15 / 0.55) 100%
+  );
+}
+.media-strip figcaption {
+  position: absolute;
+  left: var(--s-5);
+  bottom: var(--s-4);
+  z-index: 1;
+  max-width: 32rem;
+  font-family: var(--font-mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.02em;
+  color: rgb(255 255 255 / 0.78);
 }
 /* Two columns on wide screens: each stage stays within a readable measure
    while the page avoids a long single column beside empty space. */

@@ -94,6 +94,15 @@ export function MethodologyPage() {
         <CalibrationStrip />
       </Section>
 
+      <figure className="media-strip">
+        <picture>
+          <source media="(max-width: 640px)" srcSet="/hero/forest-portrait.webp" type="image/webp" />
+          <source srcSet="/hero/forest-mid.webp" type="image/webp" />
+          <img src="/hero/forest-mid.jpg" alt="" loading="lazy" decoding="async" />
+        </picture>
+        <figcaption>Forest canopy. The measurements on this page come from Sentinel-2, not from photographs.</figcaption>
+      </figure>
+
       <Section tone="cream">
         <Container>
           <div className="stages">
