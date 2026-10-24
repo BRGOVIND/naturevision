@@ -5,10 +5,11 @@ from __future__ import annotations
 import os
 from functools import lru_cache
 from pathlib import Path
+from typing import Annotated
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from pydantic import Field, field_validator, model_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
 REPO_ROOT = BACKEND_ROOT.parent
@@ -29,7 +30,9 @@ class Settings(BaseSettings):
     log_level: str = Field(default="INFO")
     log_format: str = Field(default="console", description="console | json")
     api_prefix: str = "/api/v1"
-    cors_origins: list[str] = Field(default=["http://localhost:5173", "http://localhost:3000"])
+    cors_origins: Annotated[list[str], NoDecode] = Field(
+        default=["http://localhost:5173", "http://localhost:3000"]
+    )
 
     # --- database ------------------------------------------------------
     database_url: str = Field(
