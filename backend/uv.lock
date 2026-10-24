@@ -1432,6 +1432,7 @@ dev = [
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
     { name = "ruff" },
+    { name = "torch" },
     { name = "types-requests" },
 ]
 pdf = [
@@ -1478,6 +1479,7 @@ requires-dist = [
     { name = "shapely", specifier = ">=2.0" },
     { name = "sqlalchemy", specifier = ">=2.0.36" },
     { name = "structlog", specifier = ">=24.4" },
+    { name = "torch", marker = "extra == 'dev'", specifier = ">=2.5" },
     { name = "torch", marker = "extra == 'torch'", specifier = ">=2.5" },
     { name = "types-requests", marker = "extra == 'dev'" },
     { name = "typing-extensions", specifier = ">=4.12" },
