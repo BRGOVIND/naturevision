@@ -40,6 +40,7 @@ from app.imagery.stac import SentinelHubStacProvider
 from app.interpretation.evidence import EvidencePackage
 from app.models import (
     Analysis,
+    AnalysisLayer,
     AnalysisStatus,
     EnvironmentalMetric,
     ModelPrediction,
@@ -165,6 +166,8 @@ async def run_analysis_task(analysis_id: str) -> None:
         async with factory() as session:
             service = AnalysisService(session)
             analysis = await service.get(analysis_id)
+            if analysis.status == AnalysisStatus.REPORT_READY:
+                return
             region = validate_region(
                 geometry=analysis.region.geometry_geojson, crs=analysis.region.crs
             )
@@ -190,7 +193,7 @@ async def run_analysis_task(analysis_id: str) -> None:
             outcome = await orchestrator.run(request, progress)
 
             await progress(AnalysisStatus.INTERPRETING, "Rendering map layers", 0.88)
-            manifest = _persist_layers(analysis_id, outcome)
+            manifest = _persist_layers(analysis_id, outcome, session)
 
             _persist_results(session, analysis, outcome, manifest)
             analysis.status = AnalysisStatus.REPORT_READY
@@ -233,15 +236,21 @@ async def _record_failure(factory, analysis_id: str, code: str, message: str) ->
 
 
 # --- persistence helpers ----------------------------------------------------
-def _persist_layers(analysis_id: str, outcome: AnalysisOutcome) -> dict[str, Any]:
+def _persist_layers(
+    analysis_id: str, outcome: AnalysisOutcome, session: AsyncSession
+) -> dict[str, Any]:
     """Render every available overlay once and write it to the artifact store."""
     directory = analysis_dir(analysis_id)
-    directory.mkdir(parents=True, exist_ok=True)
+    if not settings.use_database_artifacts:
+        directory.mkdir(parents=True, exist_ok=True)
 
     rendered: dict[str, RenderedLayer] = {}
 
     def add(key: str, layer: RenderedLayer) -> None:
-        (directory / f"{key}.png").write_bytes(layer.png)
+        if settings.use_database_artifacts:
+            session.add(AnalysisLayer(analysis_id=analysis_id, key=key, png=layer.png))
+        else:
+            (directory / f"{key}.png").write_bytes(layer.png)
         rendered[key] = layer
 
     add("ndvi_a", render_continuous(outcome.period_a.ndvi))
@@ -444,9 +453,21 @@ def _persist_results(
         analysis.status_detail = outcome.land_cover_unavailable_reason
 
 
-def read_layer(analysis_id: str, layer_key: str) -> bytes:
+async def read_layer(
+    analysis_id: str, layer_key: str, session: AsyncSession | None = None
+) -> bytes:
     """Read a previously rendered overlay from the artifact store."""
     safe_key = "".join(c for c in layer_key if c.isalnum() or c in "_-")
+    if settings.use_database_artifacts:
+        if session is None:
+            raise RuntimeError("A database session is required for stored map layers")
+        layer = await session.get(AnalysisLayer, (analysis_id, safe_key))
+        if layer is None:
+            raise ResourceNotFoundError(
+                "That map layer was not produced for this analysis.",
+                details={"layer": layer_key},
+            )
+        return layer.png
     path = analysis_dir(analysis_id) / f"{safe_key}.png"
     if not path.is_file():
         raise ResourceNotFoundError(

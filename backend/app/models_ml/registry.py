@@ -20,7 +20,6 @@ from app.core.errors import ModelInferenceError, ModelUnavailableError
 from app.core.logging import get_logger
 from app.models_ml.backends.base import LandCoverBackend, ModelMetadata
 from app.models_ml.backends.random_forest import RandomForestBackend
-from app.models_ml.backends.torch_mlp import TorchMLPBackend
 from app.models_ml.features import FEATURE_NAMES, FEATURE_VERSION
 
 logger = get_logger(__name__)
@@ -29,12 +28,11 @@ MANIFEST_FILENAME = "manifest.json"
 
 BACKENDS: dict[str, type[LandCoverBackend]] = {
     RandomForestBackend.backend_name: RandomForestBackend,
-    TorchMLPBackend.backend_name: TorchMLPBackend,
 }
 
 ARTIFACT_FILENAMES: dict[str, str] = {
     RandomForestBackend.backend_name: "model.joblib",
-    TorchMLPBackend.backend_name: "model.pt",
+    "torch_mlp": "model.pt",
 }
 
 
@@ -86,6 +84,9 @@ def available_models() -> list[dict[str, Any]]:
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
         except json.JSONDecodeError:
             logger.warning("model_manifest_unreadable", directory=candidate.name)
+            continue
+        artifact_name = manifest.get("artifact", ARTIFACT_FILENAMES.get(candidate.name, ""))
+        if not (candidate / artifact_name).is_file():
             continue
         found.append({"directory": candidate.name, **manifest.get("metadata", {})})
     return found
@@ -140,7 +141,17 @@ class ModelRegistry:
                     details={"artifact": artifact_path.name},
                 )
 
-        backend_cls = BACKENDS.get(metadata.backend or name)
+        backend_name = metadata.backend or name
+        if backend_name == "torch_mlp":
+            try:
+                from app.models_ml.backends.torch_mlp import TorchMLPBackend
+            except ImportError as exc:
+                raise ModelUnavailableError(
+                    "The optional PyTorch backend is not installed on this deployment."
+                ) from exc
+            backend_cls = TorchMLPBackend
+        else:
+            backend_cls = BACKENDS.get(backend_name)
         if backend_cls is None:
             raise ModelUnavailableError(
                 f"Unknown model backend '{metadata.backend}'.",

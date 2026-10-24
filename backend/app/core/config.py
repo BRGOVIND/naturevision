@@ -2,10 +2,12 @@
 
 from __future__ import annotations
 
+import os
 from functools import lru_cache
 from pathlib import Path
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
-from pydantic import Field, field_validator
+from pydantic import Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 BACKEND_ROOT = Path(__file__).resolve().parents[2]
@@ -75,6 +77,27 @@ class Settings(BaseSettings):
 
     # --- storage -----------------------------------------------------------
     artifact_dir: Path = Field(default=BACKEND_ROOT / "artifacts" / "analyses")
+    use_database_artifacts: bool = False
+
+    @model_validator(mode="after")
+    def configure_vercel(self) -> Settings:
+        if not os.getenv("VERCEL"):
+            return self
+        self.raster_cache_dir = Path("/tmp/naturevision/raster")
+        self.artifact_dir = Path("/tmp/naturevision/artifacts")
+        self.use_database_artifacts = True
+        neon_url = os.getenv("NEON_DATABASE_URL")
+        if neon_url:
+            parsed = urlsplit(neon_url)
+            query = urlencode([
+                (key, value)
+                for key, value in parse_qsl(parsed.query)
+                if key not in {"channel_binding", "sslmode"}
+            ])
+            self.database_url = urlunsplit(
+                ("postgresql+asyncpg", parsed.netloc, parsed.path, query, parsed.fragment)
+            )
+        return self
 
     @field_validator("cors_origins", mode="before")
     @classmethod
@@ -97,7 +120,10 @@ class Settings(BaseSettings):
         return bool(self.groq_api_key)
 
     def ensure_directories(self) -> None:
-        for directory in (self.raster_cache_dir, self.model_dir, self.artifact_dir):
+        directories = (self.raster_cache_dir, self.artifact_dir)
+        if not self.use_database_artifacts:
+            directories += (self.model_dir,)
+        for directory in directories:
             directory.mkdir(parents=True, exist_ok=True)
 
 

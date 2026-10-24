@@ -25,7 +25,9 @@ def get_engine() -> AsyncEngine:
     if _engine is None:
         kwargs: dict = {"echo": settings.db_echo, "future": True}
         if settings.is_postgres:
-            kwargs.update(pool_size=10, max_overflow=20, pool_pre_ping=True, pool_recycle=1800)
+            kwargs.update(pool_size=2, max_overflow=3, pool_pre_ping=True, pool_recycle=1800)
+            if settings.use_database_artifacts:
+                kwargs["connect_args"] = {"ssl": "require"}
         _engine = create_async_engine(settings.database_url, **kwargs)
     return _engine
 

@@ -8,6 +8,7 @@ from fastapi import APIRouter, Query, Response, status
 from sqlalchemy import select
 
 from app.api.deps import AnalysisServiceDep, LanguageDep
+from app.core.config import settings
 from app.core.errors import AnalysisStateError, ResourceNotFoundError
 from app.core.logging import get_logger
 from app.geospatial.render import RenderedLayer
@@ -18,7 +19,7 @@ from app.models import AnalysisStatus, Report
 from app.reports.builder import build_report
 from app.reports.export import pdf_available, render_html, render_pdf, write_html
 from app.schemas.analysis import ReportRequest, ReportResponse
-from app.services.analysis_service import analysis_dir
+from app.services.analysis_service import read_layer
 
 logger = get_logger(__name__)
 router = APIRouter(tags=["reports"])
@@ -111,7 +112,7 @@ async def generate_report(
 
     visual = None
     if payload.include_visual_interpretation and envelope.available:
-        visual = await _describe_ndvi_layer(analysis.id, language, package)
+        visual = await _describe_ndvi_layer(analysis.id, language, package, service)
         envelope.visual = visual
 
     region_name = analysis.region.name or package.region.get("name") or "selected region"
@@ -122,7 +123,7 @@ async def generate_report(
         region_name=region_name,
     )
 
-    html_path = write_html(structure, analysis.id)
+    html_path = None if settings.use_database_artifacts else write_html(structure, analysis.id)
 
     if existing is not None:
         await service.session.delete(existing)
@@ -136,7 +137,7 @@ async def generate_report(
         visual_interpretation=visual.model_dump() if visual else None,
         interpretation_provider=envelope.provider,
         interpretation_model=envelope.model,
-        html_path=str(html_path),
+        html_path=str(html_path) if html_path else None,
         generated_at=dt.datetime.now(dt.UTC),
     )
     service.session.add(report)
@@ -217,13 +218,16 @@ async def _load_report(service: AnalysisServiceDep, report_id: str) -> Report:
     return report
 
 
-async def _describe_ndvi_layer(analysis_id: str, language: LanguageDep, package: EvidencePackage):
+async def _describe_ndvi_layer(
+    analysis_id: str, language: LanguageDep, package: EvidencePackage, service: AnalysisServiceDep
+):
     """Run vision interpretation over the rendered NDVI overlay, if present."""
-    path = analysis_dir(analysis_id) / "ndvi_a.png"
-    if not path.is_file():
+    try:
+        png = await read_layer(analysis_id, "ndvi_a", service.session)
+    except ResourceNotFoundError:
         return None
     layer = RenderedLayer(
-        png=path.read_bytes(),
+        png=png,
         bounds=[],
         legend=[],
         value_min=None,

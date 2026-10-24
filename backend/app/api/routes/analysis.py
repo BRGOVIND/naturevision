@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from typing import Any
 
 from fastapi import APIRouter, Query, Response, status
@@ -58,7 +59,12 @@ async def create_analysis(
         include_land_cover=payload.include_land_cover,
         include_interpretation=payload.include_interpretation,
     )
-    schedule_analysis(analysis.id)
+    if os.getenv("VERCEL"):
+        from vercel.queue import send
+
+        await send("naturevision-analysis", {"analysis_id": analysis.id})
+    else:
+        schedule_analysis(analysis.id)
     return _status_schema(analysis)
 
 
@@ -106,7 +112,7 @@ async def get_layer(analysis_id: str, layer_key: str, service: AnalysisServiceDe
     """Serve a PNG overlay rendered from this analysis's actual raster output."""
     await service.get(analysis_id)  # 404s for unknown analyses before touching disk
     return Response(
-        content=read_layer(analysis_id, layer_key),
+        content=await read_layer(analysis_id, layer_key, service.session),
         media_type="image/png",
         headers={"Cache-Control": "public, max-age=86400"},
     )

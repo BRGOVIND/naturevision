@@ -22,6 +22,7 @@ from sqlalchemy import (
     Float,
     ForeignKey,
     Index,
+    LargeBinary,
     String,
     Text,
 )
@@ -158,6 +159,23 @@ class Analysis(Base):
     reports: Mapped[list[Report]] = relationship(
         back_populates="analysis", cascade="all, delete-orphan", lazy="selectin"
     )
+    layers: Mapped[list[AnalysisLayer]] = relationship(
+        back_populates="analysis", cascade="all, delete-orphan"
+    )
+
+
+class AnalysisLayer(Base):
+    """Rendered overlay stored durably for serverless deployments."""
+
+    __tablename__ = "analysis_layers"
+
+    analysis_id: Mapped[str] = mapped_column(
+        ForeignKey("analyses.id", ondelete="CASCADE"), primary_key=True
+    )
+    key: Mapped[str] = mapped_column(String(80), primary_key=True)
+    png: Mapped[bytes] = mapped_column(LargeBinary, nullable=False)
+
+    analysis: Mapped[Analysis] = relationship(back_populates="layers")
 
 
 class SatelliteObservationRecord(Base):
@@ -273,6 +291,7 @@ __all__ = [
     "STATUS_SEQUENCE",
     "TERMINAL_STATUSES",
     "Analysis",
+    "AnalysisLayer",
     "AnalysisStatus",
     "Base",
     "EnvironmentalMetric",
