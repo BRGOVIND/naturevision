@@ -44,9 +44,6 @@ pdf = ["weasyprint>=63.0"]
 research = ["pandas>=2.2", "geopandas>=1.0", "xarray>=2024.10", "matplotlib>=3.9"]
 torch = ["torch>=2.5"]
 
-[[tool.vercel.subscribers]]
-entrypoint = "app.worker"
-
 [build-system]
 requires = ["setuptools>=75"]
 build-backend = "setuptools.build_meta"

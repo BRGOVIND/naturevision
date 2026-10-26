@@ -12,6 +12,25 @@
       "root": "backend/",
       "runtime": "container",
       "entrypoint": "Dockerfile.vercel"
+    },
+    "queue_worker": {
+      "root": "queue-worker/",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "backend",
+          "format": "url",
+          "env": "NATUREVISION_BACKEND_URL"
+        }
+      ],
+      "functions": {
+        "api/analysis.js": {
+          "maxDuration": 300,
+          "experimentalTriggers": [
+            { "type": "queue/v2beta", "topic": "naturevision-analysis" }
+          ]
+        }
+      }
     }
   },
   "rewrites": [

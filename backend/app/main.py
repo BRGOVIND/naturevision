@@ -15,6 +15,7 @@ from app.core.config import settings
 from app.core.errors import register_exception_handlers
 from app.core.logging import configure_logging, get_logger, request_id_var
 from app.db.session import dispose_engine, init_database
+from app.services.analysis_service import run_analysis_task
 
 logger = get_logger(__name__)
 
@@ -103,6 +104,11 @@ def create_app() -> FastAPI:
 
     # Unprefixed liveness path, for container and load-balancer probes.
     app.include_router(system.router, include_in_schema=False)
+
+    @app.post("/internal/run/{analysis_id}", include_in_schema=False)
+    async def run_queued_analysis(analysis_id: str) -> dict[str, str]:
+        await run_analysis_task(analysis_id)
+        return {"analysis_id": analysis_id}
 
     return app
 
