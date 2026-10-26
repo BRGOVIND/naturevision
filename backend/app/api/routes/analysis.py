@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import os
 from typing import Any
 
+import httpx
 from fastapi import APIRouter, Query, Response, status
 
 from app.api.deps import AnalysisServiceDep
@@ -60,9 +62,10 @@ async def create_analysis(
         include_interpretation=payload.include_interpretation,
     )
     if settings.use_database_artifacts:
-        from vercel.queue import send
-
-        await send("naturevision-analysis", {"analysis_id": analysis.id})
+        queue_url = os.environ["NATUREVISION_QUEUE_URL"]
+        async with httpx.AsyncClient(timeout=15) as client:
+            response = await client.post(queue_url, json={"analysis_id": analysis.id})
+            response.raise_for_status()
     else:
         schedule_analysis(analysis.id)
     return _status_schema(analysis)

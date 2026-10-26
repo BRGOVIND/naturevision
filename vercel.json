@@ -11,7 +11,19 @@
     "backend": {
       "root": "backend/",
       "runtime": "container",
-      "entrypoint": "Dockerfile.vercel"
+      "entrypoint": "Dockerfile.vercel",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "queue_producer",
+          "format": "url",
+          "env": "NATUREVISION_QUEUE_URL"
+        }
+      ]
+    },
+    "queue_producer": {
+      "root": "queue-producer/",
+      "entrypoint": "api/enqueue.js"
     },
     "queue_worker": {
       "root": "queue-worker/",
