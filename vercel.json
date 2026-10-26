@@ -15,6 +15,7 @@
     },
     "queue_worker": {
       "root": "queue-worker/",
+      "entrypoint": "api/analysis.js",
       "bindings": [
         {
           "type": "service",
