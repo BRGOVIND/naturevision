@@ -85,7 +85,7 @@ class Settings(BaseSettings):
 
     @model_validator(mode="after")
     def configure_vercel(self) -> Settings:
-        if not os.getenv("VERCEL"):
+        if not (os.getenv("VERCEL") or os.getenv("NEON_DATABASE_URL")):
             return self
         self.raster_cache_dir = Path("/tmp/naturevision/raster")
         self.artifact_dir = Path("/tmp/naturevision/artifacts")

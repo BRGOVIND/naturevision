@@ -1427,13 +1427,17 @@ dependencies = [
 [package.optional-dependencies]
 dev = [
     { name = "aiosqlite" },
+    { name = "geopandas" },
+    { name = "matplotlib" },
     { name = "mypy" },
+    { name = "pandas" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
     { name = "ruff" },
     { name = "torch" },
     { name = "types-requests" },
+    { name = "xarray" },
 ]
 pdf = [
     { name = "weasyprint" },
@@ -1455,14 +1459,17 @@ requires-dist = [
     { name = "asyncpg", specifier = ">=0.30" },
     { name = "fastapi", specifier = ">=0.115" },
     { name = "geoalchemy2", specifier = ">=0.16" },
+    { name = "geopandas", marker = "extra == 'dev'", specifier = ">=1.0" },
     { name = "geopandas", marker = "extra == 'research'", specifier = ">=1.0" },
     { name = "greenlet", specifier = ">=3.1" },
     { name = "httpx", specifier = ">=0.28" },
     { name = "jinja2", specifier = ">=3.1" },
     { name = "joblib", specifier = ">=1.4" },
+    { name = "matplotlib", marker = "extra == 'dev'", specifier = ">=3.9" },
     { name = "matplotlib", marker = "extra == 'research'", specifier = ">=3.9" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.13" },
     { name = "numpy", specifier = ">=2.1" },
+    { name = "pandas", marker = "extra == 'dev'", specifier = ">=2.2" },
     { name = "pandas", marker = "extra == 'research'", specifier = ">=2.2" },
     { name = "pillow", specifier = ">=11.0" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.2" },
@@ -1486,6 +1493,7 @@ requires-dist = [
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.32" },
     { name = "vercel-queue", specifier = ">=0.3" },
     { name = "weasyprint", marker = "extra == 'pdf'", specifier = ">=63.0" },
+    { name = "xarray", marker = "extra == 'dev'", specifier = ">=2024.10" },
     { name = "xarray", marker = "extra == 'research'", specifier = ">=2024.10" },
 ]
 provides-extras = ["dev", "pdf", "research", "torch"]

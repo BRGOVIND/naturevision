@@ -39,6 +39,10 @@ dev = [
     "types-requests",
     "aiosqlite>=0.20",
     "torch>=2.5",
+    "pandas>=2.2",
+    "geopandas>=1.0",
+    "xarray>=2024.10",
+    "matplotlib>=3.9",
 ]
 pdf = ["weasyprint>=63.0"]
 research = ["pandas>=2.2", "geopandas>=1.0", "xarray>=2024.10", "matplotlib>=3.9"]

@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import os
 from typing import Any
 
 from fastapi import APIRouter, Query, Response, status
 
 from app.api.deps import AnalysisServiceDep
+from app.core.config import settings
 from app.core.logging import get_logger
 from app.geospatial.geometry import validate_region
 from app.models import Analysis, AnalysisStatus
@@ -59,7 +59,7 @@ async def create_analysis(
         include_land_cover=payload.include_land_cover,
         include_interpretation=payload.include_interpretation,
     )
-    if os.getenv("VERCEL"):
+    if settings.use_database_artifacts:
         from vercel.queue import send
 
         await send("naturevision-analysis", {"analysis_id": analysis.id})
