@@ -87,6 +87,8 @@ class Settings(BaseSettings):
     def configure_vercel(self) -> Settings:
         if not (os.getenv("VERCEL") or os.getenv("NEON_DATABASE_URL")):
             return self
+        if self.app_env == "development" and os.getenv("VERCEL_ENV"):
+            self.app_env = os.environ["VERCEL_ENV"]
         self.raster_cache_dir = Path("/tmp/naturevision/raster")
         self.artifact_dir = Path("/tmp/naturevision/artifacts")
         self.use_database_artifacts = True
