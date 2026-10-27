@@ -110,3 +110,22 @@ Land-cover classification
 Evidence package
        ↓
 Grounded environmental interpretation
+```
+
+## Vercel deployment
+
+`vercel.json` deploys the Vite frontend and FastAPI container in one Vercel
+project. The frontend calls the same-origin `/api/v1` routes. A small Node
+service publishes analysis jobs to Vercel Queues; a queue-triggered worker calls
+the backend privately. The backend stores analysis records and rendered map
+layers in PostgreSQL, so results survive container restarts.
+
+Connect a Neon PostgreSQL database to the Vercel project with the `NEON`
+environment variable prefix for both Production and Preview, then redeploy.
+The deployment creates the PostGIS extension and application tables at startup.
+No Render database or public backend URL is required.
+
+The hosted runtime does not ship a trained land-cover model artifact or a Groq
+API key. `/api/v1/health` reports which optional capabilities are available.
+Free Vercel and Neon plans have usage limits; monitor both dashboards as usage
+grows.
