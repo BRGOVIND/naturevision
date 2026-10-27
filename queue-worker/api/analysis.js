@@ -2,7 +2,7 @@ import { QueueClient } from '@vercel/queue'
 
 const queue = new QueueClient()
 
-export default queue.handleNodeCallback(async (message) => {
+const handleMessage = queue.handleCallback(async (message) => {
   const analysisId = message.analysis_id
   if (typeof analysisId !== 'string' || !/^[0-9a-f-]{36}$/.test(analysisId)) {
     throw new Error('Invalid analysis ID in queue message')
@@ -14,3 +14,5 @@ export default queue.handleNodeCallback(async (message) => {
     throw new Error(`Analysis service returned ${response.status}`)
   }
 })
+
+export default { fetch: handleMessage }

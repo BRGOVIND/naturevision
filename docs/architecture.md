@@ -1,8 +1,8 @@
 # Architecture
 
-A modular monolith. There is no message bus, no agent framework and no service
-mesh, because the problem does not need them: the analysis is a linear pipeline
-over deterministic services, and keeping it linear is what makes it testable.
+A modular monolith. The analysis is a linear pipeline over deterministic services.
+On Vercel, a queue separates HTTP requests from the longer-running pipeline;
+the queue does not change the analysis logic.
 
 ## Layering
 
@@ -66,18 +66,19 @@ commits a status, detail string and progress fraction, so the UI shows what is
 actually happening rather than an unexplained spinner. Every failure path
 records a terminal state with a safe message.
 
-The background task resolves its imagery provider through a module-level factory
-rather than constructing one directly, because it runs outside the request scope
-where FastAPI's dependency overrides apply. That indirection is what makes the
-lifecycle testable.
+On Vercel, a small Node service publishes each new analysis to Vercel Queues.
+A queue-triggered function calls the private backend service, which runs the
+pipeline and commits progress to PostgreSQL. Local development schedules the
+same task in process. The task resolves its imagery provider through a
+module-level factory, so tests can substitute an in-memory provider.
 
 ### Overlays are rendered once and persisted
 
 When an analysis completes, every available layer is rendered to PNG and written
 to the artifact store, and the manifest records each layer's WGS84 bounds and
-legend. Holding raster stacks in memory would not survive a restart and would
-not scale; re-deriving them per map interaction would re-fetch imagery.
-Rendering once avoids both, and layer requests become static file reads.
+legend. On Vercel the PNG bytes live in PostgreSQL; local development can use
+disk. Holding raster stacks in memory would not survive a restart, while
+re-deriving them per map interaction would re-fetch imagery.
 
 Overlays are reprojected to EPSG:4326 before encoding so their corners coincide
 exactly with the bounds handed to the map client.
@@ -128,7 +129,8 @@ mistaken for a measurement at a glance.
 POST /analysis
   └─ validate geometry (server-side, geodesic extent)
   └─ persist Region + Analysis, return 202
-  └─ background task
+  └─ enqueue analysis (Vercel) or schedule local task
+  └─ worker calls private backend to run pipeline
        ├─ searching     catalogue query, rank, select
        ├─ acquiring     resolve calibration, windowed band reads, cloud mask
        ├─ processing    co-register, NDVI, statistics
@@ -144,7 +146,7 @@ POST /ai/report
 
 ## Testing strategy
 
-130 tests, no network access required.
+167 tests, no network access required.
 
 - **Geospatial**: coordinate and polygon validation, CRS handling, geodesic
   area, grid alignment, clipping, windowing.
